@@ -1,6 +1,6 @@
-# 宋方杰 | Embedded Systems
+# Embedded Systems
 
-电子信息科学与技术本科生，学习方向集中在嵌入式软件、单片机外设驱动和底层计算机系统。这里按技术能力组织已经完成的工程与实践记录，从电子电路和数字逻辑延伸到C/C++、8051外设和竞赛综合程序。
+Anonymous embedded systems learner focusing on hardware foundations, C/C++, MCU development and embedded software. 这里按技术能力组织已经完成的工程与实践记录，从电子电路和数字逻辑延伸到 C/C++、8051 外设和竞赛综合程序。
 
 ## 技术方向
 
@@ -13,6 +13,15 @@
 | 硬件基础 | 电路仿真、原理图分析、BOM和PCB设计流程 |
 
 下一阶段将沿 **STM32 → FreeRTOS → Embedded Linux** 继续学习；这些方向目前作为路线，不列入已完成能力。
+
+## 项目导航
+
+| 能力层 | 代表仓库 | 可查看的技术证据 |
+| --- | --- | --- |
+| 硬件与计算机底层 | [Embedded-Systems-Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations) | CircuitJS、Digital、简化 CPU、原理图与 BOM |
+| 嵌入式软件基础 | [Embedded-C-Cpp-Learning](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) | 内存、模块接口、命令解析、状态机和主机测试 |
+| MCU 与外设驱动 | [stc89c52-learning](https://github.com/REliasCheng/stc89c52-learning) | C51 工程、板级接口、传感器与多外设应用 |
+| 综合工程训练 | [BlueBridgeCup-MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU) | CT107D 资源分配、驱动修正和竞赛程序结构 |
 
 ## 技术成长路线
 
