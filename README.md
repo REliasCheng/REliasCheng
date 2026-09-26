@@ -2,60 +2,59 @@
   <img src="./assets/images/embedded-systems-hero.svg" alt="Embedded Systems — Hardware, Firmware, Low-level Software" width="100%">
 </p>
 
-## 👋 Hello
+# 👋 Hi, I'm Elias
 
-**Building embedded systems from hardware to firmware.**
+**Embedded Systems Developer**
 
-## 🔧 Embedded Systems
+Building systems from hardware to firmware.
 
-### ⚙️ Hardware
+## ⚙ What I Build
 
-`Digital Logic` · `MCU Architecture` · `PCB Interfaces`
+### 🔧 MCU Firmware
 
-### 🔌 Firmware
+Firmware for 8051/STC and Cortex-M platforms, from register configuration to interrupt-driven control.
 
-`C` · `Peripheral Drivers` · `Interrupts` · `UART / I²C / SPI`
+### ⚡ Peripheral Drivers
 
-### 🧠 Systems
+GPIO, timers, UART, I²C, SPI, ADC, DMA, display, storage, and sensor interfaces.
 
-`C++` · `Modular Design` · `State Machines` · `Task Management`
+### 🧠 Embedded Systems
+
+Hardware-aware software organized around resource maps, driver boundaries, callbacks, and task flow.
+
+## 🛠 Technology Path
+
+```text
+Electronics & Digital Logic
+            ↓
+C/C++ & Software Structure
+            ↓
+8051 / STC MCU Firmware
+            ↓
+ARM Cortex-M
+            ↓
+RTOS / Embedded Linux
+```
 
 ## 🚀 Featured Projects
 
-> ### ⚡ [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
-> Digital logic, circuit models, and a simplified CPU built from first principles.
->
-> `Digital Logic` · `CPU Architecture` · `CircuitJS`
+> ### [ARM Cortex-M Development Lab](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab)
+> Cortex-M4 firmware projects for STM32F407 and GD32F407, covering clocks, interrupts, peripheral drivers, and DMA.
 
-> ### ⚙️ [Embedded C/C++](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
-> Low-level programming, modular interfaces, state machines, and task management.
->
-> `C/C++` · `Memory` · `Callbacks` · `Task Manager`
+> ### [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning)
+> Enhanced 8051 firmware across communication interfaces, ADC/PWM, USB HID, and RTX51 Tiny.
 
-> ### 🔌 [STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning)
-> Peripheral drivers and multi-module applications around the 8051 architecture.
->
-> `GPIO` · `Timer` · `UART` · `I²C` · `OLED`
+> ### [C51 Board Lab](https://github.com/REliasCheng/C51-Board-Lab)
+> Board-level analysis of shared buses, device selection, port reuse, and peripheral connections.
 
-> ### 🧭 [C51 Board Lab](https://github.com/REliasCheng/C51-Board-Lab)
-> Board-level resource analysis, shared buses, device selection, and peripheral connections.
->
-> `STC89C52` · `74HC138` · `74HC245` · `Board Resources`
+> ### [Embedded C/C++](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
+> Low-level C/C++, modular interfaces, command processing, state machines, and task management.
 
-> ### 🧩 [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning)
-> Enhanced 8051 peripherals, communication interfaces, event-driven modules, and RTX51 Tiny.
->
-> `STC8H8K64U` · `USB HID` · `Interrupts` · `RTX51 Tiny`
+> ### [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
+> Circuit models, digital logic, a simplified CPU, and hardware-control experiments.
 
-> ### 🧱 [ARM Cortex-M Development Lab](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab)
-> Cortex-M4 firmware architecture, peripheral drivers, interrupts, DMA, and hardware-software integration.
->
-> `STM32F407` · `GD32F407` · `NVIC` · `DMA` · `HAL`
-
-> ### 🏆 [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)
-> CT107D firmware focused on latch control, peripheral coordination, and resource allocation.
->
-> `CT107D` · `74HC573` · `Sensors` · `Periodic Tasks`
+> ### [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)
+> CT107D firmware focused on latch control, peripheral coordination, and embedded control tasks.
 
 ## 🌱 Currently Exploring
 
