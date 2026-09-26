@@ -6,11 +6,7 @@
 
 **Building embedded systems from hardware to firmware.**
 
-## ⚡ What I Build
-
-`⚙️ Hardware Architecture` · `🔌 MCU Firmware` · `🧠 Embedded Software` · `🛰️ Real-time Systems`
-
-## 🛠️ Tech Stack
+## 🔧 Embedded Systems
 
 ### ⚙️ Hardware
 
@@ -50,6 +46,11 @@
 > Enhanced 8051 peripherals, communication interfaces, event-driven modules, and RTX51 Tiny.
 >
 > `STC8H8K64U` · `USB HID` · `Interrupts` · `RTX51 Tiny`
+
+> ### 🧱 [ARM Cortex-M Development Lab](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab)
+> Cortex-M4 firmware architecture, peripheral drivers, interrupts, DMA, and hardware-software integration.
+>
+> `STM32F407` · `GD32F407` · `NVIC` · `DMA` · `HAL`
 
 > ### 🏆 [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)
 > CT107D firmware focused on latch control, peripheral coordination, and resource allocation.
