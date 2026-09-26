@@ -1,38 +1,38 @@
-# Embedded Systems Developer
+# Embedded Systems
 
-Embedded C/C++ · 8051/STC MCU · Digital Logic · Peripheral Drivers
+> Building embedded systems from circuits to firmware.
 
-这里集中展示电子电路、数字逻辑、C/C++、开发板分析、MCU 外设和竞赛综合工程。
+## About
+
+Building hardware-facing software around digital logic, C/C++, and 8051/STC microcontrollers. The repositories below connect circuit behavior, software structure, peripheral drivers, and multi-module firmware.
 
 ## Technical Path
 
-```text
-Electronics → Digital Logic → Computer Architecture
-            → C/C++ Software Design
-            → 8051 / STC MCU Development
-            → Integrated Embedded Projects
-```
+`Digital Logic` → `Computer Architecture` → `C/C++` → `MCU Firmware` → `RTOS` → `Embedded Linux`
 
-## Projects
+## Featured Projects
 
-- [Embedded-Systems-Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
-  CircuitJS 电路、Digital 逻辑工程、简化 CPU、原理图和基础硬件控制。
+### [Embedded-Systems-Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
 
-- [Embedded-C-Cpp-Learning](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
-  C/C++、内存管理、模块接口、命令处理框架和轻量任务管理器。
+CircuitJS circuits, Digital logic projects, a simplified 8-bit CPU, schematics, and hardware control examples.
 
-- [C51-Board-Lab](https://github.com/REliasCheng/C51-Board-Lab)
-  51 开天开发板的端口分配、译码、总线缓冲、外设复用和板级实验。
+### [Embedded-C-Cpp-Learning](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
 
-- [stc89c52-learning](https://github.com/REliasCheng/stc89c52-learning)
-  STC89C52RC 的 GPIO、显示、按键、Timer、UART、I²C、RTC 与传感器工程。
+C/C++ memory and interface design, callbacks, state machines, a command framework, and a lightweight task manager.
 
-- [STC8-MCU-Learning](https://github.com/REliasCheng/STC8-MCU-Learning)
-  STC8H8K64U 外设驱动、UART/USB 通信、多外设组合和 RTX51 Tiny。
+### [STC8-MCU-Learning](https://github.com/REliasCheng/STC8-MCU-Learning)
 
-- [BlueBridgeCup-MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)
-  CT107D 外设驱动、资源分配、任务节拍和蓝桥杯单片机综合训练。
+STC8H8K64U peripheral drivers, UART/USB communication, interrupt-driven modules, and RTX51 Tiny task coordination.
 
-## Next
+### [BlueBridgeCup-MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)
 
-STM32 → FreeRTOS → Embedded Linux
+CT107D latch control, sensor interfaces, resource allocation, periodic tasks, and integrated competition firmware.
+
+## More Repositories
+
+- [C51-Board-Lab](https://github.com/REliasCheng/C51-Board-Lab) — 8051 board resources, bus buffering, device selection, and peripheral connections.
+- [stc89c52-learning](https://github.com/REliasCheng/stc89c52-learning) — STC89C52RC drivers and an integrated RTC, temperature, OLED, key, and EEPROM application.
+
+## Current Focus
+
+`STM32` · `FreeRTOS` · `Embedded Linux`
