@@ -1,59 +1,65 @@
 <p align="center">
-  <img src="./assets/images/embedded-systems-banner.png" alt="Embedded Systems — Hardware, Firmware, Low-level Software" width="100%">
+  <img src="./assets/images/embedded-systems-hero.svg" alt="Embedded Systems — Hardware, Firmware, Low-level Software" width="100%">
 </p>
 
-<p align="center"><strong>Building low-level systems from hardware architecture to firmware.</strong></p>
+<h1 align="center">Embedded Systems Developer</h1>
+
+<p align="center"><strong>Building embedded systems from silicon to software.</strong></p>
 
 ---
 
 ## About
 
-Focused on hardware architecture, MCU firmware, C/C++ systems programming, and hardware-software integration.
+Embedded systems · Hardware-aware firmware · Low-level software · MCU architecture
 
-## Technology
+## Technical Stack
 
 ### Hardware
 
-Digital Logic · CPU Architecture · Board-level Interfaces
+`Digital Logic` · `MCU Architecture` · `PCB Interfaces`
 
 ### Firmware
 
-8051/STC MCU · Peripheral Drivers · Interrupt-driven Systems
+`C` · `Peripheral Drivers` · `Interrupts` · `UART / I²C / SPI`
 
 ### Software
 
-C/C++ · Modular Design · Embedded Software
+`C++` · `Modular Design` · `State Machines` · `Task Management`
 
 ## Featured Projects
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <sub>HARDWARE</sub><br>
-      <strong><a href="https://github.com/REliasCheng/Embedded-Systems-Foundations">Embedded Systems Foundations</a></strong><br><br>
-      Digital logic, simplified CPU architecture, circuit simulation, and hardware control.
-    </td>
-    <td width="50%" valign="top">
-      <sub>SOFTWARE</sub><br>
-      <strong><a href="https://github.com/REliasCheng/Embedded-C-Cpp-Learning">Embedded C/C++</a></strong><br><br>
-      Memory, modular interfaces, callbacks, state machines, and host-tested software components.
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <sub>FIRMWARE</sub><br>
-      <strong>MCU Firmware Projects</strong><br><br>
-      <a href="https://github.com/REliasCheng/stc89c52-learning">STC89C52</a> · <a href="https://github.com/REliasCheng/STC8-MCU-Learning">STC8</a><br>
-      Peripheral drivers, communication interfaces, and embedded applications.
-    </td>
-    <td width="50%" valign="top">
-      <sub>SYSTEMS</sub><br>
-      <strong><a href="https://github.com/REliasCheng/BlueBridgeCup-MCU">BlueBridgeCup MCU</a></strong><br><br>
-      CT107D resource allocation, sensor interfaces, periodic tasks, and integrated control firmware.
-    </td>
-  </tr>
-</table>
+### [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
 
-## Currently Exploring
+Digital logic, circuit models, and a simplified CPU built from first principles.<br>
+`Digital Logic` · `CPU Architecture` · `CircuitJS`
 
-`STM32` · `RTOS` · `Embedded Linux`
+### [Embedded C/C++](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
+
+Low-level programming, modular interfaces, state machines, and task management.<br>
+`C/C++` · `Memory` · `Callbacks` · `Task Manager`
+
+### [STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning)
+
+Peripheral drivers and multi-module applications around the 8051 architecture.<br>
+`GPIO` · `Timer` · `UART` · `I²C` · `OLED`
+
+### [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)
+
+CT107D firmware focused on latch control, peripheral coordination, and resource allocation.<br>
+`CT107D` · `74HC573` · `Sensors` · `Periodic Tasks`
+
+### [C51 Board Lab](https://github.com/REliasCheng/C51-Board-Lab)
+
+Board-level resource analysis, shared buses, device selection, and peripheral connections.<br>
+`STC89C52` · `74HC138` · `74HC245` · `Board Resources`
+
+### [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning)
+
+Enhanced 8051 peripherals, communication interfaces, event-driven modules, and RTX51 Tiny.<br>
+`STC8H8K64U` · `USB HID` · `Interrupts` · `RTX51 Tiny`
+
+## Architecture
+
+`Hardware` → `Firmware` → `Real-time Systems` → `Embedded Linux`
+
+<sub>Current direction: STM32 · RTOS · Embedded Linux</sub>

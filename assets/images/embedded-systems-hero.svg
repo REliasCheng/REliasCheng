@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="480" viewBox="0 0 1600 480" role="img" aria-labelledby="title desc">
+  <title id="title">Embedded Systems</title>
+  <desc id="desc">A restrained hardware bus, signal waveform, and circuit trace composition in graphite and steel blue.</desc>
+
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080b0f"/>
+      <stop offset="0.58" stop-color="#0d1218"/>
+      <stop offset="1" stop-color="#101922"/>
+    </linearGradient>
+    <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#46677d" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#78a9c6"/>
+      <stop offset="1" stop-color="#46677d" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#8aa0ae" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .trace { fill: none; stroke: #5e8197; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: .38; }
+      .flow { fill: none; stroke: url(#signal); stroke-width: 2; stroke-dasharray: 18 22; animation: flow 10s linear infinite; }
+      .node { fill: #87aec3; opacity: .72; }
+      .label { fill: #6f8796; font: 500 15px ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: 3px; }
+      @keyframes flow { to { stroke-dashoffset: -160; } }
+      @media (prefers-reduced-motion: reduce) { .flow { animation: none; } }
+    </style>
+  </defs>
+
+  <rect width="1600" height="480" rx="22" fill="url(#background)"/>
+  <rect width="1600" height="480" rx="22" fill="url(#grid)"/>
+
+  <g opacity="0.75">
+    <path class="trace" d="M0 82H154L206 134H418"/>
+    <path class="trace" d="M0 122H126L206 202H418"/>
+    <path class="trace" d="M0 382H178L236 324H464"/>
+    <path class="trace" d="M1120 76H1302L1350 124H1600"/>
+    <path class="trace" d="M1120 402H1278L1358 322H1600"/>
+    <path class="flow" d="M0 102H140L206 168H494"/>
+    <path class="flow" d="M1088 96H1288L1342 150H1600"/>
+    <circle class="node" cx="206" cy="168" r="4"/>
+    <circle class="node" cx="1342" cy="150" r="4"/>
+  </g>
+
+  <g transform="translate(1050 132)">
+    <rect width="248" height="216" rx="16" fill="#111a22" stroke="#59778a" stroke-width="2"/>
+    <rect x="25" y="25" width="198" height="166" rx="8" fill="#0a0f14" stroke="#283b48"/>
+    <path d="M62 76H98V50H134V102H170V72H206" fill="none" stroke="#89b5cd" stroke-width="3" filter="url(#softGlow)"/>
+    <path d="M61 136H187M61 156H154" stroke="#334c5b" stroke-width="2"/>
+    <text class="label" x="61" y="183">MCU / BUS</text>
+    <g stroke="#66869a" stroke-width="2">
+      <path d="M-26 34H0M-26 70H0M-26 106H0M-26 142H0M-26 178H0"/>
+      <path d="M248 34H274M248 70H274M248 106H274M248 142H274M248 178H274"/>
+    </g>
+  </g>
+
+  <g transform="translate(138 156)">
+    <text x="0" y="0" fill="#eef3f6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="58" font-weight="650" letter-spacing="2">EMBEDDED SYSTEMS</text>
+    <text x="3" y="54" fill="#7e9aaa" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="19" letter-spacing="4">HARDWARE / FIRMWARE / LOW-LEVEL SOFTWARE</text>
+    <rect x="3" y="91" width="520" height="2" fill="#314754"/>
+    <path d="M3 137H74V113H132V161H196V125H258V145H330" fill="none" stroke="#78a9c6" stroke-width="3" filter="url(#softGlow)"/>
+    <text class="label" x="360" y="151">SIGNAL / 01</text>
+  </g>
+
+  <g fill="#718997" opacity="0.55">
+    <circle cx="1460" cy="92" r="4"/>
+    <circle cx="1490" cy="92" r="4"/>
+    <circle cx="1520" cy="92" r="4"/>
+    <rect x="1444" y="364" width="88" height="3" rx="1.5"/>
+    <rect x="1478" y="382" width="54" height="3" rx="1.5"/>
+  </g>
+</svg>
