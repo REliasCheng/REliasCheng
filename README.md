@@ -20,7 +20,7 @@ GPIO, timers, UART, I²C, SPI, ADC, DMA, display, storage, and sensor interfaces
 
 ### 🧠 Embedded Systems
 
-Hardware-aware software organized around resource maps, driver boundaries, callbacks, and task flow.
+Hardware-aware software organized around resource maps, driver boundaries, task scheduling, IPC, and resource synchronization.
 
 ## 🛠 Technology Path
 
@@ -33,7 +33,9 @@ C/C++ & Software Structure
             ↓
 ARM Cortex-M
             ↓
-RTOS / Embedded Linux
+FreeRTOS
+            ↓
+Embedded Linux
 ```
 
 ## 🚀 Featured Projects
@@ -41,11 +43,11 @@ RTOS / Embedded Linux
 > ### [ARM Cortex-M Development Lab](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab)
 > Cortex-M4 firmware projects for STM32F407 and GD32F407, covering clocks, interrupts, peripheral drivers, and DMA.
 
+> ### [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab)
+> Real-time embedded systems on GD32F407VE / Cortex-M4, covering scheduling, IPC, synchronization, and ISR-to-task coordination.
+
 > ### [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning)
 > Enhanced 8051 firmware across communication interfaces, ADC/PWM, USB HID, and RTX51 Tiny.
-
-> ### [C51 Board Lab](https://github.com/REliasCheng/C51-Board-Lab)
-> Board-level analysis of shared buses, device selection, port reuse, and peripheral connections.
 
 > ### [Embedded C/C++](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
 > Low-level C/C++, modular interfaces, command processing, state machines, and task management.
@@ -53,9 +55,9 @@ RTOS / Embedded Linux
 > ### [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
 > Circuit models, digital logic, a simplified CPU, and hardware-control experiments.
 
-> ### [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)
-> CT107D firmware focused on latch control, peripheral coordination, and embedded control tasks.
+> ### [C51 Board Lab](https://github.com/REliasCheng/C51-Board-Lab)
+> Board-level analysis of shared buses, device selection, port reuse, and peripheral connections.
 
 ## 🌱 Currently Exploring
 
-`STM32` · `RTOS` · `Embedded Linux`
+`Embedded Linux`
