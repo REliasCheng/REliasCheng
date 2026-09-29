@@ -35,6 +35,8 @@ ARM Cortex-M
             ↓
 FreeRTOS
             ↓
+LVGL / Embedded GUI
+            ↓
 Embedded Linux
 ```
 
@@ -46,6 +48,9 @@ Embedded Linux
 > ### [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab)
 > Real-time embedded systems on GD32F407VE / Cortex-M4, covering scheduling, IPC, synchronization, and ISR-to-task coordination.
 
+> ### [LVGL Embedded GUI Lab](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab)
+> Embedded GUI development with LVGL 8.3.11 on GD32F407VE / Cortex-M4, covering display porting, touch input, rendering, and event-driven UI integration.
+
 > ### [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning)
 > Enhanced 8051 firmware across communication interfaces, ADC/PWM, USB HID, and RTX51 Tiny.
 
@@ -54,9 +59,6 @@ Embedded Linux
 
 > ### [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
 > Circuit models, digital logic, a simplified CPU, and hardware-control experiments.
-
-> ### [C51 Board Lab](https://github.com/REliasCheng/C51-Board-Lab)
-> Board-level analysis of shared buses, device selection, port reuse, and peripheral connections.
 
 ## 🌱 Currently Exploring
 
