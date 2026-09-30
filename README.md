@@ -37,6 +37,10 @@ FreeRTOS
             ↓
 LVGL / Embedded GUI
             ↓
+Wireless / IoT
+            ↓
+Bootloader / OTA
+            ↓
 Embedded Linux
 ```
 
@@ -51,14 +55,14 @@ Embedded Linux
 > ### [LVGL Embedded GUI Lab](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab)
 > Embedded GUI development with LVGL 8.3.11 on GD32F407VE / Cortex-M4, covering display porting, touch input, rendering, and event-driven UI integration.
 
-> ### [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning)
-> Enhanced 8051 firmware across communication interfaces, ADC/PWM, USB HID, and RTX51 Tiny.
+> ### [Wireless & IoT Embedded Lab](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab)
+> Native Wi-Fi and Classic Bluetooth development on JieLi AC791N/WL82, with lwIP TCP, MQTT, and Aliyun IoT integration.
+
+> ### [Embedded OTA Update Lab](https://github.com/REliasCheng/Embedded-OTA-Update-Lab)
+> Firmware update architecture on GD32F407VE / Cortex-M4, covering bootloader design, UART/YMODEM IAP, MQTT block transport, flash layout, and CRC-based integrity checks.
 
 > ### [Embedded C/C++](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
 > Low-level C/C++, modular interfaces, command processing, state machines, and task management.
-
-> ### [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
-> Circuit models, digital logic, a simplified CPU, and hardware-control experiments.
 
 ## 🌱 Currently Exploring
 
