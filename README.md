@@ -2,25 +2,15 @@
   <img src="./assets/images/embedded-systems-hero.svg" alt="Embedded Systems — Hardware, Firmware, Low-level Software" width="100%">
 </p>
 
-# 👋 Hi, I'm Elias
+# Elias Cheng
 
-**Embedded Systems Developer**
-
-Building systems from hardware to firmware.
+Embedded systems developer focused on MCU firmware, hardware integration, and embedded software architecture.
 
 ## What I Build
 
-### Embedded Firmware
-
-Firmware foundations built around clear interfaces, predictable state, and hardware-aware constraints.
-
-### Peripheral and Board-Level Software
-
-Resource-aware peripheral integration, board mapping, timing, communication, and device control.
-
-### Modular Embedded Systems
-
-Portable application cores, state machines, callback-based modules, and host-tested software boundaries.
+- **Embedded C/C++** — Portable application cores, state machines, callback-based modules, and host-tested software boundaries.
+- **MCU Firmware** — Peripheral integration, timing, communication, and device control with hardware-aware constraints.
+- **Hardware Integration** — Board resource mapping, shared interfaces, and firmware-to-hardware boundaries.
 
 ## Current Work
 
@@ -46,13 +36,21 @@ Documentation connecting electronics, digital logic, CPU architecture, PCB workf
 
 ## Technology Path
 
+### Current Evidence
+
 ```text
 Foundation
-├── Electronics / Digital Logic / PCB
+├── Electronics / Digital Logic
 └── C/C++ / Modular Software / Host Test
 
 MCU Systems
-├── 8051 / STC89
+└── 8051 / STC89
+```
+
+### Roadmap
+
+```text
+MCU Systems
 ├── STC8
 └── ARM Cortex-M
 
@@ -66,6 +64,8 @@ Application and System Integration
 ```
 
 ## Technical Roadmap
+
+These repositories represent roadmap and learning directions rather than completed project claims.
 
 - [STC8 MCU](https://github.com/REliasCheng/STC8-MCU-Learning) — enhanced 8051 peripherals and system integration
 - [ARM Cortex-M](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab) — firmware foundations and peripheral drivers
