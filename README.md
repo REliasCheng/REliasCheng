@@ -4,13 +4,18 @@
 
 # Elias Cheng
 
-Embedded systems developer focused on MCU firmware, hardware integration, and embedded software architecture.
+**Embedded Systems Developer** — MCU firmware, hardware integration, and embedded software architecture.
 
-## What I Build
+## Featured Projects
 
-- **Embedded C/C++** — Portable application cores, state machines, callback-based modules, and host-tested software boundaries.
-- **MCU Firmware** — Peripheral integration, timing, communication, and device control with hardware-aware constraints.
-- **Hardware Integration** — Board resource mapping, shared interfaces, and firmware-to-hardware boundaries.
+These architecture-focused repositories show the next layers of the portfolio. They remain roadmap projects: their individual READMEs state exactly which build, hardware, and runtime evidence is not yet provided.
+
+| Project | Architecture Focus | Evidence Boundary |
+| --- | --- | --- |
+| [Embedded OTA Update](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) | Bootloader, UART/YMODEM, MQTT transport, Flash layout, CRC | Architecture and source paths documented; build and hardware evidence not provided |
+| [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) | Scheduling, IPC, synchronization, ISR-to-task design | Architecture and source paths documented; performance guarantees are not claimed |
+| [Wireless & IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) | Native Wi-Fi, lwIP, TCP, MQTT, device integration | Plain TCP 1883 path; TLS and sensor evidence are not claimed |
+| [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) | Display, input, rendering, events, BSP integration | Interface paths documented; successful rendering and hardware evidence not provided |
 
 ## Current Work
 
@@ -33,6 +38,12 @@ STC89C52RC application architecture with a portable core, state-machine control,
 ### [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
 
 Documentation connecting electronics, digital logic, CPU architecture, PCB workflow, and MCU interface concepts.
+
+## What I Build
+
+- **Embedded C/C++** — Portable application cores, state machines, callback-based modules, and host-tested software boundaries.
+- **MCU Firmware** — Peripheral integration, timing, communication, and device control with hardware-aware constraints.
+- **Hardware Integration** — Board resource mapping, shared interfaces, and firmware-to-hardware boundaries.
 
 ## Technology Path
 
