@@ -65,7 +65,7 @@ Application and System Integration
 
 ## Technical Roadmap
 
-These repositories represent roadmap and learning directions rather than completed project claims.
+These repositories track planned learning work and are not presented as completed projects.
 
 - [STC8 MCU](https://github.com/REliasCheng/STC8-MCU-Learning) — enhanced 8051 peripherals and system integration
 - [ARM Cortex-M](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab) — firmware foundations and peripheral drivers
