@@ -6,36 +6,36 @@
 
 **Embedded Systems Developer** — MCU firmware, hardware integration, and embedded software architecture.
 
-## Featured Projects
+## Featured Architecture Labs
 
-These architecture-focused repositories show the next layers of the portfolio. They remain roadmap projects: their individual READMEs state exactly which build, hardware, and runtime evidence is not yet provided.
+These labs highlight system architecture and implementation paths across RTOS, GUI, wireless connectivity, and firmware update workflows. Their individual READMEs state the current build, hardware, and runtime evidence boundaries.
 
 | Project | Architecture Focus | Evidence Boundary |
 | --- | --- | --- |
-| [Embedded OTA Update](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) | Bootloader, UART/YMODEM, MQTT transport, Flash layout, CRC | Architecture and source paths documented; build and hardware evidence not provided |
-| [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) | Scheduling, IPC, synchronization, ISR-to-task design | Architecture and source paths documented; performance guarantees are not claimed |
-| [Wireless & IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) | Native Wi-Fi, lwIP, TCP, MQTT, device integration | Plain TCP 1883 path; TLS and sensor evidence are not claimed |
-| [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) | Display, input, rendering, events, BSP integration | Interface paths documented; successful rendering and hardware evidence not provided |
+| 🔄 [Embedded OTA Update](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) | Bootloader, UART/YMODEM, MQTT transport, Flash layout, CRC | Architecture and source paths documented; build and hardware evidence not provided |
+| 🧵 [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) | Scheduling, IPC, synchronization, ISR-to-task design | Architecture and source paths documented; performance guarantees are not claimed |
+| 📡 [Wireless & IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) | Native Wi-Fi, lwIP, TCP, MQTT, device integration | Plain TCP 1883 path; TLS and sensor evidence are not claimed |
+| 🖥️ [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) | Display, input, rendering, events, BSP integration | Interface paths documented; successful rendering and hardware evidence not provided |
 
 ## Current Work
 
-### [Embedded C/C++](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
+### 💻 [Embedded C/C++](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
 
 C/C++ software structure with host-tested command processing, task state management, and modular firmware components.
 
-### [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)
+### 🔌 [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)
 
 CT107D / 8051 peripheral integration focused on shared resources, timing, communication, and host-tested control policies.
 
-### [C51 Board Resource Planner](https://github.com/REliasCheng/C51-Board-Lab)
+### 🧩 [C51 Board Resource Planner](https://github.com/REliasCheng/C51-Board-Lab)
 
 An 8051 board resource planning tool for mapping peripherals and detecting GPIO, timer, and communication conflicts through host-tested cases.
 
-### [STC89C52 Application Architecture](https://github.com/REliasCheng/stc89c52-learning)
+### 🧠 [STC89C52 Application Architecture](https://github.com/REliasCheng/stc89c52-learning)
 
 STC89C52RC application architecture with a portable core, state-machine control, persistent configuration, and host-tested logic.
 
-### [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
+### 📐 [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations)
 
 Documentation connecting electronics, digital logic, CPU architecture, PCB workflow, and MCU interface concepts.
 
@@ -66,7 +66,7 @@ MCU Systems
 └── ARM Cortex-M
 
 Embedded Software
-└── FreeRTOS / Scheduling / IPC / ISR-to-Task
+└── FreeRTOS / Scheduling / IPC / ISR-to-task
 
 Application and System Integration
 ├── LVGL / Embedded GUI
