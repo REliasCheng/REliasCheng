@@ -95,3 +95,7 @@ These repositories track planned learning work and are not presented as complete
 ### 🐧 [ARM Embedded Linux](https://github.com/REliasCheng/ARM-Linux-Embedded-Lab)
 
 Architecture and source-review lab for the RK3566 ARM64 boot flow, Device Tree, driver interfaces, and userspace boundaries; build, QEMU, hardware, and runtime evidence are not provided.
+
+### 🖥️ [Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab)
+
+Documentation and architecture lab for a PyQt5 serial host application, including GUI, application logic, communication flow, and verification boundaries; public runtime and device evidence are not provided.
