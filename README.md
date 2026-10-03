@@ -4,11 +4,11 @@
 
 # Elias Cheng
 
-**Embedded Systems Developer** — MCU firmware, hardware integration, and embedded software architecture.
+**Embedded Systems Developer** — MCU firmware, hardware integration, embedded software architecture, and robotics system integration.
 
 ## Featured Architecture Labs
 
-These labs highlight system architecture and implementation paths across RTOS, GUI, wireless connectivity, and firmware update workflows. Their individual READMEs state the current build, hardware, and runtime evidence boundaries.
+These labs highlight system architecture and implementation paths across RTOS, GUI, wireless connectivity, firmware update workflows, and robotic arm integration. Their individual READMEs state the current build, hardware, and runtime evidence boundaries.
 
 | Project | Architecture Focus | Evidence Boundary |
 | --- | --- | --- |
@@ -16,7 +16,7 @@ These labs highlight system architecture and implementation paths across RTOS, G
 | 🧵 [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) | Scheduling, IPC, synchronization, ISR-to-task design | Architecture and source paths documented; performance guarantees are not claimed |
 | 📡 [Wireless & IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) | Native Wi-Fi, lwIP, TCP, MQTT, device integration | Plain TCP 1883 path; TLS and sensor evidence are not claimed |
 | 🖥️ [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) | Display, input, rendering, events, BSP integration | Interface paths documented; successful rendering and hardware evidence not provided |
-| 🦾 [Embodied Robotics Arm](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab) | Leader–follower control, serial motor interfaces, camera input, LeRobot workflow | Source/configuration and syntax evidence documented; build and hardware/runtime evidence not provided |
+| 🦾 [Embodied Robotics Arm](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab) | Leader–follower control, serial motor interfaces, camera input, LeRobot workflow | Source/configuration and syntax validation available; host functional test, build, hardware, and runtime evidence not provided |
 
 ## Current Work
 
@@ -72,7 +72,8 @@ Embedded Software
 Application and System Integration
 ├── LVGL / Embedded GUI
 ├── Wireless / IoT
-└── Bootloader / OTA
+├── Bootloader / OTA
+└── Robotics / Robotic Arm Integration
 ```
 
 ## Technical Roadmap
