@@ -74,6 +74,9 @@ Application and System Integration
 ├── Wireless / IoT
 ├── Bootloader / OTA
 └── Robotics / Robotic Arm Integration
+
+Embedded Linux
+└── Boot Flow / Device Tree / Driver Interfaces / Userspace
 ```
 
 ## Technical Roadmap
@@ -89,4 +92,6 @@ These repositories track planned learning work and are not presented as complete
 
 ## Currently Exploring
 
-`Embedded Linux`
+### 🐧 [ARM Embedded Linux](https://github.com/REliasCheng/ARM-Linux-Embedded-Lab)
+
+Architecture and source-review lab for the RK3566 ARM64 boot flow, Device Tree, driver interfaces, and userspace boundaries; build, QEMU, hardware, and runtime evidence are not provided.
