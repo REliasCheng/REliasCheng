@@ -16,6 +16,7 @@ These labs highlight system architecture and implementation paths across RTOS, G
 | 🧵 [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) | Scheduling, IPC, synchronization, ISR-to-task design | Architecture and source paths documented; performance guarantees are not claimed |
 | 📡 [Wireless & IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) | Native Wi-Fi, lwIP, TCP, MQTT, device integration | Plain TCP 1883 path; TLS and sensor evidence are not claimed |
 | 🖥️ [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) | Display, input, rendering, events, BSP integration | Interface paths documented; successful rendering and hardware evidence not provided |
+| 🦾 [Embodied Robotics Arm](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab) | Leader–follower control, serial motor interfaces, camera input, LeRobot workflow | Source/configuration and syntax evidence documented; build and hardware/runtime evidence not provided |
 
 ## Current Work
 
