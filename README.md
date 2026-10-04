@@ -8,14 +8,14 @@
 
 ## Featured Architecture Labs
 
-These labs highlight system architecture and implementation paths across RTOS, GUI, wireless connectivity, firmware update workflows, and robotic arm integration. Their individual READMEs state the current build, hardware, and runtime evidence boundaries.
+These labs highlight repository-authored system architecture documentation across RTOS, GUI, wireless connectivity, firmware update workflows, and robotic arm integration. Their individual READMEs distinguish public implementation evidence from architecture-only scope.
 
 | Project | Architecture Focus | Evidence Boundary |
 | --- | --- | --- |
-| 🔄 [Embedded OTA Update](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) | Bootloader, UART/YMODEM, MQTT transport, Flash layout, CRC | Architecture and source paths documented; build and hardware evidence not provided |
-| 🧵 [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) | Scheduling, IPC, synchronization, ISR-to-task design | Architecture and source paths documented; performance guarantees are not claimed |
-| 📡 [Wireless & IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) | Native Wi-Fi, lwIP, TCP, MQTT, device integration | Plain TCP 1883 path; TLS and sensor evidence are not claimed |
-| 🖥️ [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) | Display, input, rendering, events, BSP integration | Interface paths documented; successful rendering and hardware evidence not provided |
+| 🔄 [Embedded OTA Update](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) | Bootloader, UART/YMODEM, MQTT transport, Flash layout, CRC | Architecture documentation only; no public implementation, build, hardware, or runtime evidence |
+| 🧵 [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) | Scheduling, IPC, synchronization, ISR-to-task design | Architecture documentation only; no public implementation or performance evidence |
+| 📡 [Wireless & IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) | Native Wi-Fi, lwIP, TCP, MQTT, device integration | Architecture documentation only; plain TCP 1883 model, with no public TLS or sensor evidence |
+| 🖥️ [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) | Display, input, rendering, events, BSP integration | Architecture documentation only; no public implementation, rendering, or hardware evidence |
 | 🦾 [Embodied Robotics Arm](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab) | Leader–follower control, serial motor interfaces, camera input, LeRobot workflow | Source/configuration and syntax validation available; host functional test, build, hardware, and runtime evidence not provided |
 
 ## Current Work
