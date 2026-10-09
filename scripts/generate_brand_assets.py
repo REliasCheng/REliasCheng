@@ -144,7 +144,7 @@ def main() -> None:
             ("Featured engineering", "01", "ORIGINAL / TESTABLE", t["signal"]),
             ("Current MCU work", "02", "PORTABLE CORE / TARGET PENDING", t["blue"]),
             ("Architecture labs", "03", "DOCUMENTED / NOT IMPLEMENTED", t["warning"]),
-            ("Exploration labs", "04", "STUDY / INTEGRATION", t["muted"]),
+            ("Exploration + foundations", "04", "STUDY / KNOWLEDGE", t["muted"]),
         ):
             filename = {"01": "featured", "02": "mcu", "03": "architecture", "04": "exploration"}[code]
             save(CARDS / f"{filename}-{theme}.svg", category_card(theme, label, code, subtitle, accent))

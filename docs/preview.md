@@ -7,14 +7,14 @@ Preview branch: `design/signalcore-profile-preview`, based on the previously cle
 - Original dark/light/static vector identity, category cards, terminal, footer, tokens, and reproducible generator.
 - Evidence-based classification of all 14 non-profile repositories and a revised README hierarchy.
 - Public API metrics snapshot with current-main CI-SHA checks, dated labels and explicit unavailable states.
-- Static contribution fallback and a preview-only Platane/snk workflow that produces actual data-derived SVG artifacts.
+- A Platane/snk contribution animation generated from the actual public graph in [preview run 37899433686](https://github.com/REliasCheng/REliasCheng/actions/runs/37899433686), validated and checked into the preview branch with a static fallback.
 - Asset/link validation, metrics semantics tests, preview Actions with read-only repository permission, and maintenance documentation.
 
 ## Preview limitations
 
 - Animation in GitHub's README/PR renderer may differ from local SVG rendering. Reduced-motion mode intentionally disables decorative movement. Default-branch Profile playback has not been deployed or asserted.
 - The metrics image is a checked-in, dated preview snapshot; it does not automatically become live in the Profile. Preview Actions upload artifacts and have no write permission.
-- The contribution snake remains a static fallback until the preview Action artifact is verified and linked. No production resource branch, GitHub Pages site, metadata change, pinned-repository change, or edits to technical repositories are included.
+- The contribution snake is a checked-in preview artifact, not a daily-updating production asset. No production resource branch, GitHub Pages site, metadata change, pinned-repository change, or edits to technical repositories are included.
 - Repository maturity decisions reflect public default-branch evidence inspected for this preview, not a new copyright clearance or hardware test.
 
 ## Review gate

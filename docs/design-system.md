@@ -18,7 +18,7 @@ Use system Segoe UI/Arial for readable narrative and Consolas/ui-monospace for t
 - Terminal: a short design-process motif, never simulated test output.
 - Category card: one visual heading per maturity group; details and evidence remain selectable text in the README.
 - Metrics: dated public API snapshot. Show source, refresh time, current-main SHA relationship and failure/unavailable states. A count is not an engineering score.
-- Contribution: actual GitHub data only. Use an explicitly static fallback until the Action-generated SVGs exist and pass review.
+- Contribution: actual GitHub data only. The preview snake was produced by Platane/snk from the public contribution graph, validated, and framed with these palette tokens. An explicitly static fallback remains for inaccessible animation.
 - Footer and dividers: quiet navigation, not a substitute for content.
 
 ## Dark and light policy

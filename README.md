@@ -24,11 +24,9 @@ Original, inspectable implementations with public host-side evidence. The linked
   <img src="assets/cards/featured-dark.svg" alt="Featured engineering projects" width="100%">
 </picture>
 
-| Project | Engineering focus | Public evidence boundary |
-| --- | --- | --- |
-| [Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab) | Python/PyQt5 serial application with testable core and mock backend | Host tests, static checks and package build; no device validation |
-| [Embedded C/C++ Core](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) | Portable command, buffer and task-state modules | Host tests; no MCU target validation |
-| [C51 Board Resource Planner](https://github.com/REliasCheng/C51-Board-Lab) | 8051 resource mapping and conflict detection | Host tests; no board validation |
+- [Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab) — Python/PyQt5 serial application with a testable core and mock backend. Host tests, static checks and package build; no device validation.
+- [Embedded C/C++ Core](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) — portable command, buffer and task-state modules. Host tests; no MCU target validation.
+- [C51 Board Resource Planner](https://github.com/REliasCheng/C51-Board-Lab) — 8051 resource mapping and conflict detection. Host tests; no board validation.
 
 ## Current MCU work
 
@@ -40,11 +38,9 @@ Application and communication cores are distinguishable from a complete target f
   <img src="assets/cards/mcu-dark.svg" alt="Current MCU work" width="100%">
 </picture>
 
-| Project | Engineering focus | Public evidence boundary |
-| --- | --- | --- |
-| [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning) | C89 UART RX ring buffer and 8051 adapter boundary | Host-tested core; no Keil target or board evidence |
-| [STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning) | RTC, temperature and configuration state behind platform callbacks | Host tests; C51 target and hardware not verified |
-| [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU) | CT107D resource, timing and control policies | Host-tested policies; no complete target or board evidence |
+- [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning) — C89 UART RX ring buffer and 8051 adapter boundary. Host-tested core; no Keil target or board evidence.
+- [STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning) — RTC, temperature and configuration state behind platform callbacks. Host tests; C51 target and hardware not verified.
+- [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU) — CT107D resource, timing and control policies. Host-tested policies; no complete target or board evidence.
 
 ## Architecture labs
 
@@ -56,13 +52,11 @@ These repositories communicate system design and technical boundaries. They are 
   <img src="assets/cards/architecture-dark.svg" alt="Architecture labs" width="100%">
 </picture>
 
-| Project | Architecture focus |
-| --- | --- |
-| [ARM Cortex-M](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab) | Startup, interrupts, clocks and driver layering |
-| [FreeRTOS](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) | Scheduling, IPC and ISR-to-task design |
-| [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) | Display, input, rendering and event pipeline |
-| [Wireless / IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) | Native Wi-Fi → lwIP → TCP → plain MQTT model; no TLS or live sensor evidence |
-| [Firmware Update / OTA](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) | Bootloader, UART/YMODEM, MQTT and CRC boundary model; no A/B or rollback claim |
+- [ARM Cortex-M](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab) — startup, interrupts, clocks and driver layering.
+- [FreeRTOS](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) — scheduling, IPC and ISR-to-task design.
+- [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) — display, input, rendering and event pipeline.
+- [Wireless / IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) — native Wi-Fi → lwIP → TCP → plain MQTT model; no TLS or live sensor evidence.
+- [Firmware Update / OTA](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) — bootloader, UART/YMODEM, MQTT and CRC boundary model; no A/B or rollback claim.
 
 ## Exploration and foundations
 
@@ -95,11 +89,11 @@ The panel below is a **dated preview snapshot** from public GitHub API data, not
 <details>
 <summary>Contribution activity preview</summary>
 
-Contribution activity reflects public GitHub events, not engineering quality. Until the contribution-snake Action has produced and verified its preview files, this section intentionally uses an original static fallback. It never represents a fabricated contribution history.
+This animated preview was generated from the public REliasCheng contribution graph by the preview Action. Contribution activity is not an engineering-quality score. The original static image remains the fallback if animated SVG is unavailable.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/fallback/contribution-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/fallback/contribution-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/preview/snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/preview/snake-light.svg">
   <img src="assets/fallback/contribution-dark.svg" alt="Static fallback for the GitHub contribution activity component" width="100%">
 </picture>
 
