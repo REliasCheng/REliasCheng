@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import re
-from urllib.parse import unquote
+from urllib.parse import quote, unquote
 from xml.etree import ElementTree
 
 
@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
 PROJECTS = ROOT / "data/projects.json"
 TOKENS = ROOT / "assets/brand/tokens.json"
-REPO_LINK = re.compile(r"https://github\.com/REliasCheng/([A-Za-z0-9_.-]+)")
+EVIDENCE = ROOT / "data/featured-evidence.json"
 MD_LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
 HTML_ASSET = re.compile(r'(?:src|srcset)="([^"]+)"')
 FORBIDDEN_SVG = re.compile(
@@ -33,10 +33,40 @@ def contrast(first: str, second: str) -> float:
     return (upper + 0.05) / (lower + 0.05)
 
 
+def expected_evidence_links(evidence: dict) -> set[str]:
+    links = set()
+    for repository, paths in evidence.items():
+        if set(paths) != {"source", "tests", "ci", "design"}:
+            raise ValueError(f"Incomplete evidence manifest for {repository}")
+        for kind, path in paths.items():
+            if not isinstance(path, str) or not path or path.startswith("/") or ".." in Path(path).parts:
+                raise ValueError(f"Invalid evidence path for {repository}: {path}")
+            route = "actions/workflows/" + Path(path).name if kind == "ci" else "blob/main/" + quote(path, safe="/")
+            links.add(f"https://github.com/REliasCheng/{repository}/{route}")
+    return links
+
+
+def check_repository_links(readme: str, repositories: set[str], evidence: dict) -> list[str]:
+    errors = []
+    markdown_urls = set(MD_LINK.findall(readme))
+    github_urls = {url for url in markdown_urls if url.startswith("https://github.com/")}
+    expected_roots = {f"https://github.com/REliasCheng/{repo}" for repo in repositories}
+    expected_deep = expected_evidence_links(evidence)
+    if not expected_roots <= github_urls:
+        errors.append(f"Missing repository root links: {sorted(expected_roots - github_urls)}")
+    if not expected_deep <= github_urls:
+        errors.append(f"Missing featured evidence links: {sorted(expected_deep - github_urls)}")
+    unexpected = github_urls - expected_roots - expected_deep
+    if unexpected:
+        errors.append(f"Unexpected GitHub README links: {sorted(unexpected)}")
+    return errors
+
+
 def validate() -> list[str]:
     errors = []
     readme = README.read_text(encoding="utf-8")
     catalog = json.loads(PROJECTS.read_text(encoding="utf-8"))
+    evidence = json.loads(EVIDENCE.read_text(encoding="utf-8"))
     tokens = json.loads(TOKENS.read_text(encoding="utf-8"))
     for theme in ("dark", "light"):
         palette = tokens[theme]
@@ -48,9 +78,9 @@ def validate() -> list[str]:
     repositories = [project["repository"] for group in categories for project in group["projects"]]
     if len(repositories) != 14 or len(set(repositories)) != 14:
         errors.append("Project catalog must contain each of the 14 non-profile repositories once")
-    linked = REPO_LINK.findall(readme)
-    if len(linked) != 14 or set(linked) != set(repositories):
-        errors.append(f"README repository links do not match catalog: {linked}")
+    if set(evidence) != {"Python-Host-Application-Lab", "Embedded-C-Cpp-Learning", "C51-Board-Lab"}:
+        errors.append("Featured evidence manifest must cover exactly the three featured repositories")
+    errors.extend(check_repository_links(readme, set(repositories), evidence))
     for link in MD_LINK.findall(readme):
         if link.startswith(("http://", "https://", "#")):
             continue
@@ -108,4 +138,4 @@ if __name__ == "__main__":
         for problem in problems:
             print("ERROR:", problem)
         raise SystemExit(1)
-    print("Profile validation passed: 14 unique links, local assets, SVG XML and safe references")
+    print("Profile validation passed: 14 repository roots, featured evidence, local assets and safe SVGs")

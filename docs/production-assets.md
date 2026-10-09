@@ -1,6 +1,6 @@
 # Future SIGNALCORE dynamic-asset publication
 
-This is a design and dry-run specification, **not a release authorization**. The current Profile still reads checked-in preview SVGs. `signalcore-assets` does not exist and this branch does not create it. No preview workflow has `contents: write`.
+This is a design and dry-run specification, **not a release authorization**. The Profile is on `main` but still reads checked-in, dated SVG snapshots. `signalcore-assets` has not been initialized by this work, and no validation workflow has `contents: write`.
 
 ## Branch and first publication gate
 
@@ -11,7 +11,7 @@ This is a design and dry-run specification, **not a release authorization**. The
 5. Only after separate release approval, run the publisher's gated `--publish --approved-main-sha <exact-40-character-SHA>` path. It clones the **existing** resource branch into a temporary directory, changes only the five validated assets, commits only if bytes changed, and performs a normal fast-forward push. A remote race/non-fast-forward fails closed; no force/rebase/retry-overwrite.
 6. Confirm both published asset URLs return SVG/JSON with correct MIME and payload, then switch README references in a separately reviewed normal commit. Until that URL check passes, keep the checked-in preview and static fallbacks. The first approved Profile merge is a separate decision.
 
-The future production workflow should be a single serial publishing job with a repository-scoped concurrency group. Scheduled Actions run from the default branch; a `schedule` key present only on this preview branch does **not** provide daily production updates. The future job should receive `contents: write` only after validation and an approval gate. Preview generation and PR validation retain `contents: read`; never use `pull_request_target` to execute untrusted PR code with write credentials.
+The future production workflow should be a single serial publishing job with a repository-scoped concurrency group. Scheduled Actions run from the default branch; the present artifact-generating workflows do **not** provide daily production updates. The future job should receive `contents: write` only after validation and an approval gate. Generation and PR validation retain `contents: read`; never use `pull_request_target` to execute untrusted PR code with write credentials.
 
 ## Failure behavior
 

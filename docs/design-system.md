@@ -2,7 +2,7 @@
 
 ## Brand concept
 
-SIGNALCORE is a compact embedded-engineering interface: routing traces, a signal waveform, restrained terminal language, and clear evidence labels. It is a visual identity for this Profile preview, not a claim of verified hardware. All artwork in `assets/brand`, `assets/cards`, and `assets/fallback` is generated from repository-authored vector geometry and tokens; no third-party image, font, logo, or course material is imported. The separately generated contribution animation uses Platane/snk and actual GitHub contribution data under that tool's own terms.
+SIGNALCORE is a compact embedded-engineering interface: routing traces, a signal waveform, restrained terminal language, and clear evidence labels. It is the current Profile visual identity, not a claim of verified hardware. All artwork in `assets/brand`, `assets/cards`, and `assets/fallback` is generated from repository-authored vector geometry and tokens; no third-party image, font, logo, or course material is imported. The separately generated contribution animation uses Platane/snk and actual GitHub contribution data under that tool's own terms.
 
 ## Palette
 
@@ -24,11 +24,11 @@ Use system Segoe UI/Arial for readable narrative and Consolas/ui-monospace for t
 
 ## Dark and light policy
 
-Each displayed component has dark and light SVG variants. GitHub `<picture>` sources select by `prefers-color-scheme`; its `<img>` points to a file that already exists on the preview branch. Standalone SVGs have their own background fill. No external image URL is needed. The default Profile page remains unchanged before a separately approved merge.
+Each displayed component has dark and light SVG variants. GitHub `<picture>` sources select by `prefers-color-scheme`; its `<img>` points to a checked-in file. Standalone SVGs have their own background fill. No external image URL is needed. The default Profile was updated by PR #1; GitHub renderer QA is tracked separately.
 
 ## Animation and accessibility
 
-The hero route and signal sweep use low-amplitude CSS motion. The terminal reveals eight lines over roughly seven seconds, then shows a blinking prompt. In a GitHub README, SVG-internal motion media queries are not reliable enough alone: each animated `<picture>` places `prefers-reduced-motion: reduce` dark/light static sources **before** animated sources. This applies to hero, terminal and contribution graph. The snake is separate data-derived animation, visible by default, with both direct still-image links and a neutral `<img>` fallback. Essential identity, project categories, links, evidence boundaries and metrics labels are HTML/text. Every picture has alt text. The preview is checked at desktop and narrow widths in both color schemes; actual default-branch Profile playback requires release-stage confirmation.
+The hero route and signal sweep use low-amplitude CSS motion. The terminal reveals eight lines over roughly seven seconds, then shows a blinking prompt. In a GitHub README, SVG-internal motion media queries are not reliable enough alone: each animated `<picture>` places `prefers-reduced-motion: reduce` dark/light static sources **before** animated sources. This applies to hero, terminal and contribution graph. The snake is separate data-derived animation, visible by default, with both direct still-image links and a neutral `<img>` fallback. Essential identity, project categories, links, evidence boundaries and metrics labels are HTML/text. Every picture has alt text. Earlier preview checks do not establish completed default-branch browser QA.
 
 ## Project category system
 
@@ -40,4 +40,4 @@ For a monitored host workflow, `PASS` means its successful run SHA matches the c
 
 ## SVG generation and maintenance
 
-Run `python scripts/generate_brand_assets.py` after token or geometry edits, then `python scripts/validate_profile.py` and visual review. `scripts/generate_metrics.py` reads public GitHub API data; it refuses an empty repository inventory and never substitutes zero for an API failure. Its output is a dated snapshot. The snake workflow uses the documented Platane/snk SVG-only v3 interface with five contribution colors. See [maintenance](maintenance.md) and [future production assets](production-assets.md) for update, failure, dry-run and fallback steps. A production asset branch or Pages site is not part of this preview.
+Run `python scripts/generate_brand_assets.py` after token or geometry edits, then `python scripts/validate_profile.py` and visual review. `scripts/generate_metrics.py` reads public GitHub API data; it refuses an empty repository inventory and never substitutes zero for an API failure. Its output is a dated snapshot. The snake workflow uses the documented Platane/snk SVG-only v3 interface with five contribution colors. See [maintenance](maintenance.md) and [future production assets](production-assets.md) for update, failure, dry-run and fallback steps. A production asset branch or Pages site has not been activated.

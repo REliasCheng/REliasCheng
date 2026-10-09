@@ -1,5 +1,7 @@
 # SIGNALCORE portfolio baseline
 
+This is a historical pre-preview baseline, not a statement of current Profile content. The visual Profile merged to `main` through PR #1 on 2026-10-09; its checked-in dynamic images are still dated snapshots.
+
 Read-only baseline recorded on 2026-10-09 (Asia/Shanghai), before preview-branch changes. GitHub listed 15 public repositories. All 15 local checkouts had clean worktrees and `HEAD` equal to GitHub `main` when inspected. Their root READMEs existed; 31 SVG files were tracked across the 15 current branches. This is a presentation audit, not a historical rights clearance or a new hardware validation.
 
 | Role | Repositories | Evidence boundary |
