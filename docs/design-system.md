@@ -16,7 +16,7 @@ Use system Segoe UI/Arial for readable narrative and Consolas/ui-monospace for t
 
 - Hero: one identity statement and one schematic MCU/signal motif. It is not a hardware photograph.
 - Terminal: a staged whoami/portfolio introduction with original-work and host-test labels, never simulated test output. The alternate static SVG contains all meaningful text without animation.
-- Featured cards: three distinct abstract diagrams for the host app, portable C/C++ modules, and the 8051 planner. Their linked Markdown text states each project's actual evidence boundary; the SVGs are not runtime screenshots.
+- Featured cards: three distinct abstract diagrams for the host app, portable C/C++ modules, and the 8051 planner. Each has a compact dark/light SVG selected below 600 px so labels do not become microscopic. Their linked Markdown text states each project's actual evidence boundary; the SVGs are not runtime screenshots.
 - Category card: one visual heading per maturity group; details and evidence remain selectable text in the README.
 - Metrics: dated public API snapshot in a compact mobile-readable panel. Show source, refresh time, current-main SHA relationship and failure/unavailable states. A count is not an engineering score.
 - Contribution: actual GitHub data only. The preview snake was produced by Platane/snk from the public contribution graph, validated, and framed with these palette tokens. The default view is animated; linked still dark/light graphs are derived from that same verified SVG and contain no snake animation. A neutral `<img>` fallback also remains.

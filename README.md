@@ -23,6 +23,8 @@ I build testable embedded software, MCU application cores, board-planning tools,
 Original, inspectable implementations with public host-side evidence. The linked repositories define their own build and hardware limits.
 
 <picture>
+  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-python-mobile-dark.svg">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-python-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-python-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-python-light.svg">
   <img src="assets/cards/featured-python-dark.svg" alt="Python host application: GUI, testable core and serial boundary" width="100%">
@@ -31,6 +33,8 @@ Original, inspectable implementations with public host-side evidence. The linked
 [Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab) — Python/PyQt5 serial application with a testable core and mock backend. Host tests, static checks and package build; no device validation.
 
 <picture>
+  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-embedded-cpp-mobile-dark.svg">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-embedded-cpp-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-embedded-cpp-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-embedded-cpp-light.svg">
   <img src="assets/cards/featured-embedded-cpp-dark.svg" alt="Portable C and C++ command and task modules with host tests" width="100%">
@@ -39,6 +43,8 @@ Original, inspectable implementations with public host-side evidence. The linked
 [Embedded C/C++ Core](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) — portable command, buffer and task-state modules. Host tests; no MCU target validation.
 
 <picture>
+  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-c51-mobile-dark.svg">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-c51-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-c51-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-c51-light.svg">
   <img src="assets/cards/featured-c51-dark.svg" alt="8051 board resource planner mapping module needs to GPIO, Timer, UART and I2C" width="100%">

@@ -9,7 +9,7 @@ from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from generate_brand_assets import featured_card, terminal  # noqa: E402
+from generate_brand_assets import featured_card, featured_mobile_card, terminal  # noqa: E402
 from prepare_static_contribution import prepare  # noqa: E402
 
 
@@ -31,6 +31,7 @@ class BrandAssetTests(unittest.TestCase):
     def test_distinct_featured_cards_in_both_themes(self):
         for theme in ("dark", "light"):
             contents = [featured_card(theme, kind) for kind in ("python", "embedded-cpp", "c51")]
+            mobile = [featured_mobile_card(theme, kind) for kind in ("python", "embedded-cpp", "c51")]
             for content in contents:
                 ElementTree.fromstring(content)
                 self.assertIn("<title", content)
@@ -38,6 +39,12 @@ class BrandAssetTests(unittest.TestCase):
                 self.assertIn('viewBox="0 0 1200 190"', content)
                 self.assertNotIn("<image", content)
             self.assertEqual(len(set(contents)), 3)
+            self.assertEqual(len(set(mobile)), 3)
+            for content in mobile:
+                ElementTree.fromstring(content)
+                self.assertIn('viewBox="0 0 540 220"', content)
+                self.assertIn("<title", content)
+                self.assertIn("<desc", content)
 
     def test_still_graph_is_derived_without_snake_or_animation(self):
         with tempfile.TemporaryDirectory() as temporary:

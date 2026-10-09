@@ -82,6 +82,9 @@ def validate() -> list[str]:
         for theme in ("dark", "light"):
             if f"assets/cards/featured-{kind}-{theme}.svg" not in readme:
                 errors.append(f"Missing featured {kind} {theme} picture source")
+            mobile = f"assets/cards/featured-{kind}-mobile-{theme}.svg"
+            if mobile not in readme or readme.index(mobile) > readme.index(f"assets/cards/featured-{kind}-{theme}.svg"):
+                errors.append(f"Missing or incorrectly ordered mobile featured {kind} {theme} source")
     for path in (ROOT / "assets").rglob("*.svg"):
         content = path.read_text(encoding="utf-8")
         try:

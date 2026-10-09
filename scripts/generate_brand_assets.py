@@ -192,6 +192,38 @@ def featured_card(theme: str, kind: str) -> str:
 </svg>'''
 
 
+def featured_mobile_card(theme: str, kind: str) -> str:
+    """Compact layout keeps core labels legible inside GitHub's narrow column."""
+    t = TOKENS[theme]
+    cases = {
+        "python": ("PYTHON / HOST APPLICATION", "Host application architecture", "GUI → core → serial boundary", "HOST TESTED / NO DEVICE CLAIM", ("GUI", "CORE", "SERIAL")),
+        "embedded-cpp": ("C11 / C++11 / PORTABLE CORE", "Embedded software structure", "commands → state → modules", "HOST TESTED / NO MCU CLAIM", ("CMD", "TASK", "TEST")),
+        "c51": ("8051 / BOARD RESOURCE PLANNER", "Resource mapping and conflicts", "module → GPIO / Timer / UART / I2C", "HOST TESTED / NO BOARD CLAIM", ("MODULE", "MAP", "CHECK")),
+    }
+    code, title, flow, boundary, nodes = cases[kind]
+    boxes = []
+    for index, label in enumerate(nodes):
+        x = 24 + index * 169
+        boxes.append(
+            f'<rect x="{x}" y="133" width="143" height="45" rx="6" fill="none" stroke="{t["signal"] if index == 1 else t["blue"]}" stroke-width="2"/>'
+            f'<text x="{x + 15}" y="161" fill="{t["text"]}" font-size="16">{label}</text>'
+        )
+        if index < 2:
+            boxes.append(f'<path d="M{x + 143} 155H{x + 169}" stroke="{t["signal"]}" stroke-width="2"/>')
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="540" height="220" viewBox="0 0 540 220" role="img" aria-labelledby="title desc">
+  <title id="title">{title}</title><desc id="desc">Compact original diagram: {flow}. {boundary}.</desc>
+  <rect width="540" height="220" rx="12" fill="{t['panel']}" stroke="{t['border']}" stroke-width="2"/>
+  <rect width="6" height="220" rx="3" fill="{t['signal']}"/>
+  <g font-family="Consolas, ui-monospace, monospace">
+    <text x="24" y="35" fill="{t['signal']}" font-size="16" letter-spacing="1">{code}</text>
+    <text x="24" y="108" fill="{t['secondary']}" font-size="18">{flow}</text>
+    {''.join(boxes)}
+    <text x="24" y="204" fill="{t['muted']}" font-size="17">{boundary}</text>
+  </g>
+  <text x="24" y="77" fill="{t['text']}" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="650">{title}</text>
+</svg>'''
+
+
 def fallback(theme: str, kind: str) -> str:
     t = TOKENS[theme]
     caption = "Contribution animation requires a verified generated image" if kind == "contribution" else "Public metrics are temporarily unavailable"
@@ -231,11 +263,12 @@ def main() -> None:
             save(CARDS / f"{filename}-{theme}.svg", category_card(theme, label, code, subtitle, accent))
         for kind in ("python", "embedded-cpp", "c51"):
             save(CARDS / f"featured-{kind}-{theme}.svg", featured_card(theme, kind))
+            save(CARDS / f"featured-{kind}-mobile-{theme}.svg", featured_mobile_card(theme, kind))
         save(FALLBACK / f"contribution-{theme}.svg", fallback(theme, "contribution"))
         save(FALLBACK / f"telemetry-{theme}.svg", fallback(theme, "telemetry"))
     save(BRAND / "hero-static.svg", hero("dark", animated=False))
     save(BRAND / "hero-static-light.svg", hero("light", animated=False))
-    print("Generated 30 original SVG assets from assets/brand/tokens.json")
+    print("Generated 36 original SVG assets from assets/brand/tokens.json")
 
 
 if __name__ == "__main__":
