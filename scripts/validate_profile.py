@@ -12,6 +12,7 @@ from xml.etree import ElementTree
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
 PROJECTS = ROOT / "data/projects.json"
+TOKENS = ROOT / "assets/brand/tokens.json"
 REPO_LINK = re.compile(r"https://github\.com/REliasCheng/([A-Za-z0-9_.-]+)")
 MD_LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
 HTML_ASSET = re.compile(r'(?:src|srcset)="([^"]+)"')
@@ -21,10 +22,28 @@ FORBIDDEN_SVG = re.compile(
 )
 
 
+def luminance(color: str) -> float:
+    channels = [int(color[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+    linear = [value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in channels]
+    return sum(value * weight for value, weight in zip(linear, (0.2126, 0.7152, 0.0722)))
+
+
+def contrast(first: str, second: str) -> float:
+    upper, lower = sorted((luminance(first), luminance(second)), reverse=True)
+    return (upper + 0.05) / (lower + 0.05)
+
+
 def validate() -> list[str]:
     errors = []
     readme = README.read_text(encoding="utf-8")
     catalog = json.loads(PROJECTS.read_text(encoding="utf-8"))
+    tokens = json.loads(TOKENS.read_text(encoding="utf-8"))
+    for theme in ("dark", "light"):
+        palette = tokens[theme]
+        for role in ("text", "secondary", "muted", "signal", "blue", "verified", "warning"):
+            ratio = contrast(palette["panel"], palette[role])
+            if ratio < 4.5:
+                errors.append(f"{theme} {role}/panel contrast below 4.5:1: {ratio:.2f}")
     categories = catalog["categories"]
     repositories = [project["repository"] for group in categories for project in group["projects"]]
     if len(repositories) != 14 or len(set(repositories)) != 14:

@@ -6,7 +6,7 @@ SIGNALCORE is a compact embedded-engineering interface: routing traces, a signal
 
 ## Palette
 
-`assets/brand/tokens.json` is authoritative. Dark uses background `#0B111B`, panel `#142235`, border `#25394C`, text `#F0F6FF`, signal `#61DCE6`, and verification green `#67D9C5`. Light uses background `#F5F8FC`, white panels, border `#D0DFEA`, text `#102033`, signal `#087F95`, and verification green `#16876C`. Muted text is for secondary labels, never the sole expression of status.
+`assets/brand/tokens.json` is authoritative. Dark uses background `#0B111B`, panel `#142235`, border `#25394C`, text `#F0F6FF`, signal `#61DCE6`, and verification green `#67D9C5`. Light uses background `#F5F8FC`, white panels, border `#D0DFEA`, text `#102033`, signal `#087F95`, and verification green `#0F765E`. Muted text is for secondary labels, never the sole expression of status. All semantic text colors meet at least 4.5:1 contrast against their panel background.
 
 ## Typography, spacing, and borders
 
