@@ -234,7 +234,8 @@ def main() -> None:
         save(FALLBACK / f"contribution-{theme}.svg", fallback(theme, "contribution"))
         save(FALLBACK / f"telemetry-{theme}.svg", fallback(theme, "telemetry"))
     save(BRAND / "hero-static.svg", hero("dark", animated=False))
-    print("Generated 29 original SVG assets from assets/brand/tokens.json")
+    save(BRAND / "hero-static-light.svg", hero("light", animated=False))
+    print("Generated 30 original SVG assets from assets/brand/tokens.json")
 
 
 if __name__ == "__main__":

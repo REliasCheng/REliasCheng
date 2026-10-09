@@ -1,4 +1,6 @@
 <picture>
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/brand/hero-static.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/brand/hero-static-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/brand/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/brand/hero-light.svg">
   <img src="assets/brand/hero-static.svg" alt="SIGNALCORE — Elias Cheng, embedded systems and software architecture" width="100%">
@@ -9,6 +11,8 @@
 I build testable embedded software, MCU application cores, board-planning tools, and host applications. This profile separates **implemented work** from **architecture studies** and **exploration**; host tests are not MCU or hardware validation.
 
 <picture>
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/brand/terminal-static-dark.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/brand/terminal-static-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/brand/terminal-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/brand/terminal-light.svg">
   <img src="assets/brand/terminal-static-dark.svg" alt="Terminal introduction: Elias Cheng, original host software, host-side tests, and embedded architecture studies" width="100%">
@@ -105,6 +109,8 @@ The panel below is a **dated preview snapshot** from public GitHub API data, not
 This animated preview was generated from the public REliasCheng contribution graph by the preview Action. Contribution activity is not an engineering-quality score. The original static image remains the fallback if animated SVG is unavailable.
 
 <picture>
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/preview/contribution-static-dark.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/preview/contribution-static-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/preview/snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/preview/snake-light.svg">
   <img src="assets/fallback/contribution-dark.svg" alt="Static fallback for the GitHub contribution activity component" width="100%">

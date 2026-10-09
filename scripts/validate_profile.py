@@ -69,6 +69,15 @@ def validate() -> list[str]:
         errors.append("Contribution graphic must be visible by default")
     if "assets/brand/terminal-static-dark.svg" not in readme:
         errors.append("Terminal needs a meaningful static image fallback")
+    for prefix, static_names, animated_name in (
+        ("hero", ("hero-static.svg", "hero-static-light.svg"), "hero-dark.svg"),
+        ("terminal", ("terminal-static-dark.svg", "terminal-static-light.svg"), "terminal-dark.svg"),
+        ("contribution", ("contribution-static-dark.svg", "contribution-static-light.svg"), "snake-dark.svg"),
+    ):
+        for name in static_names:
+            marker = f'srcset="assets/{"preview" if prefix == "contribution" else "brand"}/{name}"'
+            if marker not in readme or readme.index(marker) > readme.index(animated_name):
+                errors.append(f"Reduced-motion static source absent or after animated {prefix}: {name}")
     for kind in ("python", "embedded-cpp", "c51"):
         for theme in ("dark", "light"):
             if f"assets/cards/featured-{kind}-{theme}.svg" not in readme:

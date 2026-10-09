@@ -28,7 +28,7 @@ Each displayed component has dark and light SVG variants. GitHub `<picture>` sou
 
 ## Animation and accessibility
 
-The hero route and signal sweep use low-amplitude CSS motion. The terminal reveals eight lines over roughly seven seconds, then shows a blinking prompt; `prefers-reduced-motion` displays all terminal text without motion. The contribution snake is separate data-derived animation, visible by default with a static `<img>` fallback. Essential identity, project categories, links, evidence boundaries and metrics labels are HTML/text. Every picture has alt text. The preview is checked at desktop and narrow widths in both color schemes; actual default-branch Profile playback requires release-stage confirmation.
+The hero route and signal sweep use low-amplitude CSS motion. The terminal reveals eight lines over roughly seven seconds, then shows a blinking prompt. In a GitHub README, SVG-internal motion media queries are not reliable enough alone: each animated `<picture>` places `prefers-reduced-motion: reduce` dark/light static sources **before** animated sources. This applies to hero, terminal and contribution graph. The snake is separate data-derived animation, visible by default, with both direct still-image links and a neutral `<img>` fallback. Essential identity, project categories, links, evidence boundaries and metrics labels are HTML/text. Every picture has alt text. The preview is checked at desktop and narrow widths in both color schemes; actual default-branch Profile playback requires release-stage confirmation.
 
 ## Project category system
 
