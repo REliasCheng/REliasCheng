@@ -1,0 +1,53 @@
+{
+  "owner": "REliasCheng",
+  "refreshed_utc": "2026-10-09 08:45 UTC",
+  "public_repositories": 15,
+  "languages_by_repository": [
+    [
+      "C",
+      5
+    ],
+    [
+      "Python",
+      1
+    ]
+  ],
+  "ci": [
+    {
+      "label": "Python Host",
+      "repository": "Python-Host-Application-Lab",
+      "scope": "Host app",
+      "status": "PASS",
+      "sha": "597f9fd604e9af135bab5ce08a9c787bba0ed54c"
+    },
+    {
+      "label": "Embedded C/C++",
+      "repository": "Embedded-C-Cpp-Learning",
+      "scope": "Portable core",
+      "status": "PASS",
+      "sha": "08701159afa995dec8686f11dc1c3bf587d849b9"
+    },
+    {
+      "label": "C51 Planner",
+      "repository": "C51-Board-Lab",
+      "scope": "Planner core",
+      "status": "PASS",
+      "sha": "c723c5b1f54f16917d5beeed0e3f61217ee061d8"
+    },
+    {
+      "label": "STC89 Terminal",
+      "repository": "stc89c52-learning",
+      "scope": "Portable core",
+      "status": "PASS",
+      "sha": "bd7883132c8e34e8883fdc3a24f15b87ea2c793d"
+    },
+    {
+      "label": "STC8 UART",
+      "repository": "STC8-MCU-Learning",
+      "scope": "Portable core",
+      "status": "PASS",
+      "sha": "549dfd643a738ecaff3011c835f241297ab417bc"
+    }
+  ],
+  "source": "GitHub public REST API"
+}

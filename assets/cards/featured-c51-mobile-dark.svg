@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="220" viewBox="0 0 540 220" role="img" aria-labelledby="title desc">
+  <title id="title">Resource mapping and conflicts</title><desc id="desc">Compact original diagram: module → GPIO / Timer / UART / I2C. HOST TESTED / NO BOARD CLAIM.</desc>
+  <rect width="540" height="220" rx="12" fill="#142235" stroke="#25394C" stroke-width="2"/>
+  <rect width="6" height="220" rx="3" fill="#61DCE6"/>
+  <g font-family="Consolas, ui-monospace, monospace">
+    <text x="24" y="35" fill="#61DCE6" font-size="16" letter-spacing="1">8051 / BOARD RESOURCE PLANNER</text>
+    <text x="24" y="108" fill="#A9BDCD" font-size="18">module → GPIO / Timer / UART / I2C</text>
+    <rect x="24" y="133" width="143" height="45" rx="6" fill="none" stroke="#60A5FA" stroke-width="2"/><text x="39" y="161" fill="#F0F6FF" font-size="16">MODULE</text><path d="M167 155H193" stroke="#61DCE6" stroke-width="2"/><rect x="193" y="133" width="143" height="45" rx="6" fill="none" stroke="#61DCE6" stroke-width="2"/><text x="208" y="161" fill="#F0F6FF" font-size="16">MAP</text><path d="M336 155H362" stroke="#61DCE6" stroke-width="2"/><rect x="362" y="133" width="143" height="45" rx="6" fill="none" stroke="#60A5FA" stroke-width="2"/><text x="377" y="161" fill="#F0F6FF" font-size="16">CHECK</text>
+    <text x="24" y="204" fill="#708CA2" font-size="17">HOST TESTED / NO BOARD CLAIM</text>
+  </g>
+  <text x="24" y="77" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="650">Resource mapping and conflicts</text>
+</svg>
