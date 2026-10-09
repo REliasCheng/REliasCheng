@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
@@ -18,17 +19,35 @@ import urllib.error
 from xml.etree import ElementTree
 
 from generate_metrics import MONITORED, classify_ci, fetch_json, public_inventory, OWNER
-from validate_metrics import validate as validate_metrics
+from prepare_static_contribution import derive_static
+from svg_safety import validate_svg
+from validate_metrics import snapshot_freshness, validate as validate_metrics
 from validate_snake import validate as validate_snake
 
 
 BRANCH = "signalcore-assets"
-ASSETS = ("snake-dark.svg", "snake-light.svg", "telemetry-dark.svg", "telemetry-light.svg", "telemetry.json")
+ASSETS = (
+    "snake-dark.svg", "snake-light.svg",
+    "contribution-static-dark.svg", "contribution-static-light.svg",
+    "telemetry-dark.svg", "telemetry-light.svg", "telemetry.json",
+)
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class PublicationBlocked(RuntimeError):
-    """Any validation or concurrency failure leaves published assets unchanged."""
+    """Pre-push validation, approval, or rejected-push failure."""
+
+
+class PublicationVerificationUncertain(PublicationBlocked):
+    """Push succeeded, but a later remote read could not prove the final head."""
+
+    def __init__(self, committed_sha: str, observed_head: str | None) -> None:
+        self.committed_sha = committed_sha
+        self.observed_head = observed_head
+        super().__init__(
+            f"Push accepted commit {committed_sha}; later remote head is "
+            f"{observed_head or 'unavailable'}. Remote state may have advanced; inspect before retry."
+        )
 
 
 def command(*args: str, cwd: Path = ROOT) -> str:
@@ -38,11 +57,20 @@ def command(*args: str, cwd: Path = ROOT) -> str:
     return result.stdout.strip()
 
 
-def validate_source(directory: Path, fetch=fetch_json) -> dict:
+def validate_source(directory: Path, fetch=fetch_json, *, now: datetime | None = None,
+                    require_fresh: bool = False) -> dict:
     try:
         validate_snake(directory)
-        validate_metrics(directory)
+        validate_metrics(directory, now=now)
+        for theme in ("dark", "light"):
+            still = directory / f"contribution-static-{theme}.svg"
+            validate_svg(still)
+            expected = derive_static((directory / f"snake-{theme}.svg").read_text(encoding="utf-8"), theme)
+            if still.read_text(encoding="utf-8") != expected:
+                raise PublicationBlocked(f"Static contribution image does not match the {theme} animated source")
         data = json.loads((directory / "telemetry.json").read_text(encoding="utf-8"))
+        if require_fresh and snapshot_freshness(data["refreshed_utc"], now or datetime.now(timezone.utc)) != "FRESH":
+            raise PublicationBlocked("Metrics snapshot is stale; regenerate before publication")
         public = public_inventory(fetch)
         languages = Counter(repo.get("language") for repo in public if repo.get("language"))
         if len(public) != data["public_repositories"] or languages.most_common(3) != [tuple(x) for x in data["languages_by_repository"]]:
@@ -82,8 +110,9 @@ def branch_head(remote: str = "origin", branch: str = BRANCH) -> str | None:
     return lines.split("\t", 1)[0] if lines else None
 
 
-def plan(source: Path, published: Path | None = None, fetch=fetch_json, remote: str = "origin", head=None) -> dict:
-    data = validate_source(source, fetch)
+def plan(source: Path, published: Path | None = None, fetch=fetch_json, remote: str = "origin",
+         head=None, now: datetime | None = None) -> dict:
+    data = validate_source(source, fetch, now=now, require_fresh=True)
     current_head = branch_head(remote) if head is None else head
     if published is None and current_head:
         remote_url = command("git", "remote", "get-url", remote)
@@ -120,7 +149,7 @@ def publish(source: Path, approved_main_sha: str, remote: str = "origin") -> str
         raise PublicationBlocked("Unexpected remote URL")
     if not branch_head(remote):
         raise PublicationBlocked("Production asset branch absent; initialization requires separate approval")
-    validate_source(source)
+    validate_source(source, require_fresh=True)
     with tempfile.TemporaryDirectory(prefix="signalcore-publish-") as temporary:
         checkout = Path(temporary) / "assets"
         command("git", "clone", "--single-branch", "--branch", BRANCH, remote_url, str(checkout))
@@ -134,8 +163,12 @@ def publish(source: Path, approved_main_sha: str, remote: str = "origin") -> str
                 "commit", "-m", "chore: refresh validated public profile assets", cwd=checkout)
         committed = command("git", "rev-parse", "HEAD", cwd=checkout)
         command("git", "push", "origin", f"HEAD:refs/heads/{BRANCH}", cwd=checkout)
-        if branch_head(remote) != committed:
-            raise PublicationBlocked("Remote branch verification failed after normal push")
+        try:
+            observed = branch_head(remote)
+        except PublicationBlocked as exc:
+            raise PublicationVerificationUncertain(committed, None) from exc
+        if observed != committed:
+            raise PublicationVerificationUncertain(committed, observed)
         return committed
 
 
@@ -155,6 +188,8 @@ def main() -> None:
             if not args.approved_main_sha:
                 raise PublicationBlocked("--publish requires --approved-main-sha and separate release approval")
             print(publish(args.source, args.approved_main_sha))
+    except PublicationVerificationUncertain as exc:
+        parser.exit(3, f"PUBLICATION_VERIFICATION_UNCERTAIN: {exc}\n")
     except PublicationBlocked as exc:
         parser.exit(2, f"PUBLICATION_BLOCKED: {exc}\n")
 

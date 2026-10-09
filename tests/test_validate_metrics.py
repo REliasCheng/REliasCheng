@@ -1,6 +1,7 @@
 """Reject valid-looking telemetry that is inconsistent with its JSON."""
 
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import shutil
 import sys
@@ -9,7 +10,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from validate_metrics import validate  # noqa: E402
+from validate_metrics import snapshot_freshness, validate  # noqa: E402
 
 
 class MetricsValidationTests(unittest.TestCase):
@@ -50,6 +51,16 @@ class MetricsValidationTests(unittest.TestCase):
         self.write_data()
         with self.assertRaisesRegex(ValueError, "UTC refresh"):
             validate(self.directory)
+
+    def test_fresh_stale_future_and_timezone_contract(self):
+        collected = "2026-10-09 08:45 UTC"
+        baseline = datetime(2026, 10, 9, 9, 0, tzinfo=timezone.utc)
+        self.assertEqual(snapshot_freshness(collected, baseline), "FRESH")
+        self.assertEqual(snapshot_freshness(collected, baseline + timedelta(hours=49)), "STALE")
+        self.assertEqual(snapshot_freshness(collected, baseline - timedelta(hours=2)), "FUTURE")
+        self.assertEqual(snapshot_freshness(collected, baseline.astimezone(timezone(timedelta(hours=8)))), "FRESH")
+        with self.assertRaisesRegex(ValueError, "timezone-aware"):
+            snapshot_freshness(collected, datetime(2026, 10, 9, 9, 0))
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 """No-network, no-write tests for future asset publication failure semantics."""
 
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 import shutil
 import sys
@@ -10,7 +11,10 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from publish_assets import ASSETS, PublicationBlocked, changed_assets, plan, publish, validate_source  # noqa: E402
+from publish_assets import (  # noqa: E402
+    ASSETS, PublicationBlocked, PublicationVerificationUncertain, changed_assets,
+    plan, publish, validate_source,
+)
 
 
 class PublisherTests(unittest.TestCase):
@@ -23,6 +27,7 @@ class PublisherTests(unittest.TestCase):
             shutil.copyfile(ROOT / "assets/preview" / name, self.source / name)
         self.data = json.loads((self.source / "telemetry.json").read_text(encoding="utf-8"))
         self.shas = {item["repository"]: item["sha"] for item in self.data["ci"]}
+        self.now = datetime(2026, 10, 9, 9, 0, tzinfo=timezone.utc)
 
     def fetch(self, path):
         if path.startswith("/users/"):
@@ -39,9 +44,23 @@ class PublisherTests(unittest.TestCase):
     def test_valid_source_and_no_change(self):
         validated = validate_source(self.source, self.fetch)
         self.assertEqual(validated["public_repositories"], self.data["public_repositories"])
-        result = plan(self.source, self.source, self.fetch, head="a" * 40)
+        result = plan(self.source, self.source, self.fetch, head="a" * 40, now=self.now)
         self.assertTrue(result["no_change"])
         self.assertEqual(result["changed"], [])
+
+    def test_stale_snapshot_blocks_dry_run_but_old_artifact_remains_readable(self):
+        with self.assertRaisesRegex(PublicationBlocked, "stale"):
+            plan(self.source, self.source, self.fetch, head="a" * 40,
+                 now=datetime(2026, 10, 12, 9, 0, tzinfo=timezone.utc))
+        self.assertEqual(validate_source(self.source, self.fetch)["public_repositories"], 15)
+        self.assertTrue(plan(self.source, self.source, self.fetch, head="a" * 40, now=self.now)["no_change"])
+
+    def test_still_image_must_match_animated_source(self):
+        target = self.source / "contribution-static-dark.svg"
+        target.write_text(target.read_text(encoding="utf-8").replace("Static REliasCheng", "Old REliasCheng", 1),
+                          encoding="utf-8")
+        with self.assertRaisesRegex(PublicationBlocked, "does not match"):
+            validate_source(self.source, self.fetch)
 
     def test_changed_file_only(self):
         destination = Path(self.holder.name) / "published"
@@ -50,7 +69,7 @@ class PublisherTests(unittest.TestCase):
         self.assertEqual(changed_assets(self.source, destination), ["snake-dark.svg"])
 
     def test_missing_dark_or_light(self):
-        for name in ("snake-dark.svg", "telemetry-light.svg"):
+        for name in ("snake-dark.svg", "contribution-static-light.svg", "telemetry-light.svg"):
             with self.subTest(name=name):
                 target = self.source / name
                 original = target.read_bytes()
@@ -95,7 +114,7 @@ class PublisherTests(unittest.TestCase):
             validate_source(self.source, changed_fetch)
 
     def test_missing_production_branch_is_reported_without_creation(self):
-        result = plan(self.source, None, self.fetch, head="")
+        result = plan(self.source, None, self.fetch, head="", now=self.now)
         self.assertEqual(result["branch_status"], "MISSING_REQUIRES_SEPARATE_APPROVAL")
         self.assertFalse(result["remote_changed"])
 
@@ -110,7 +129,7 @@ class PublisherTests(unittest.TestCase):
             raise AssertionError(f"Unexpected command: {args}")
 
         with patch("publish_assets.command", side_effect=fake_command):
-            result = plan(self.source, None, self.fetch, head="a" * 40)
+            result = plan(self.source, None, self.fetch, head="a" * 40, now=self.now)
         self.assertTrue(result["no_change"])
 
     def test_approved_sha_mismatch_blocks_before_clone(self):
@@ -151,6 +170,46 @@ class PublisherTests(unittest.TestCase):
             with self.assertRaisesRegex(PublicationBlocked, "non-fast-forward"):
                 publish(self.source, "a" * 40)
         self.assertFalse(any("--force" in part for call in calls for part in call))
+
+    def test_successful_push_followed_by_remote_advance_is_not_reported_as_no_change(self):
+        calls = []
+
+        def fake_command(*args, cwd=ROOT):
+            calls.append(args)
+            if args[:3] == ("git", "remote", "get-url"):
+                return "https://github.com/REliasCheng/REliasCheng.git"
+            if args[:2] == ("git", "clone"):
+                Path(args[-1]).mkdir()
+            if args[:3] == ("git", "rev-parse", "HEAD"):
+                return "b" * 40
+            return ""
+
+        with patch("publish_assets.branch_head", side_effect=["a" * 40, "a" * 40, "c" * 40]), patch(
+            "publish_assets.validate_source", return_value=self.data
+        ), patch("publish_assets.command", side_effect=fake_command):
+            with self.assertRaises(PublicationVerificationUncertain) as result:
+                publish(self.source, "a" * 40)
+        self.assertEqual(result.exception.committed_sha, "b" * 40)
+        self.assertEqual(result.exception.observed_head, "c" * 40)
+        self.assertTrue(any(call[:2] == ("git", "push") for call in calls))
+        self.assertFalse(any("--force" in part for call in calls for part in call))
+
+    def test_successful_push_followed_by_unavailable_remote_read_is_uncertain(self):
+        def fake_command(*args, cwd=ROOT):
+            if args[:3] == ("git", "remote", "get-url"):
+                return "https://github.com/REliasCheng/REliasCheng.git"
+            if args[:2] == ("git", "clone"):
+                Path(args[-1]).mkdir()
+            if args[:3] == ("git", "rev-parse", "HEAD"):
+                return "b" * 40
+            return ""
+
+        with patch("publish_assets.branch_head", side_effect=["a" * 40, "a" * 40, PublicationBlocked("read failed")]), patch(
+            "publish_assets.validate_source", return_value=self.data
+        ), patch("publish_assets.command", side_effect=fake_command):
+            with self.assertRaises(PublicationVerificationUncertain) as result:
+                publish(self.source, "a" * 40)
+        self.assertIsNone(result.exception.observed_head)
 
 
 if __name__ == "__main__":

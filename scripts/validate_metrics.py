@@ -3,23 +3,39 @@
 from __future__ import annotations
 
 import argparse
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
-from xml.etree import ElementTree
-
-from validate_snake import UNSAFE
+from svg_safety import validate_svg
 from generate_metrics import MONITORED, OWNER, render_svg
 
 
-def validate(directory: Path) -> None:
+MAX_SNAPSHOT_AGE = timedelta(hours=48)
+MAX_FUTURE_SKEW = timedelta(minutes=5)
+
+
+def snapshot_freshness(value: str, now: datetime) -> str:
+    """Classify API collection time; historical display may be stale, publishing may not."""
+    if now.tzinfo is None:
+        raise ValueError("Freshness comparison requires timezone-aware current time")
+    try:
+        collected = datetime.strptime(value, "%Y-%m-%d %H:%M UTC").replace(tzinfo=timezone.utc)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Metrics require an explicit UTC refresh timestamp") from exc
+    age = now.astimezone(timezone.utc) - collected
+    if age < -MAX_FUTURE_SKEW:
+        return "FUTURE"
+    if age > MAX_SNAPSHOT_AGE:
+        return "STALE"
+    return "FRESH"
+
+
+def validate(directory: Path, *, now: datetime | None = None) -> None:
     data = json.loads((directory / "telemetry.json").read_text(encoding="utf-8"))
     if data.get("owner") != OWNER:
         raise ValueError("Metrics owner mismatch")
-    try:
-        datetime.strptime(data["refreshed_utc"], "%Y-%m-%d %H:%M UTC")
-    except (KeyError, TypeError, ValueError) as exc:
-        raise ValueError("Metrics require an explicit UTC refresh timestamp") from exc
+    if snapshot_freshness(data["refreshed_utc"], now or datetime.now(timezone.utc)) == "FUTURE":
+        raise ValueError("Metrics refresh timestamp is unreasonably in the future")
     if data["public_repositories"] < 1 or data["source"] != "GitHub public REST API":
         raise ValueError("Invalid repository inventory or data source")
     expected = {(repository, label, scope) for label, repository, _, scope in MONITORED}
@@ -33,12 +49,7 @@ def validate(directory: Path) -> None:
             raise ValueError("Available CI evidence requires a current-main SHA")
     for theme in ("dark", "light"):
         path = directory / f"telemetry-{theme}.svg"
-        if not path.is_file() or not (500 < path.stat().st_size < 1_000_000):
-            raise ValueError(f"Missing, empty, or oversized metrics SVG: {path}")
-        content = path.read_text(encoding="utf-8")
-        root = ElementTree.fromstring(content)
-        if not root.tag.endswith("svg") or UNSAFE.search(content):
-            raise ValueError(f"Unsafe or invalid metrics SVG: {path}")
+        content = validate_svg(path)
         if content != render_svg(data, theme) + "\n":
             raise ValueError(f"Metrics SVG does not match its JSON source: {path}")
         print(f"Validated {path}")
