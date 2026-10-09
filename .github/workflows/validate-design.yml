@@ -37,3 +37,7 @@ jobs:
         run: |
           python scripts/generate_brand_assets.py
           git diff --exit-code -- assets/brand assets/cards assets/fallback
+      - name: Confirm still contribution images derive from checked-in public graph
+        run: |
+          python scripts/prepare_static_contribution.py
+          git diff --exit-code -- assets/preview/contribution-static-dark.svg assets/preview/contribution-static-light.svg

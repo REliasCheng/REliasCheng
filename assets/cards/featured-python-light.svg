@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="190" viewBox="0 0 1200 190" role="img" aria-labelledby="title desc">
+  <title id="title">Host application architecture</title><desc id="desc">Original abstract diagram for PYTHON / HOST APPLICATION. HOST TESTED / NO DEVICE CLAIM.</desc>
+  <rect width="1200" height="190" rx="13" fill="#FFFFFF" stroke="#D0DFEA" stroke-width="2"/>
+  <rect width="7" height="190" rx="3" fill="#087F95"/>
+  <text x="30" y="40" fill="#087F95" font-family="Consolas, ui-monospace, monospace" font-size="15" letter-spacing="2">PYTHON / HOST APPLICATION</text>
+  <text x="30" y="84" fill="#102033" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="650">Host application architecture</text>
+  <text x="30" y="119" fill="#3A536B" font-family="Consolas, ui-monospace, monospace" font-size="17">GUI  →  application core  →  serial boundary</text>
+  <path d="M30 143H765" stroke="#D0DFEA"/>
+  <text x="30" y="169" fill="#526B80" font-family="Consolas, ui-monospace, monospace" font-size="14" letter-spacing="1">HOST TESTED / NO DEVICE CLAIM</text>
+  <g font-family="Consolas, ui-monospace, monospace"><rect x="823" y="42" width="126" height="114" rx="9" fill="none" stroke="#2563EB" stroke-width="2"/>
+  <path d="M823 72H949M842 93H916M842 112H902M842 132H923" stroke="#2563EB" stroke-width="2"/>
+  <path d="M949 98H988M1060 98H1095" stroke="#087F95" stroke-width="2"/>
+  <rect x="988" y="68" width="72" height="60" rx="6" fill="none" stroke="#087F95" stroke-width="2"/>
+  <text x="1001" y="104" fill="#087F95" font-size="13">CORE</text>
+  <path d="M1095 75V121M1104 75V121" stroke="#526B80" stroke-width="3"/></g>
+</svg>

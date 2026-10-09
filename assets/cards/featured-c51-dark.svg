@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="190" viewBox="0 0 1200 190" role="img" aria-labelledby="title desc">
+  <title id="title">Resource mapping and conflicts</title><desc id="desc">Original abstract diagram for 8051 / BOARD RESOURCE PLANNER. HOST TESTED / NO BOARD CLAIM.</desc>
+  <rect width="1200" height="190" rx="13" fill="#142235" stroke="#25394C" stroke-width="2"/>
+  <rect width="7" height="190" rx="3" fill="#61DCE6"/>
+  <text x="30" y="40" fill="#61DCE6" font-family="Consolas, ui-monospace, monospace" font-size="15" letter-spacing="2">8051 / BOARD RESOURCE PLANNER</text>
+  <text x="30" y="84" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="650">Resource mapping and conflicts</text>
+  <text x="30" y="119" fill="#A9BDCD" font-family="Consolas, ui-monospace, monospace" font-size="17">module needs  →  GPIO / Timer / UART / I2C</text>
+  <path d="M30 143H765" stroke="#25394C"/>
+  <text x="30" y="169" fill="#708CA2" font-family="Consolas, ui-monospace, monospace" font-size="14" letter-spacing="1">HOST TESTED / NO BOARD CLAIM</text>
+  <g font-family="Consolas, ui-monospace, monospace"><rect x="822" y="58" width="115" height="83" rx="7" fill="none" stroke="#60A5FA" stroke-width="2"/>
+  <text x="840" y="105" fill="#60A5FA" font-size="14">MODULE</text>
+  <path d="M937 99H990" stroke="#61DCE6" stroke-width="3"/>
+  <rect x="990" y="51" width="149" height="96" rx="7" fill="none" stroke="#61DCE6" stroke-width="2"/>
+  <path d="M990 82H1139M990 114H1139M1064 51V147" stroke="#25394C" stroke-width="2"/>
+  <text x="1004" y="73" fill="#61DCE6" font-size="13">GPIO</text><text x="1075" y="73" fill="#61DCE6" font-size="13">TIMER</text>
+  <text x="1004" y="104" fill="#61DCE6" font-size="13">UART</text><text x="1075" y="104" fill="#61DCE6" font-size="13">I2C</text>
+  <text x="1004" y="136" fill="#F2BD70" font-size="13">CONFLICT?</text></g>
+</svg>

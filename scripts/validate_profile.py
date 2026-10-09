@@ -65,6 +65,14 @@ def validate() -> list[str]:
         errors.append("Unbalanced picture elements")
     if readme.count("alt=") < readme.count("<picture>"):
         errors.append("Picture elements need text alternatives")
+    if "<details>" in readme and "assets/preview/snake-" in readme:
+        errors.append("Contribution graphic must be visible by default")
+    if "assets/brand/terminal-static-dark.svg" not in readme:
+        errors.append("Terminal needs a meaningful static image fallback")
+    for kind in ("python", "embedded-cpp", "c51"):
+        for theme in ("dark", "light"):
+            if f"assets/cards/featured-{kind}-{theme}.svg" not in readme:
+                errors.append(f"Missing featured {kind} {theme} picture source")
     for path in (ROOT / "assets").rglob("*.svg"):
         content = path.read_text(encoding="utf-8")
         try:

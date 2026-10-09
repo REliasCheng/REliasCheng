@@ -1,16 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="236" viewBox="0 0 1200 236" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
   <title id="title">SIGNALCORE portfolio terminal</title>
-  <desc id="desc">Visual identity terminal. READY and STUDY describe portfolio categories, not hardware status.</desc>
-  <style>.cursor { animation: blink 1.5s step-end infinite; } @keyframes blink { 50% { opacity: 0; } } @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }</style>
-  <rect width="1200" height="236" rx="14" fill="#FFFFFF" stroke="#D0DFEA" stroke-width="2"/>
-  <path d="M0 44H1200" stroke="#D0DFEA"/><circle cx="27" cy="22" r="5" fill="#087F95"/><circle cx="47" cy="22" r="5" fill="#2563EB"/><circle cx="67" cy="22" r="5" fill="#526B80"/>
+  <desc id="desc">A staged whoami and portfolio command sequence introducing original software, host tests and architecture studies; these are not hardware status messages.</desc>
+<style>
+    .typed { animation-name: reveal; animation-timing-function: steps(30,end); animation-fill-mode: both; }
+    @keyframes reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    .cursor { opacity: 0; animation: blink 1.1s step-end 7.35s infinite; }
+    @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .typed { animation: none; clip-path: none; }
+      .cursor { animation: none; opacity: 1; }
+    }
+  </style>
+  <rect width="1200" height="360" rx="14" fill="#FFFFFF" stroke="#D0DFEA" stroke-width="2"/>
+  <path d="M0 45H1200" stroke="#D0DFEA"/><circle cx="27" cy="22" r="5" fill="#087F95"/><circle cx="47" cy="22" r="5" fill="#2563EB"/><circle cx="67" cy="22" r="5" fill="#526B80"/>
   <text x="94" y="28" fill="#3A536B" font-family="Consolas, ui-monospace, monospace" font-size="15">signalcore / portfolio interface</text>
-  <g font-family="Consolas, ui-monospace, monospace" font-size="18">
-    <text x="30" y="85" fill="#087F95">signalcore@elias:~$ identity</text>
-    <text x="30" y="116" fill="#102033">NAME     Elias Cheng</text>
-    <text x="30" y="146" fill="#102033">FOCUS    Embedded systems / firmware / integration</text>
-    <text x="30" y="181" fill="#087F95">signalcore@elias:~$ load portfolio</text>
-    <text x="30" y="211" fill="#3A536B">[BUILD] Original host-tested software    [STUDY] Architecture and systems</text>
-    <rect class="cursor" x="947" y="192" width="10" height="21" fill="#087F95"/>
+  <path d="M29 173H775M29 305H775" stroke="#D0DFEA" stroke-width="1"/>
+  <path d="M865 94H928L949 117H1128M865 272H928L949 249H1128" fill="none" stroke="#D0DFEA" stroke-width="2"/>
+  <path d="M935 133H1082V200H1040V218H984V200H935Z" fill="none" stroke="#087F95" stroke-width="2"/>
+  <path d="M954 165H977V150H1001V183H1026V165H1061" fill="none" stroke="#087F95" stroke-width="2"/>
+  <text x="952" y="245" fill="#526B80" font-family="Consolas, ui-monospace, monospace" font-size="13" letter-spacing="2">CORE / HOST</text>
+  <g font-family="Consolas, ui-monospace, monospace" font-size="19">
+    <text x="34" y="90" fill="#087F95" class="typed" style="animation-delay:0.2s;animation-duration:0.9s">signalcore@elias:~$ whoami</text><text x="34" y="122" fill="#102033" class="typed" style="animation-delay:1.2s;animation-duration:0.35s">Elias Cheng</text><text x="34" y="152" fill="#3A536B" class="typed" style="animation-delay:1.75s;animation-duration:0.55s">Embedded systems / firmware / low-level software</text><text x="34" y="198" fill="#087F95" class="typed" style="animation-delay:2.85s;animation-duration:0.9s">signalcore@elias:~$ load --portfolio</text><text x="34" y="232" fill="#102033" class="typed" style="animation-delay:4.0s;animation-duration:0.55s">[CODE] Original host software</text><text x="34" y="260" fill="#0F765E" class="typed" style="animation-delay:4.8s;animation-duration:0.55s">[CHECK] Host-side tests on implemented work</text><text x="34" y="288" fill="#3A536B" class="typed" style="animation-delay:5.6s;animation-duration:0.65s">[STUDY] MCU / RTOS / system architecture</text><text x="34" y="325" fill="#087F95" class="typed" style="animation-delay:6.7s;animation-duration:0.55s">signalcore@elias:~$</text>
+    <rect class="cursor" x="288" y="307" width="10" height="22" fill="#087F95"/>
   </g>
 </svg>

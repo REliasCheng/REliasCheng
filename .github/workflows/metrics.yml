@@ -32,6 +32,8 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: signalcore-metrics-preview
-          path: dist/telemetry-*.svg
+          path: |
+            dist/telemetry-*.svg
+            dist/telemetry.json
           if-no-files-found: error
           retention-days: 14

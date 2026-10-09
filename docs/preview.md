@@ -4,11 +4,12 @@ Preview branch: `design/signalcore-profile-preview`, based on the previously cle
 
 ## Implemented here
 
-- Original dark/light/static vector identity, category cards, terminal, footer, tokens, and reproducible generator.
+- Original dark/light/static vector identity, three distinct featured project cards, category cards, staged typing terminal with reduced-motion/static fallback, footer, tokens, and reproducible generator.
 - Evidence-based classification of all 14 non-profile repositories and a revised README hierarchy.
 - Public API metrics snapshot with current-main CI-SHA checks, dated labels and explicit unavailable states.
 - A Platane/snk contribution animation generated from the actual public graph in [preview run 37899433686](https://github.com/REliasCheng/REliasCheng/actions/runs/37899433686), validated and checked into the preview branch with a static fallback.
 - Asset/link validation, metrics semantics tests, preview Actions with read-only repository permission, and maintenance documentation.
+- A visible-by-default contribution graphic, compact metrics panel, and [future production publication design](production-assets.md) with a dry-run and failure tests. Production publication is not active.
 
 ## Preview limitations
 

@@ -11,7 +11,7 @@ I build testable embedded software, MCU application cores, board-planning tools,
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/brand/terminal-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/brand/terminal-light.svg">
-  <img src="assets/brand/terminal-dark.svg" alt="SIGNALCORE terminal motif: design, implement, verify, document" width="100%">
+  <img src="assets/brand/terminal-static-dark.svg" alt="Terminal introduction: Elias Cheng, original host software, host-side tests, and embedded architecture studies" width="100%">
 </picture>
 
 ## Featured engineering projects
@@ -19,14 +19,28 @@ I build testable embedded software, MCU application cores, board-planning tools,
 Original, inspectable implementations with public host-side evidence. The linked repositories define their own build and hardware limits.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-light.svg">
-  <img src="assets/cards/featured-dark.svg" alt="Featured engineering projects" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-python-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-python-light.svg">
+  <img src="assets/cards/featured-python-dark.svg" alt="Python host application: GUI, testable core and serial boundary" width="100%">
 </picture>
 
-- [Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab) — Python/PyQt5 serial application with a testable core and mock backend. Host tests, static checks and package build; no device validation.
-- [Embedded C/C++ Core](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) — portable command, buffer and task-state modules. Host tests; no MCU target validation.
-- [C51 Board Resource Planner](https://github.com/REliasCheng/C51-Board-Lab) — 8051 resource mapping and conflict detection. Host tests; no board validation.
+[Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab) — Python/PyQt5 serial application with a testable core and mock backend. Host tests, static checks and package build; no device validation.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-embedded-cpp-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-embedded-cpp-light.svg">
+  <img src="assets/cards/featured-embedded-cpp-dark.svg" alt="Portable C and C++ command and task modules with host tests" width="100%">
+</picture>
+
+[Embedded C/C++ Core](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) — portable command, buffer and task-state modules. Host tests; no MCU target validation.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-c51-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-c51-light.svg">
+  <img src="assets/cards/featured-c51-dark.svg" alt="8051 board resource planner mapping module needs to GPIO, Timer, UART and I2C" width="100%">
+</picture>
+
+[C51 Board Resource Planner](https://github.com/REliasCheng/C51-Board-Lab) — 8051 resource mapping and conflict detection. Host tests; no board validation.
 
 ## Current MCU work
 
@@ -86,8 +100,7 @@ The panel below is a **dated preview snapshot** from public GitHub API data, not
   <img src="assets/fallback/telemetry-dark.svg" alt="Public GitHub telemetry with dated repository and current-main host CI status" width="100%">
 </picture>
 
-<details>
-<summary>Contribution activity preview</summary>
+## Contribution activity
 
 This animated preview was generated from the public REliasCheng contribution graph by the preview Action. Contribution activity is not an engineering-quality score. The original static image remains the fallback if animated SVG is unavailable.
 
@@ -97,7 +110,7 @@ This animated preview was generated from the public REliasCheng contribution gra
   <img src="assets/fallback/contribution-dark.svg" alt="Static fallback for the GitHub contribution activity component" width="100%">
 </picture>
 
-</details>
+Prefer a still image? [Dark contribution graph](assets/preview/contribution-static-dark.svg) · [Light contribution graph](assets/preview/contribution-static-light.svg). Both are derived from the same public contribution data.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/brand/footer-dark.svg">
