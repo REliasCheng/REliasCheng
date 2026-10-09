@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="236" viewBox="0 0 1200 236" role="img" aria-labelledby="title desc">
+  <title id="title">SIGNALCORE portfolio terminal</title>
+  <desc id="desc">Visual identity terminal. READY and STUDY describe portfolio categories, not hardware status.</desc>
+  <style>.cursor { animation: blink 1.5s step-end infinite; } @keyframes blink { 50% { opacity: 0; } } @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }</style>
+  <rect width="1200" height="236" rx="14" fill="#FFFFFF" stroke="#D0DFEA" stroke-width="2"/>
+  <path d="M0 44H1200" stroke="#D0DFEA"/><circle cx="27" cy="22" r="5" fill="#087F95"/><circle cx="47" cy="22" r="5" fill="#2563EB"/><circle cx="67" cy="22" r="5" fill="#526B80"/>
+  <text x="94" y="28" fill="#3A536B" font-family="Consolas, ui-monospace, monospace" font-size="15">signalcore / portfolio interface</text>
+  <g font-family="Consolas, ui-monospace, monospace" font-size="18">
+    <text x="30" y="85" fill="#087F95">signalcore@elias:~$ identity</text>
+    <text x="30" y="116" fill="#102033">NAME     Elias Cheng</text>
+    <text x="30" y="146" fill="#102033">FOCUS    Embedded systems / firmware / integration</text>
+    <text x="30" y="181" fill="#087F95">signalcore@elias:~$ load portfolio</text>
+    <text x="30" y="211" fill="#3A536B">[BUILD] Original host-tested software    [STUDY] Architecture and systems</text>
+    <rect class="cursor" x="947" y="192" width="10" height="21" fill="#087F95"/>
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+name: SIGNALCORE public metrics preview
+
+on:
+  push:
+    branches:
+      - design/signalcore-profile-preview
+  schedule:
+    - cron: '41 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Generate dated snapshot from public GitHub API
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/generate_metrics.py --output-dir dist
+      - name: Validate generated XML
+        run: python scripts/validate_metrics.py dist
+      - name: Upload preview only; do not publish or commit
+        uses: actions/upload-artifact@v7
+        with:
+          name: signalcore-metrics-preview
+          path: dist/telemetry-*.svg
+          if-no-files-found: error
+          retention-days: 14
