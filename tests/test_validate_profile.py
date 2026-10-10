@@ -6,7 +6,10 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from validate_profile import check_repository_links, expected_evidence_links  # noqa: E402
+from validate_profile import (  # noqa: E402
+    PRODUCTION_ASSET_ROOT, check_repository_links, expected_evidence_links,
+    valid_readme_asset,
+)
 
 
 class ProfileLinkTests(unittest.TestCase):
@@ -42,6 +45,21 @@ class ProfileLinkTests(unittest.TestCase):
         self.evidence["Python-Host-Application-Lab"]["source"] = "../private.txt"
         with self.assertRaises(ValueError):
             expected_evidence_links(self.evidence)
+
+    def test_future_production_urls_are_exactly_allowlisted_but_not_active(self):
+        valid = PRODUCTION_ASSET_ROOT + "snake-dark.svg"
+        self.assertFalse(valid_readme_asset(valid))
+        self.assertTrue(valid_readme_asset(valid, allow_production=True))
+        for invalid in (
+            "http://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/snake-dark.svg",
+            "https://example.com/snake-dark.svg",
+            PRODUCTION_ASSET_ROOT + "secrets.txt",
+            PRODUCTION_ASSET_ROOT + "../main/README.md",
+            PRODUCTION_ASSET_ROOT + "snake-dark.svg?token=x",
+            "data:image/svg+xml;base64,PHN2Zz4=",
+        ):
+            with self.subTest(asset=invalid):
+                self.assertFalse(valid_readme_asset(invalid, allow_production=True))
 
 
 if __name__ == "__main__":

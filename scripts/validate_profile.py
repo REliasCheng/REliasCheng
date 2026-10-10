@@ -20,6 +20,11 @@ FORBIDDEN_SVG = re.compile(
     r'<\s*(?:script|foreignObject|image)\b|(?:href|src)\s*=\s*["\'](?:https?:|data:|javascript:)|url\(\s*["\']?https?:',
     re.I,
 )
+PRODUCTION_ASSET_ROOT = "https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/"
+PRODUCTION_ASSET_FILES = {
+    "snake-dark.svg", "snake-light.svg", "contribution-static-dark.svg",
+    "contribution-static-light.svg", "telemetry-dark.svg", "telemetry-light.svg",
+}
 
 
 def luminance(color: str) -> float:
@@ -62,6 +67,15 @@ def check_repository_links(readme: str, repositories: set[str], evidence: dict) 
     return errors
 
 
+def valid_readme_asset(asset: str, *, allow_production: bool = False) -> bool:
+    if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", asset):
+        return allow_production and asset in {
+            PRODUCTION_ASSET_ROOT + name for name in PRODUCTION_ASSET_FILES
+        }
+    path = (ROOT / unquote(asset)).resolve()
+    return path.is_relative_to(ROOT.resolve()) and path.is_file()
+
+
 def validate() -> list[str]:
     errors = []
     readme = README.read_text(encoding="utf-8")
@@ -88,8 +102,7 @@ def validate() -> list[str]:
         if not path.is_relative_to(ROOT.resolve()) or not path.is_file():
             errors.append(f"Missing or escaping Markdown link: {link}")
     for asset in HTML_ASSET.findall(readme):
-        path = (ROOT / unquote(asset)).resolve()
-        if not path.is_relative_to(ROOT.resolve()) or not path.is_file():
+        if not valid_readme_asset(asset):
             errors.append(f"Missing or escaping README asset: {asset}")
     if readme.count("<picture>") != readme.count("</picture>"):
         errors.append("Unbalanced picture elements")
