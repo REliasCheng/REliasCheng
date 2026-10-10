@@ -1,8 +1,4 @@
-"""Plan or (after separate approval) fast-forward publish validated dynamic assets.
-
-This script does not create the asset branch. The current preview uses dry-run
-only; no workflow invokes --publish and no write credentials are required.
-"""
+"""Plan or fast-forward publish validated dynamic assets to an existing branch."""
 
 from __future__ import annotations
 
@@ -131,7 +127,7 @@ def plan(source: Path, published: Path | None = None, fetch=fetch_json, remote: 
 
 
 def publish(source: Path, approved_main_sha: str, remote: str = "origin") -> str:
-    """Future-only: clone existing branch, commit changed files, normal push.
+    """Clone the existing branch, commit changed files, and use a normal push.
 
     A concurrent push is rejected by Git as non-fast-forward; never retry with
     force. The temporary clone preserves the last published assets on failure.
@@ -163,6 +159,8 @@ def publish(source: Path, approved_main_sha: str, remote: str = "origin") -> str
         command("git", "-c", "user.name=signalcore-assets", "-c", "user.email=signalcore-assets@users.noreply.github.com",
                 "commit", "-m", "chore: refresh validated public profile assets", cwd=checkout)
         committed = command("git", "rev-parse", "HEAD", cwd=checkout)
+        if branch_head(remote, "main") != approved_main_sha:
+            raise PublicationBlocked("Approved main SHA changed before publication push")
         command("git", "push", "origin", f"HEAD:refs/heads/{BRANCH}", cwd=checkout)
         try:
             observed = branch_head(remote)
@@ -177,17 +175,17 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--dry-run", action="store_true")
-    mode.add_argument("--publish", action="store_true", help="future approval only; never invoked by preview Actions")
+    mode.add_argument("--publish", action="store_true", help="publish to the existing branch after validation")
     parser.add_argument("--source", type=Path, default=ROOT / "assets/preview")
     parser.add_argument("--published-dir", type=Path, help="read-only comparison fixture for dry-run")
-    parser.add_argument("--approved-main-sha", help="required only for a separately approved future publication")
+    parser.add_argument("--approved-main-sha", help="required current main SHA for publication")
     args = parser.parse_args()
     try:
         if args.dry_run:
             print(json.dumps(plan(args.source, args.published_dir), indent=2))
         else:
             if not args.approved_main_sha:
-                raise PublicationBlocked("--publish requires --approved-main-sha and separate release approval")
+                raise PublicationBlocked("--publish requires --approved-main-sha")
             print(publish(args.source, args.approved_main_sha))
     except PublicationVerificationUncertain as exc:
         parser.exit(3, f"PUBLICATION_VERIFICATION_UNCERTAIN: {exc}\n")
