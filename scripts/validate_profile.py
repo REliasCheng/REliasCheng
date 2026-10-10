@@ -1,4 +1,4 @@
-"""Validate the preview's project catalog, README paths, and self-contained SVGs."""
+"""Validate the profile catalog, README assets, and self-contained SVGs."""
 
 from __future__ import annotations
 
@@ -76,6 +76,48 @@ def valid_readme_asset(asset: str, *, allow_production: bool = False) -> bool:
     return path.is_relative_to(ROOT.resolve()) and path.is_file()
 
 
+def check_live_asset_layout(readme: str) -> list[str]:
+    """Require exactly the approved live sources, theme and motion order, and local fallbacks."""
+    errors = []
+    pictures = re.findall(r"<picture>.*?</picture>", readme, re.S)
+    expected = {
+        "telemetry": [
+            (f"(prefers-color-scheme: {theme})", PRODUCTION_ASSET_ROOT + f"telemetry-{theme}.svg")
+            for theme in ("dark", "light")
+        ],
+        "contribution": [
+            (f"(prefers-reduced-motion: reduce) and (prefers-color-scheme: {theme})",
+             PRODUCTION_ASSET_ROOT + f"contribution-static-{theme}.svg")
+            for theme in ("dark", "light")
+        ] + [
+            (f"(prefers-color-scheme: {theme})", PRODUCTION_ASSET_ROOT + f"snake-{theme}.svg")
+            for theme in ("dark", "light")
+        ],
+    }
+    for kind, sources in expected.items():
+        matches = [picture for picture in pictures if sources[-1][1] in picture]
+        fallback = f'assets/fallback/{"telemetry-dark" if kind == "telemetry" else "contribution-dark"}.svg'
+        if len(matches) != 1:
+            errors.append(f"Expected exactly one live {kind} picture")
+            continue
+        actual = re.findall(r'<source media="([^"]+)" srcset="([^"]+)">', matches[0])
+        if actual != sources:
+            errors.append(f"Live {kind} picture has incorrect theme or reduced-motion sources")
+        if f'<img src="{fallback}"' not in matches[0]:
+            errors.append(f"Live {kind} picture lacks its local static fallback")
+    approved_sources = {url for sources in expected.values() for _, url in sources}
+    actual_sources = {asset for asset in HTML_ASSET.findall(readme) if asset.startswith(PRODUCTION_ASSET_ROOT)}
+    if actual_sources != approved_sources:
+        errors.append("README production SVG inventory differs from the six approved assets")
+    still_links = {PRODUCTION_ASSET_ROOT + f"contribution-static-{theme}.svg" for theme in ("dark", "light")}
+    raw_links = {link for link in MD_LINK.findall(readme) if link.startswith("https://raw.githubusercontent.com/")}
+    if raw_links != still_links:
+        errors.append("README still-image links differ from the two approved production assets")
+    if any(f"assets/preview/{name}" in readme for name in PRODUCTION_ASSET_FILES):
+        errors.append("README still references a preview dynamic asset")
+    return errors
+
+
 def validate() -> list[str]:
     errors = []
     readme = README.read_text(encoding="utf-8")
@@ -102,13 +144,14 @@ def validate() -> list[str]:
         if not path.is_relative_to(ROOT.resolve()) or not path.is_file():
             errors.append(f"Missing or escaping Markdown link: {link}")
     for asset in HTML_ASSET.findall(readme):
-        if not valid_readme_asset(asset):
+        if not valid_readme_asset(asset, allow_production=True):
             errors.append(f"Missing or escaping README asset: {asset}")
+    errors.extend(check_live_asset_layout(readme))
     if readme.count("<picture>") != readme.count("</picture>"):
         errors.append("Unbalanced picture elements")
     if readme.count("alt=") < readme.count("<picture>"):
         errors.append("Picture elements need text alternatives")
-    if "<details>" in readme and "assets/preview/snake-" in readme:
+    if "<details>" in readme and PRODUCTION_ASSET_ROOT + "snake-dark.svg" in readme:
         errors.append("Contribution graphic must be visible by default")
     if "assets/brand/terminal-static-dark.svg" not in readme:
         errors.append("Terminal needs a meaningful static image fallback")
@@ -118,8 +161,9 @@ def validate() -> list[str]:
         ("contribution", ("contribution-static-dark.svg", "contribution-static-light.svg"), "snake-dark.svg"),
     ):
         for name in static_names:
-            marker = f'srcset="assets/{"preview" if prefix == "contribution" else "brand"}/{name}"'
-            if marker not in readme or readme.index(marker) > readme.index(animated_name):
+            asset = PRODUCTION_ASSET_ROOT + name if prefix == "contribution" else f"assets/brand/{name}"
+            marker = f'srcset="{asset}"'
+            if marker not in readme or animated_name not in readme or readme.index(marker) > readme.index(animated_name):
                 errors.append(f"Reduced-motion static source absent or after animated {prefix}: {name}")
     for kind in ("python", "embedded-cpp", "c51"):
         for theme in ("dark", "light"):
@@ -138,10 +182,6 @@ def validate() -> list[str]:
             errors.append(f"Potential external or executable SVG content: {path}")
         if path.stat().st_size > 1_000_000:
             errors.append(f"SVG exceeds 1 MB: {path}")
-    if "assets/preview/snake-" in readme and not all(
-        (ROOT / "assets/preview" / f"snake-{theme}.svg").is_file() for theme in ("dark", "light")
-    ):
-        errors.append("README references missing contribution-snake files")
     return errors
 
 
@@ -151,4 +191,4 @@ if __name__ == "__main__":
         for problem in problems:
             print("ERROR:", problem)
         raise SystemExit(1)
-    print("Profile validation passed: 14 repository roots, featured evidence, local assets and safe SVGs")
+    print("Profile validation passed: 14 repository roots, featured evidence, approved live assets and safe local SVGs")

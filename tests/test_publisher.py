@@ -181,6 +181,33 @@ class PublisherTests(unittest.TestCase):
                 publish(self.source, "a" * 40)
         self.assertFalse(any("--force" in part for call in calls for part in call))
 
+    def test_main_advance_before_push_blocks_publication(self):
+        calls = []
+
+        def fake_command(*args, cwd=ROOT):
+            calls.append(args)
+            if args[:3] == ("git", "remote", "get-url"):
+                return "https://github.com/REliasCheng/REliasCheng.git"
+            if args[:2] == ("git", "clone"):
+                Path(args[-1]).mkdir()
+            if args[:3] == ("git", "rev-parse", "HEAD"):
+                return "b" * 40
+            return ""
+
+        def head(remote, branch="signalcore-assets"):
+            if branch == "main":
+                head.main_checks += 1
+                return "a" * 40 if head.main_checks == 1 else "c" * 40
+            return "d" * 40
+
+        head.main_checks = 0
+        with patch("publish_assets.branch_head", side_effect=head), patch(
+            "publish_assets.validate_source", return_value=self.data
+        ), patch("publish_assets.command", side_effect=fake_command):
+            with self.assertRaisesRegex(PublicationBlocked, "changed before publication push"):
+                publish(self.source, "a" * 40)
+        self.assertFalse(any(call[:2] == ("git", "push") for call in calls))
+
     def test_successful_push_followed_by_remote_advance_is_not_reported_as_no_change(self):
         calls = []
 
@@ -194,7 +221,7 @@ class PublisherTests(unittest.TestCase):
                 return "b" * 40
             return ""
 
-        with patch("publish_assets.branch_head", side_effect=["a" * 40, "a" * 40, "c" * 40]), patch(
+        with patch("publish_assets.branch_head", side_effect=["a" * 40, "a" * 40, "a" * 40, "c" * 40]), patch(
             "publish_assets.validate_source", return_value=self.data
         ), patch("publish_assets.command", side_effect=fake_command):
             with self.assertRaises(PublicationVerificationUncertain) as result:
@@ -214,7 +241,7 @@ class PublisherTests(unittest.TestCase):
                 return "b" * 40
             return ""
 
-        with patch("publish_assets.branch_head", side_effect=["a" * 40, "a" * 40, PublicationBlocked("read failed")]), patch(
+        with patch("publish_assets.branch_head", side_effect=["a" * 40, "a" * 40, "a" * 40, PublicationBlocked("read failed")]), patch(
             "publish_assets.validate_source", return_value=self.data
         ), patch("publish_assets.command", side_effect=fake_command):
             with self.assertRaises(PublicationVerificationUncertain) as result:

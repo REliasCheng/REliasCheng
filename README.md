@@ -111,8 +111,8 @@ This is a learning and design progression, **not a claim that every layer is imp
 The panel below is a **dated snapshot** from public GitHub API data, not a live service. Its host-CI status was bound to each repository's `main` SHA at the displayed refresh time; a later commit can make that evidence stale. `PASS` does not mean target build or hardware validation; an unavailable API result remains `UNAVAILABLE`.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/preview/telemetry-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/preview/telemetry-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/telemetry-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/telemetry-light.svg">
   <img src="assets/fallback/telemetry-dark.svg" alt="Public GitHub telemetry with dated repository and current-main host CI status" width="100%">
 </picture>
 
@@ -121,14 +121,14 @@ The panel below is a **dated snapshot** from public GitHub API data, not a live 
 This animation was generated from the public REliasCheng contribution graph. Contribution activity is not an engineering-quality score. The checked-in static image remains the fallback if animated SVG is unavailable.
 
 <picture>
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/preview/contribution-static-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/preview/contribution-static-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="assets/preview/snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/preview/snake-light.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-dark.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/snake-light.svg">
   <img src="assets/fallback/contribution-dark.svg" alt="Static fallback for the GitHub contribution activity component" width="100%">
 </picture>
 
-Prefer a still image? [Dark contribution graph](assets/preview/contribution-static-dark.svg) · [Light contribution graph](assets/preview/contribution-static-light.svg). Both are derived from the same public contribution data.
+Prefer a still image? [Dark contribution graph](https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-dark.svg) · [Light contribution graph](https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-light.svg). Both are derived from the same public contribution data.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/brand/footer-dark.svg">
