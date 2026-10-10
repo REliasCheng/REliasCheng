@@ -24,7 +24,7 @@ Use system Segoe UI/Arial for readable narrative and Consolas/ui-monospace for t
 
 ## Dark and light policy
 
-Each displayed component has dark and light SVG variants. GitHub `<picture>` sources select by `prefers-color-scheme`; its `<img>` points to a checked-in file. Standalone SVGs have their own background fill. No external image URL is needed. The default Profile was updated by PR #1; GitHub renderer QA is tracked separately.
+Each displayed component has dark and light SVG variants. GitHub `<picture>` sources select by `prefers-color-scheme`; their `<img>` fallbacks point to checked-in files. Dynamic contribution and metrics sources use the repository's `signalcore-assets` branch through approved raw URLs; standalone SVGs have their own background fill. The default Profile was updated by PR #1 and later production changes. Automatic dark-theme selection in a real browser remains to be verified.
 
 ## Animation and accessibility
 
@@ -40,4 +40,4 @@ For a monitored host workflow, `PASS` means its successful run SHA matches the c
 
 ## SVG generation and maintenance
 
-Run `python scripts/generate_brand_assets.py` after token or geometry edits, then `python scripts/validate_profile.py` and visual review. `scripts/generate_metrics.py` reads public GitHub API data; it refuses an empty repository inventory and never substitutes zero for an API failure. Its output is a dated snapshot. The snake workflow uses the documented Platane/snk SVG-only v3 interface with five contribution colors. See [maintenance](maintenance.md) and [future production assets](production-assets.md) for update, failure, dry-run and fallback steps. A production asset branch or Pages site has not been activated.
+Run `python scripts/generate_brand_assets.py` after token or geometry edits, then `python scripts/validate_profile.py` and visual review. `scripts/generate_metrics.py` reads public GitHub API data; it refuses an empty repository inventory and never substitutes zero for an API failure. Its output is a dated snapshot. The snake workflow uses the documented Platane/snk SVG-only v3 interface with five contribution colors. See [maintenance](maintenance.md) and [production assets](production-assets.md) for update, failure, dry-run and fallback steps. The independent production asset branch is active; no GitHub Pages site is claimed.
