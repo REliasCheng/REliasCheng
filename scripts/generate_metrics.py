@@ -122,7 +122,7 @@ def render_svg(data: dict, theme: str) -> str:
     languages = ", ".join(f"{name} {amount}" for name, amount in data["languages_by_repository"]) or "Unavailable"
     rows = []
     for index, item in enumerate(data["ci"]):
-        y = 180 + index * 50
+        y = 168 + index * 45
         status = item["status"]
         color = t["verified"] if status == "PASS" else t["warning"] if status in {"STALE", "PENDING"} else t["secondary"]
         sha = item["sha"][:8] if item["sha"] else "unavailable"
@@ -133,20 +133,20 @@ def render_svg(data: dict, theme: str) -> str:
             f'<text x="30" y="{y + 19}" fill="{t["secondary"]}" font-size="16">{escape(item["scope"])}</text>'
             f'<text x="370" y="{y + 19}" fill="{t["muted"]}" font-size="15">{sha}</text>'
         )
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="520" height="455" viewBox="0 0 520 455" role="img" aria-labelledby="title desc">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="520" height="413" viewBox="0 0 520 413" role="img" aria-labelledby="title desc">
   <title id="title">SIGNALCORE public GitHub telemetry</title>
   <desc id="desc">Public repository count, repository-language counts and current-main host CI states. Activity is not engineering quality; host CI is not hardware validation.</desc>
-  <rect width="520" height="455" rx="14" fill="{t['panel']}" stroke="{t['border']}" stroke-width="2"/>
-  <text x="30" y="36" fill="{t['signal']}" font-family="Consolas, ui-monospace, monospace" font-size="16" letter-spacing="1">SIGNALCORE / PUBLIC METRICS</text>
-  <text x="30" y="72" fill="{t['text']}" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="650">{count} public repositories</text>
-  <text x="30" y="99" fill="{t['secondary']}" font-family="Consolas, ui-monospace, monospace" font-size="15">Primary language / repo: {escape(languages)}</text>
-  <text x="30" y="121" fill="{t['muted']}" font-family="Consolas, ui-monospace, monospace" font-size="15">Refreshed: {escape(data['refreshed_utc'])}</text>
-  <path d="M24 137H496" stroke="{t['border']}" stroke-width="2"/>
+  <rect width="520" height="413" rx="14" fill="{t['panel']}" stroke="{t['border']}" stroke-width="2"/>
+  <text x="30" y="33" fill="{t['signal']}" font-family="Consolas, ui-monospace, monospace" font-size="16" letter-spacing="1">SIGNALCORE / PUBLIC METRICS</text>
+  <text x="30" y="67" fill="{t['text']}" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="650">{count} public repositories</text>
+  <text x="30" y="94" fill="{t['secondary']}" font-family="Consolas, ui-monospace, monospace" font-size="15">Primary language / repo: {escape(languages)}</text>
+  <text x="30" y="116" fill="{t['muted']}" font-family="Consolas, ui-monospace, monospace" font-size="15">Refreshed: {escape(data['refreshed_utc'])}</text>
+  <path d="M24 131H496" stroke="{t['border']}" stroke-width="2"/>
   <g font-family="Consolas, ui-monospace, monospace">
-    <text x="30" y="157" fill="{t['muted']}" font-size="14">PROJECT / HOST SCOPE</text>
-    <text x="370" y="157" fill="{t['muted']}" font-size="14">CI / MAIN SHA</text>
+    <text x="30" y="147" fill="{t['muted']}" font-size="14">PROJECT / HOST SCOPE</text>
+    <text x="370" y="147" fill="{t['muted']}" font-size="14">CI / MAIN SHA</text>
     {''.join(rows)}
-    <text x="30" y="439" fill="{t['muted']}" font-size="14">PASS = current-main host CI only.</text>
+    <text x="30" y="397" fill="{t['muted']}" font-size="14">PASS = current-main host CI only.</text>
   </g>
 </svg>'''
 
