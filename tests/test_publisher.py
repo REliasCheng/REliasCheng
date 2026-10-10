@@ -137,6 +137,16 @@ class PublisherTests(unittest.TestCase):
             with self.assertRaisesRegex(PublicationBlocked, "Approved main SHA differs"):
                 publish(self.source, "b" * 40)
 
+    def test_checkout_remote_without_git_suffix(self):
+        def head(remote, branch="signalcore-assets"):
+            return "a" * 40 if branch == "main" else None
+
+        with patch("publish_assets.branch_head", side_effect=head), patch(
+            "publish_assets.command", return_value="https://github.com/REliasCheng/REliasCheng"
+        ):
+            with self.assertRaisesRegex(PublicationBlocked, "branch absent"):
+                publish(self.source, "a" * 40)
+
     def test_missing_branch_blocks_before_clone(self):
         def head(remote, branch="signalcore-assets"):
             return "a" * 40 if branch == "main" else None
