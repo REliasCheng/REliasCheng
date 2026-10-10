@@ -32,6 +32,8 @@ Original, inspectable implementations with public host-side evidence. The linked
 
 [Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab) — Python/PyQt5 serial application with a testable core and mock backend. Host tests, static checks and package build; no device validation.
 
+Design decision: keep serial I/O behind an application boundary so behavior can be tested without a connected device. Evidence: [Source](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/src/host_app/core/application.py) · [Tests](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/tests/test_application.py) · [CI](https://github.com/REliasCheng/Python-Host-Application-Lab/actions/workflows/test.yml) · [Design](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/docs/system-architecture.md).
+
 <picture>
   <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-embedded-cpp-mobile-dark.svg">
   <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-embedded-cpp-mobile-light.svg">
@@ -42,6 +44,8 @@ Original, inspectable implementations with public host-side evidence. The linked
 
 [Embedded C/C++ Core](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) — portable command, buffer and task-state modules. Host tests; no MCU target validation.
 
+Design decision: reject incomplete command output without committing partial state. Evidence: [Source](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/projects/06_%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6%E5%AE%9E%E8%B7%B5/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%91%BD%E4%BB%A4%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6/practice/src/command.c) · [Tests](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/projects/06_%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6%E5%AE%9E%E8%B7%B5/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%91%BD%E4%BB%A4%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6/tests/test_command_framework.c) · [CI](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/actions/workflows/host-tests.yml) · [Design](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/docs/%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1.md).
+
 <picture>
   <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-c51-mobile-dark.svg">
   <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-c51-mobile-light.svg">
@@ -51,6 +55,8 @@ Original, inspectable implementations with public host-side evidence. The linked
 </picture>
 
 [C51 Board Resource Planner](https://github.com/REliasCheng/C51-Board-Lab) — 8051 resource mapping and conflict detection. Host tests; no board validation.
+
+Design decision: model module resource demands explicitly before reporting GPIO, Timer, UART or I2C conflicts. Evidence: [Source](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/practice/src/board_resources.c) · [Tests](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/tests/test_board_resources.c) · [CI](https://github.com/REliasCheng/C51-Board-Lab/actions/workflows/host-tests.yml) · [Design](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/README.md).
 
 ## Current MCU work
 
@@ -102,7 +108,7 @@ This is a learning and design progression, **not a claim that every layer is imp
 
 ## Public telemetry
 
-The panel below is a **dated preview snapshot** from public GitHub API data, not a live service. Its host-CI status is bound to each repository's current `main` SHA. `PASS` does not mean target build or hardware validation; an unavailable API result remains `UNAVAILABLE`.
+The panel below is a **dated snapshot** from public GitHub API data, not a live service. Its host-CI status was bound to each repository's `main` SHA at the displayed refresh time; a later commit can make that evidence stale. `PASS` does not mean target build or hardware validation; an unavailable API result remains `UNAVAILABLE`.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/preview/telemetry-dark.svg">
@@ -112,7 +118,7 @@ The panel below is a **dated preview snapshot** from public GitHub API data, not
 
 ## Contribution activity
 
-This animated preview was generated from the public REliasCheng contribution graph by the preview Action. Contribution activity is not an engineering-quality score. The original static image remains the fallback if animated SVG is unavailable.
+This animation was generated from the public REliasCheng contribution graph. Contribution activity is not an engineering-quality score. The checked-in static image remains the fallback if animated SVG is unavailable.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/preview/contribution-static-dark.svg">

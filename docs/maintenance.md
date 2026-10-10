@@ -1,6 +1,6 @@
 # SIGNALCORE maintenance
 
-This document describes the **preview branch**. It grants no permission to update the default branch, repository metadata, other repositories, or a production asset branch.
+The visual system is now on the Profile default branch through PR #1. This document records both its checked-in snapshot maintenance and the historical preview process. It grants no permission to change repository metadata, technical repositories, or a production asset branch.
 
 ## Generate and validate artwork
 

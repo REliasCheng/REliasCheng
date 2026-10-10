@@ -3,19 +3,29 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import json
 from pathlib import Path
 from xml.etree import ElementTree
 
 from validate_snake import UNSAFE
+from generate_metrics import MONITORED, OWNER, render_svg
 
 
 def validate(directory: Path) -> None:
     data = json.loads((directory / "telemetry.json").read_text(encoding="utf-8"))
+    if data.get("owner") != OWNER:
+        raise ValueError("Metrics owner mismatch")
+    try:
+        datetime.strptime(data["refreshed_utc"], "%Y-%m-%d %H:%M UTC")
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError("Metrics require an explicit UTC refresh timestamp") from exc
     if data["public_repositories"] < 1 or data["source"] != "GitHub public REST API":
         raise ValueError("Invalid repository inventory or data source")
-    if len(data["ci"]) != 5:
-        raise ValueError("Five monitored host workflows are expected")
+    expected = {(repository, label, scope) for label, repository, _, scope in MONITORED}
+    actual = [(entry["repository"], entry["label"], entry["scope"]) for entry in data["ci"]]
+    if len(actual) != len(expected) or set(actual) != expected:
+        raise ValueError("CI rows must exactly match the five unique monitored repositories, labels and scopes")
     for entry in data["ci"]:
         if entry["status"] not in {"PASS", "FAIL", "PENDING", "STALE", "NOT VERIFIED", "UNAVAILABLE"}:
             raise ValueError(f"Unknown CI status: {entry['status']}")
@@ -29,6 +39,8 @@ def validate(directory: Path) -> None:
         root = ElementTree.fromstring(content)
         if not root.tag.endswith("svg") or UNSAFE.search(content):
             raise ValueError(f"Unsafe or invalid metrics SVG: {path}")
+        if content != render_svg(data, theme) + "\n":
+            raise ValueError(f"Metrics SVG does not match its JSON source: {path}")
         print(f"Validated {path}")
 
 

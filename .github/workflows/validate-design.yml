@@ -12,6 +12,7 @@ on:
       - .github/workflows/**
   push:
     branches:
+      - main
       - design/signalcore-profile-preview
   workflow_dispatch:
 
