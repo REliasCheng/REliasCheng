@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
       - name: Generate from actual REliasCheng contributions
-        uses: Platane/snk/svg-only@v3
+        uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3
         with:
           github_user_name: REliasCheng
           outputs: |
@@ -28,13 +28,13 @@ jobs:
             dist/snake-light.svg?color_snake=%23087F95&color_dots=%23F5F8FC,%23D0DFEA,%239BC8D4,%233A9FAF,%23087F95
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
           python-version: '3.13'
       - name: Reject absent or unsafe SVG output
         run: python scripts/validate_snake.py dist
       - name: Upload preview only; do not publish or commit
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: signalcore-snake-preview
           path: dist/snake-*.svg
