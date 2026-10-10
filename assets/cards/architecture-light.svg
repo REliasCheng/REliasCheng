@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="132" viewBox="0 0 1200 132" role="img" aria-labelledby="title desc">
-  <title id="title">Architecture labs</title><desc id="desc">SIGNALCORE section marker for DOCUMENTED / NOT IMPLEMENTED.</desc>
-  <rect width="1200" height="132" rx="13" fill="#FFFFFF" stroke="#D0DFEA" stroke-width="2"/>
-  <rect x="0" y="0" width="8" height="132" rx="4" fill="#926000"/>
-  <text x="35" y="44" fill="#926000" font-family="Consolas, ui-monospace, monospace" font-size="15" letter-spacing="3">SIGNALCORE / 03</text>
-  <text x="35" y="87" fill="#102033" font-family="Segoe UI, Arial, sans-serif" font-size="31" font-weight="650">Architecture labs</text>
-  <text x="810" y="84" fill="#3A536B" font-family="Consolas, ui-monospace, monospace" font-size="15">DOCUMENTED / NOT IMPLEMENTED</text>
-  <path d="M1034 29H1110V50H1157M1034 104H1082V80H1157" fill="none" stroke="#926000" stroke-opacity=".6" stroke-width="2"/>
-</svg>

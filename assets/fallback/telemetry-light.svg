@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="150" viewBox="0 0 1200 150" role="img" aria-labelledby="title desc">
-  <title id="title">SIGNALCORE telemetry fallback</title><desc id="desc">Static fallback. It contains no fabricated activity or metric value.</desc>
-  <rect width="1200" height="150" rx="14" fill="#FFFFFF" stroke="#D0DFEA" stroke-width="2"/>
-  <path d="M30 104H211L236 70L260 115L290 88H1170" fill="none" stroke="#087F95" stroke-width="2"/>
-  <text x="30" y="47" fill="#087F95" font-family="Consolas, ui-monospace, monospace" font-size="16" letter-spacing="2">SIGNALCORE / TELEMETRY</text>
-  <text x="316" y="99" fill="#3A536B" font-family="Segoe UI, Arial, sans-serif" font-size="21">Public metrics are temporarily unavailable</text>
-</svg>
