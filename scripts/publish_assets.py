@@ -143,6 +143,7 @@ def publish(source: Path, approved_main_sha: str, remote: str = "origin") -> str
         raise PublicationBlocked("Approved main SHA differs from remote main")
     remote_url = command("git", "remote", "get-url", remote)
     if remote_url not in {
+        f"https://github.com/{OWNER}/{OWNER}",
         f"https://github.com/{OWNER}/{OWNER}.git",
         f"git@github.com:{OWNER}/{OWNER}.git",
     }:
