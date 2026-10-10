@@ -1,6 +1,7 @@
 """Contract tests for current-SHA CI semantics and fixture-based metrics rendering."""
 
 import sys
+import json
 from datetime import datetime, timezone
 from pathlib import Path
 import unittest
@@ -12,6 +13,24 @@ from generate_metrics import classify_ci, collect, render_svg  # noqa: E402
 
 
 class MetricsTests(unittest.TestCase):
+    def test_compact_layout_preserves_all_public_metrics(self):
+        data = json.loads((ROOT / "assets/preview/telemetry.json").read_text(encoding="utf-8"))
+        for theme in ("dark", "light"):
+            root = ElementTree.fromstring(render_svg(data, theme))
+            self.assertEqual((root.get("width"), root.get("height"), root.get("viewBox")),
+                             ("520", "455", "0 0 520 455"))
+            texts = root.findall(".//{http://www.w3.org/2000/svg}text")
+            rendered = [node.text or "" for node in texts]
+            self.assertIn(f"{data['public_repositories']} public repositories", rendered)
+            self.assertTrue(any(data["refreshed_utc"] in value for value in rendered))
+            for item in data["ci"]:
+                self.assertIn(item["label"], rendered)
+                self.assertIn(item["scope"], rendered)
+                self.assertIn(item["sha"][:8] if item["sha"] else "unavailable", rendered)
+            labels = [node for node in texts if node.text in {item["label"] for item in data["ci"]}]
+            self.assertEqual([int(node.get("y")) for node in labels], [180, 230, 280, 330, 380])
+            self.assertLess(max(int(node.get("y")) for node in texts), int(root.get("height")) - 10)
+
     def test_current_success(self):
         self.assertEqual(classify_ci("current", [{"head_sha": "current", "status": "completed", "conclusion": "success"}]), "PASS")
 

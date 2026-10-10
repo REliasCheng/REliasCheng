@@ -33,8 +33,8 @@ jobs:
         with:
           github_user_name: REliasCheng
           outputs: |
-            dist/snake-dark.svg?color_snake=%2361DCE6&color_dots=%230B111B,%23142435,%2325394C,%231F9DA8,%2367D9C5
-            dist/snake-light.svg?color_snake=%23087F95&color_dots=%23F5F8FC,%23D0DFEA,%239BC8D4,%233A9FAF,%23087F95
+            dist/snake-dark.svg?color_snake=%2361DCE6&color_dots=%231C3044,%232A485E,%23365E74,%23428191,%234A98A5
+            dist/snake-light.svg?color_snake=%23075D75&color_dots=%23E8F1F5,%23C9DFE7,%23A5CAD6,%2379AFBE,%234C91A3
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Frame contribution graphics and generate both still variants
