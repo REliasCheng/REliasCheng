@@ -1,0 +1,114 @@
+name: SIGNALCORE daily production assets
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: signalcore-production-assets
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13'
+      - name: Generate real GitHub contribution graphics
+        uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b
+        with:
+          github_user_name: REliasCheng
+          outputs: |
+            dist/snake-dark.svg?color_snake=%2361DCE6&color_dots=%230B111B,%23142435,%2325394C,%231F9DA8,%2367D9C5
+            dist/snake-light.svg?color_snake=%23087F95&color_dots=%23F5F8FC,%23D0DFEA,%239BC8D4,%233A9FAF,%23087F95
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Frame contribution graphics and generate both still variants
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/prepare_snake.py dist --output-dir dist
+          python -c 'import sys; sys.path.insert(0, "scripts"); from pathlib import Path; from prepare_static_contribution import prepare; prepare(Path("dist"))'
+      - name: Generate current public GitHub metrics
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/generate_metrics.py --output-dir dist
+      - name: Validate all seven production inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/validate_snake.py dist
+          python scripts/validate_metrics.py dist
+          python -c 'import sys; sys.path.insert(0, "scripts"); from pathlib import Path; from prepare_static_contribution import derive_static; d=Path("dist"); assert all((d/f"contribution-static-{t}.svg").read_text(encoding="utf-8") == derive_static((d/f"snake-{t}.svg").read_text(encoding="utf-8"), t) for t in ("dark", "light"))'
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: signalcore-validated-assets
+          path: |
+            dist/snake-dark.svg
+            dist/snake-light.svg
+            dist/contribution-static-dark.svg
+            dist/contribution-static-light.svg
+            dist/telemetry-dark.svg
+            dist/telemetry-light.svg
+            dist/telemetry.json
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: generate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131
+        with:
+          name: signalcore-validated-assets
+          path: dist
+      - name: Verify freshness, current-main SHA, CI and publication plan
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python scripts/publish_assets.py --dry-run --source dist
+      - name: Publish seven validated files using an authenticated fast-forward push
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          askpass=$(mktemp)
+          trap 'rm -f "$askpass"' EXIT
+          cat > "$askpass" <<'ASKPASS'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' 'x-access-token' ;;
+            *Password*) printf '%s\n' "$GH_TOKEN" ;;
+          esac
+          ASKPASS
+          chmod 700 "$askpass"
+          GIT_ASKPASS="$askpass" GIT_TERMINAL_PROMPT=0 \
+            python scripts/publish_assets.py --publish --source dist --approved-main-sha "$GITHUB_SHA"
