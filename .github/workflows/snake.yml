@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - design/signalcore-profile-preview
-  schedule:
-    - cron: '23 3 * * *'
   workflow_dispatch:
 
 permissions:
