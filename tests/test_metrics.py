@@ -18,7 +18,7 @@ class MetricsTests(unittest.TestCase):
         for theme in ("dark", "light"):
             root = ElementTree.fromstring(render_svg(data, theme))
             self.assertEqual((root.get("width"), root.get("height"), root.get("viewBox")),
-                             ("520", "455", "0 0 520 455"))
+                             ("520", "413", "0 0 520 413"))
             texts = root.findall(".//{http://www.w3.org/2000/svg}text")
             rendered = [node.text or "" for node in texts]
             self.assertIn(f"{data['public_repositories']} public repositories", rendered)
@@ -28,7 +28,7 @@ class MetricsTests(unittest.TestCase):
                 self.assertIn(item["scope"], rendered)
                 self.assertIn(item["sha"][:8] if item["sha"] else "unavailable", rendered)
             labels = [node for node in texts if node.text in {item["label"] for item in data["ci"]}]
-            self.assertEqual([int(node.get("y")) for node in labels], [180, 230, 280, 330, 380])
+            self.assertEqual([int(node.get("y")) for node in labels], [168, 213, 258, 303, 348])
             self.assertLess(max(int(node.get("y")) for node in texts), int(root.get("height")) - 10)
 
     def test_current_success(self):
