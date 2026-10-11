@@ -2,14 +2,6 @@ name: SIGNALCORE design validation
 
 on:
   pull_request:
-    paths:
-      - README.md
-      - assets/**
-      - data/**
-      - docs/**
-      - scripts/**
-      - tests/**
-      - .github/workflows/**
   push:
     branches:
       - main
