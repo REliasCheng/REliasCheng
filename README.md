@@ -10,75 +10,91 @@
   <img src="assets/brand/hero-static.svg" alt="Elias Cheng — embedded software engineer; testable cores and hardware-aware design" width="100%">
 </picture>
 
-I build host applications and portable embedded cores with explicit test boundaries. Each linked repository documents its target and hardware limits.
+Open a project to inspect its implementation, host tests and target limits.
 
 ## Selected engineering
 
-Original, inspectable implementations with public host-side evidence. The linked repositories define their own build and hardware limits.
+### [Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab)
 
 <picture>
   <source media="(max-width: 900px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-python-mobile-dark.svg">
   <source media="(max-width: 900px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-python-mobile-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-python-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-python-light.svg">
-  <img src="assets/cards/featured-python-dark.svg" alt="Python host application: GUI, testable core and serial boundary" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/evidence/python-host-mock-gui-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/evidence/python-host-mock-gui-light.png">
+  <img src="assets/evidence/python-host-mock-gui-dark.png" alt="Real Qt window with MOCK0 connected, showing a status command and MOCK ACK response" width="100%">
 </picture>
 
-[Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab) — Python/PyQt5 serial application with a testable core and mock backend. Host tests, static checks and package build; no device validation.
+This real Qt window uses an in-memory serial backend, not a connected device. The serial interface keeps connection and error paths testable without hardware; real-device communication is unverified.
 
-Design decision: keep serial I/O behind an application boundary so behavior can be tested without a connected device. Evidence: [Source](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/src/host_app/core/application.py) · [Tests](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/tests/test_application.py) · [CI](https://github.com/REliasCheng/Python-Host-Application-Lab/actions/workflows/test.yml) · [Design](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/docs/system-architecture.md).
+**[View repository →](https://github.com/REliasCheng/Python-Host-Application-Lab)**
+
+[Source](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/src/host_app/core/application.py) · [Tests](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/tests/test_gui.py) · [CI](https://github.com/REliasCheng/Python-Host-Application-Lab/actions/workflows/test.yml) · [Design](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/docs/system-architecture.md)
+
+### [Embedded C/C++ Core](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)
 
 <picture>
   <source media="(max-width: 900px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-embedded-cpp-mobile-dark.svg">
   <source media="(max-width: 900px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-embedded-cpp-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-embedded-cpp-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-embedded-cpp-light.svg">
-  <img src="assets/cards/featured-embedded-cpp-dark.svg" alt="Portable C and C++ command and task modules with host tests" width="100%">
+  <img src="assets/cards/featured-embedded-cpp-dark.svg" alt="Host test: undersized command reply leaves the LED state unchanged" width="100%">
 </picture>
 
-[Embedded C/C++ Core](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) — portable command, buffer and task-state modules. Host tests; no MCU target validation.
+The handler prepares a response before mutating device state; a valid retry can commit after a short-buffer failure. Command, ring-buffer and task modules have host tests, without an MCU target build.
 
-Design decision: reject incomplete command output without committing partial state. Evidence: [Source](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/projects/06_%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6%E5%AE%9E%E8%B7%B5/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%91%BD%E4%BB%A4%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6/practice/src/command.c) · [Tests](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/projects/06_%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6%E5%AE%9E%E8%B7%B5/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%91%BD%E4%BB%A4%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6/tests/test_command_framework.c) · [CI](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/actions/workflows/host-tests.yml) · [Design](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/docs/%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1.md).
+**[View repository →](https://github.com/REliasCheng/Embedded-C-Cpp-Learning)**
+
+[Source](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/projects/06_%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6%E5%AE%9E%E8%B7%B5/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%91%BD%E4%BB%A4%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6/practice/src/command.c) · [Tests](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/projects/06_%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6%E5%AE%9E%E8%B7%B5/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%91%BD%E4%BB%A4%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6/tests/test_command_framework.c) · [CI](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/actions/workflows/host-tests.yml) · [Design](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/docs/%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1.md)
+
+### [C51 Board Resource Planner](https://github.com/REliasCheng/C51-Board-Lab)
 
 <picture>
   <source media="(max-width: 900px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-c51-mobile-dark.svg">
   <source media="(max-width: 900px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-c51-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-c51-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-c51-light.svg">
-  <img src="assets/cards/featured-c51-dark.svg" alt="8051 board resource planner mapping module needs to GPIO, Timer, UART and I2C" width="100%">
+  <img src="assets/cards/featured-c51-dark.svg" alt="Host test: UART and independent keys share P3.0 and P3.1, so the planner reports a conflict" width="100%">
 </picture>
 
-[C51 Board Resource Planner](https://github.com/REliasCheng/C51-Board-Lab) — 8051 resource mapping and conflict detection. Host tests; no board validation.
+The planner compares declared module resource masks and preserves the existing plan on conflict. GPIO, Timer, UART and I²C mapping and failure paths are host-tested; board wiring and runtime remain unverified.
 
-Design decision: model module resource demands explicitly before reporting GPIO, Timer, UART or I2C conflicts. Evidence: [Source](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/practice/src/board_resources.c) · [Tests](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/tests/test_board_resources.c) · [CI](https://github.com/REliasCheng/C51-Board-Lab/actions/workflows/host-tests.yml) · [Design](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/README.md).
+**[View repository →](https://github.com/REliasCheng/C51-Board-Lab)**
+
+[Source](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/practice/src/board_resources.c) · [Tests](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/tests/test_board_resources.c) · [CI](https://github.com/REliasCheng/C51-Board-Lab/actions/workflows/host-tests.yml) · [Design](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/README.md)
 
 ## MCU development
 
-Application and communication cores are distinguishable from a complete target firmware release.
-
-- [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning) — C89 UART RX ring buffer and 8051 adapter boundary. Host-tested core; no Keil target or board evidence.
-- [STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning) — RTC, temperature and configuration state behind platform callbacks. Host tests; C51 target and hardware not verified.
-- [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU) — CT107D resource, timing and control policies. Host-tested policies; no complete target or board evidence.
+- [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning) — C89 UART RX ring buffer and 8051 adapter; host-tested core, no Keil target or board evidence.
+- [STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning) — RTC, temperature and configuration state behind platform callbacks; host tests, no C51 target or hardware verification.
+- [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU) — CT107D resource, timing and control policies; host tests, no complete target or board validation.
 
 ## Architecture and research
 
-These repositories communicate system design and technical boundaries. They are **not** presented as publicly implemented or hardware-verified systems.
+Design and study repositories below are not presented as completed firmware or hardware runs.
+
+**Firmware / RTOS / GUI**
 
 - [ARM Cortex-M](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab) — startup, interrupts, clocks and driver layering.
 - [FreeRTOS](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) — scheduling, IPC and ISR-to-task design.
 - [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) — display, input, rendering and event pipeline.
-- [Wireless / IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) — native Wi-Fi → lwIP → TCP → plain MQTT model; no TLS or live sensor evidence.
+
+**Connectivity / OTA**
+
+- [Wireless / IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) — Wi-Fi → lwIP → TCP → plain MQTT model; no TLS or live sensor evidence.
 - [Firmware Update / OTA](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) — bootloader, UART/YMODEM, MQTT and CRC boundary model; no A/B or rollback claim.
 
-### Exploration and foundations
+**Robotics / Linux / foundations**
 
-- [Embodied Robotics Arm](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab) — LeRobot/robotic-arm integration study involving third-party code; no functional or hardware run claimed.
+- [Embodied Robotics Arm](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab) — LeRobot integration study with third-party code; no functional or hardware run claimed.
 - [ARM Embedded Linux](https://github.com/REliasCheng/ARM-Linux-Embedded-Lab) — RK3566 boot, Device Tree and driver-interface research; no public kernel build or board runtime claimed.
-- [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations) — electronics, digital logic, CPU, MCU and PCB knowledge map; a documentation project, not runnable firmware.
+- [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations) — electronics, logic, CPU, MCU and PCB knowledge map; documentation, not runnable firmware.
 
 ## Public engineering evidence
 
-The panel below is a **dated snapshot** from public GitHub API data, not a live service. Its host-CI status was bound to each repository's `main` SHA at the displayed refresh time; a later commit can make that evidence stale. `PASS` does not mean target build or hardware validation; an unavailable API result remains `UNAVAILABLE`.
+Five selected host CI workflows are checked against each repository's `main` SHA at the displayed refresh time. `PASS` means current-SHA host CI only; it does not imply target or hardware verification. API failures remain `UNAVAILABLE`. The data is a dated GitHub API snapshot.
+
+<details>
+<summary>View public repository count and the five monitored host CI checks</summary>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/telemetry-dark.svg">
@@ -86,22 +102,10 @@ The panel below is a **dated snapshot** from public GitHub API data, not a live 
   <img src="assets/fallback/telemetry-dark.svg" alt="Public GitHub telemetry with dated repository and current-main host CI status" width="100%">
 </picture>
 
-## Contribution activity
-
-This animation was generated from the public REliasCheng contribution graph. Contribution activity is not an engineering-quality score. The checked-in static image remains the fallback if animated SVG is unavailable.
-
-<picture>
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/snake-light.svg">
-  <img src="assets/fallback/contribution-dark.svg" alt="Static fallback for the GitHub contribution activity component" width="100%">
-</picture>
-
-Prefer a still image? [Dark contribution graph](https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-dark.svg) · [Light contribution graph](https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-light.svg). Both are derived from the same public contribution data.
+</details>
 
 ---
 
-**SIGNALCORE** · [Design system](docs/design-system.md) · [Maintenance](docs/maintenance.md) · [Production assets](docs/production-assets.md)
+**SIGNALCORE** · [About this portfolio](docs/maintenance.md)
 
 Original profile content follows this repository's [LICENSE](LICENSE). Linked projects, vendor material and dependencies retain their own terms.

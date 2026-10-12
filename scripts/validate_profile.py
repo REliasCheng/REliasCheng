@@ -77,7 +77,7 @@ def valid_readme_asset(asset: str, *, allow_production: bool = False) -> bool:
 
 
 def check_live_asset_layout(readme: str) -> list[str]:
-    """Require exactly the approved live sources, theme and motion order, and local fallbacks."""
+    """Keep telemetry live while the native GitHub graph supplies contribution UI."""
     errors = []
     pictures = re.findall(r"<picture>.*?</picture>", readme, re.S)
     expected = {
@@ -85,18 +85,10 @@ def check_live_asset_layout(readme: str) -> list[str]:
             (f"(prefers-color-scheme: {theme})", PRODUCTION_ASSET_ROOT + f"telemetry-{theme}.svg")
             for theme in ("dark", "light")
         ],
-        "contribution": [
-            (f"(prefers-reduced-motion: reduce) and (prefers-color-scheme: {theme})",
-             PRODUCTION_ASSET_ROOT + f"contribution-static-{theme}.svg")
-            for theme in ("dark", "light")
-        ] + [
-            (f"(prefers-color-scheme: {theme})", PRODUCTION_ASSET_ROOT + f"snake-{theme}.svg")
-            for theme in ("dark", "light")
-        ],
     }
     for kind, sources in expected.items():
         matches = [picture for picture in pictures if sources[-1][1] in picture]
-        fallback = f'assets/fallback/{"telemetry-dark" if kind == "telemetry" else "contribution-dark"}.svg'
+        fallback = 'assets/fallback/telemetry-dark.svg'
         if len(matches) != 1:
             errors.append(f"Expected exactly one live {kind} picture")
             continue
@@ -108,11 +100,12 @@ def check_live_asset_layout(readme: str) -> list[str]:
     approved_sources = {url for sources in expected.values() for _, url in sources}
     actual_sources = {asset for asset in HTML_ASSET.findall(readme) if asset.startswith(PRODUCTION_ASSET_ROOT)}
     if actual_sources != approved_sources:
-        errors.append("README production SVG inventory differs from the six approved assets")
-    still_links = {PRODUCTION_ASSET_ROOT + f"contribution-static-{theme}.svg" for theme in ("dark", "light")}
+        errors.append("README production SVG inventory differs from the two approved telemetry assets")
     raw_links = {link for link in MD_LINK.findall(readme) if link.startswith("https://raw.githubusercontent.com/")}
-    if raw_links != still_links:
-        errors.append("README still-image links differ from the two approved production assets")
+    if raw_links:
+        errors.append("README has unexpected direct production-asset links")
+    if any(name in readme for name in ("snake-dark.svg", "snake-light.svg", "contribution-static-dark.svg", "contribution-static-light.svg")):
+        errors.append("README contribution visual duplicates GitHub's native graph")
     if any(f"assets/preview/{name}" in readme for name in PRODUCTION_ASSET_FILES):
         errors.append("README still references a preview dynamic asset")
     return errors
@@ -151,14 +144,11 @@ def validate() -> list[str]:
         errors.append("Unbalanced picture elements")
     if readme.count("alt=") < readme.count("<picture>"):
         errors.append("Picture elements need text alternatives")
-    if "<details>" in readme and PRODUCTION_ASSET_ROOT + "snake-dark.svg" in readme:
-        errors.append("Contribution graphic must be visible by default")
     for prefix, static_names, animated_name in (
         ("hero", ("hero-static.svg", "hero-static-light.svg"), "hero-dark.svg"),
-        ("contribution", ("contribution-static-dark.svg", "contribution-static-light.svg"), "snake-dark.svg"),
     ):
         for name in static_names:
-            asset = PRODUCTION_ASSET_ROOT + name if prefix == "contribution" else f"assets/brand/{name}"
+            asset = f"assets/brand/{name}"
             marker = f'srcset="{asset}"'
             if marker not in readme or animated_name not in readme or readme.index(marker) > readme.index(animated_name):
                 errors.append(f"Reduced-motion static source absent or after animated {prefix}: {name}")
@@ -177,11 +167,18 @@ def validate() -> list[str]:
             errors.append(f"Redundant {removed_banner} banner remains in README")
     for kind in ("python", "embedded-cpp", "c51"):
         for theme in ("dark", "light"):
-            if f"assets/cards/featured-{kind}-{theme}.svg" not in readme:
+            desktop = (f"assets/evidence/python-host-mock-gui-{theme}.png" if kind == "python"
+                       else f"assets/cards/featured-{kind}-{theme}.svg")
+            if desktop not in readme:
                 errors.append(f"Missing featured {kind} {theme} picture source")
             mobile = f"assets/cards/featured-{kind}-mobile-{theme}.svg"
-            if mobile not in readme or readme.index(mobile) > readme.index(f"assets/cards/featured-{kind}-{theme}.svg"):
+            if mobile not in readme or readme.index(mobile) > readme.index(desktop):
                 errors.append(f"Missing or incorrectly ordered mobile featured {kind} {theme} source")
+    for theme in ("dark", "light"):
+        png = ROOT / "assets/evidence" / f"python-host-mock-gui-{theme}.png"
+        header = png.read_bytes()[:24] if png.is_file() else b""
+        if header[:16] != b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR" or int.from_bytes(header[16:20], "big") != 900 or int.from_bytes(header[20:24], "big") != 160:
+            errors.append(f"Invalid or missing real GUI capture: {png}")
     for path in (ROOT / "assets").rglob("*.svg"):
         content = path.read_text(encoding="utf-8")
         try:

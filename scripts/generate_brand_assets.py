@@ -6,7 +6,8 @@ import json
 from pathlib import Path
 from xml.etree import ElementTree
 
-from v2_brand import hero, featured_card, featured_mobile_card, footer
+from v2_brand import hero, footer
+from v21_cards import featured_card, featured_mobile_card
 
 
 

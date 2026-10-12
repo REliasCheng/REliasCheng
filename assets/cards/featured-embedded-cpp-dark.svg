@@ -1,8 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="240" viewBox="0 0 1200 240" role="img" aria-labelledby="title desc">
-<title id="title">Embedded C/C++ Core</title><desc id="desc">Original embedded-cpp architecture diagram; implementation scope and verification links follow in README text.</desc>
-<rect width="1200" height="240" rx="14" fill="#142235" stroke="#25394C"/>
-<path d="M38 24H1162" stroke="#25394C"/><text x="38" y="51" fill="#61DCE6" font-family="Consolas, monospace" font-size="17" letter-spacing="2">02 / PORTABLE CORE</text>
-<text x="38" y="109" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="650">Embedded C/C++ Core</text>
-<text x="38" y="151" fill="#A9BDCD" font-family="Segoe UI, Arial, sans-serif" font-size="21">Commands · ring buffer · state</text>
-<g font-family="Consolas, monospace" font-size="18" fill="#F0F6FF"><rect x="731" y="91" width="103" height="55" rx="5" fill="none" stroke="#25394C" stroke-width="2"/><text x="745" y="125">CMD</text><rect x="849" y="91" width="103" height="55" rx="5" fill="none" stroke="#61DCE6" stroke-width="2"/><text x="863" y="125">BUFFER</text><rect x="967" y="91" width="103" height="55" rx="5" fill="none" stroke="#25394C" stroke-width="2"/><text x="981" y="125">STATE</text><path d="M834 118H849M952 118H967" stroke="#61DCE6" stroke-width="2"/><path d="M900 91V64H1018V91" fill="none" stroke="#A9BDCD" stroke-width="2"/><text x="983" y="57" fill="#708CA2" font-size="15">NO PARTIAL COMMIT</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="176" viewBox="0 0 1200 176" role="img" aria-labelledby="title desc">
+<title id="title">C command rejects undersized response without changing device state</title><desc id="desc">Diagram based on the linked source and host tests; no device output or board verification is implied.</desc>
+<rect x=".5" y=".5" width="1199" height="175" rx="14" fill="#142235" stroke="#25394C"/>
+<text x="39" y="35" fill="#61DCE6" font-family="Consolas, ui-monospace, monospace" font-size="19">C11 / COMMAND FRAMEWORK</text>
+<text x="39" y="91" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="35" font-weight="650">No partial state commit</text>
+<text x="39" y="137" fill="#A9BDCD" font-family="Consolas, ui-monospace, monospace" font-size="24">led off</text>
+<path d="M184 128H267" stroke="#25394C" stroke-width="2"/>
+<text x="291" y="137" fill="#F2BD70" font-family="Consolas, ui-monospace, monospace" font-size="23">RESPONSE_TOO_SMALL</text>
+<path d="M695 128H769" stroke="#25394C" stroke-width="2"/>
+<text x="789" y="137" fill="#61DCE6" font-family="Consolas, ui-monospace, monospace" font-size="24">LED stays ON</text>
 </svg>
