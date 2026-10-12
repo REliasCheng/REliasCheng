@@ -1,8 +1,8 @@
 <picture>
-  <source media="(max-width: 600px) and (prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/brand/hero-mobile-static-dark.svg">
-  <source media="(max-width: 600px) and (prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/brand/hero-mobile-static-light.svg">
-  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/brand/hero-mobile-dark.svg">
-  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/brand/hero-mobile-light.svg">
+  <source media="(max-width: 900px) and (prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/brand/hero-mobile-static-dark.svg">
+  <source media="(max-width: 900px) and (prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/brand/hero-mobile-static-light.svg">
+  <source media="(max-width: 900px) and (prefers-color-scheme: dark)" srcset="assets/brand/hero-mobile-dark.svg">
+  <source media="(max-width: 900px) and (prefers-color-scheme: light)" srcset="assets/brand/hero-mobile-light.svg">
   <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/brand/hero-static.svg">
   <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/brand/hero-static-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/brand/hero-dark.svg">
@@ -17,8 +17,8 @@ I build host applications and portable embedded cores with explicit test boundar
 Original, inspectable implementations with public host-side evidence. The linked repositories define their own build and hardware limits.
 
 <picture>
-  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-python-mobile-dark.svg">
-  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-python-mobile-light.svg">
+  <source media="(max-width: 900px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-python-mobile-dark.svg">
+  <source media="(max-width: 900px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-python-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-python-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-python-light.svg">
   <img src="assets/cards/featured-python-dark.svg" alt="Python host application: GUI, testable core and serial boundary" width="100%">
@@ -29,8 +29,8 @@ Original, inspectable implementations with public host-side evidence. The linked
 Design decision: keep serial I/O behind an application boundary so behavior can be tested without a connected device. Evidence: [Source](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/src/host_app/core/application.py) · [Tests](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/tests/test_application.py) · [CI](https://github.com/REliasCheng/Python-Host-Application-Lab/actions/workflows/test.yml) · [Design](https://github.com/REliasCheng/Python-Host-Application-Lab/blob/main/docs/system-architecture.md).
 
 <picture>
-  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-embedded-cpp-mobile-dark.svg">
-  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-embedded-cpp-mobile-light.svg">
+  <source media="(max-width: 900px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-embedded-cpp-mobile-dark.svg">
+  <source media="(max-width: 900px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-embedded-cpp-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-embedded-cpp-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-embedded-cpp-light.svg">
   <img src="assets/cards/featured-embedded-cpp-dark.svg" alt="Portable C and C++ command and task modules with host tests" width="100%">
@@ -41,8 +41,8 @@ Design decision: keep serial I/O behind an application boundary so behavior can 
 Design decision: reject incomplete command output without committing partial state. Evidence: [Source](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/projects/06_%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6%E5%AE%9E%E8%B7%B5/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%91%BD%E4%BB%A4%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6/practice/src/command.c) · [Tests](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/projects/06_%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6%E5%AE%9E%E8%B7%B5/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%91%BD%E4%BB%A4%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6/tests/test_command_framework.c) · [CI](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/actions/workflows/host-tests.yml) · [Design](https://github.com/REliasCheng/Embedded-C-Cpp-Learning/blob/main/docs/%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1.md).
 
 <picture>
-  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-c51-mobile-dark.svg">
-  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-c51-mobile-light.svg">
+  <source media="(max-width: 900px) and (prefers-color-scheme: dark)" srcset="assets/cards/featured-c51-mobile-dark.svg">
+  <source media="(max-width: 900px) and (prefers-color-scheme: light)" srcset="assets/cards/featured-c51-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/featured-c51-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/cards/featured-c51-light.svg">
   <img src="assets/cards/featured-c51-dark.svg" alt="8051 board resource planner mapping module needs to GPIO, Timer, UART and I2C" width="100%">
