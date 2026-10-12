@@ -102,8 +102,11 @@ def check_live_asset_layout(readme: str) -> list[str]:
     if actual_sources != approved_sources:
         errors.append("README production SVG inventory differs from the two approved telemetry assets")
     raw_links = {link for link in MD_LINK.findall(readme) if link.startswith("https://raw.githubusercontent.com/")}
-    if raw_links:
-        errors.append("README has unexpected direct production-asset links")
+    expected_full_size = {PRODUCTION_ASSET_ROOT + f"telemetry-{theme}.svg" for theme in ("dark", "light")}
+    if raw_links != expected_full_size:
+        errors.append("README full-size metrics links differ from approved production assets")
+    if not re.search(r"<details>\s*<summary>[^<]+</summary>.*?" + re.escape(PRODUCTION_ASSET_ROOT + "telemetry-dark.svg") + r".*?</details>", readme, re.S):
+        errors.append("Telemetry disclosure is missing or no longer contains the live picture")
     if any(name in readme for name in ("snake-dark.svg", "snake-light.svg", "contribution-static-dark.svg", "contribution-static-light.svg")):
         errors.append("README contribution visual duplicates GitHub's native graph")
     if any(f"assets/preview/{name}" in readme for name in PRODUCTION_ASSET_FILES):

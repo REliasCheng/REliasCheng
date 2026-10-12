@@ -76,7 +76,7 @@ class ProfileLinkTests(unittest.TestCase):
         changed += '\n[Unexpected](https://raw.githubusercontent.com/REliasCheng/REliasCheng/main/README.md)\n'
         errors = check_live_asset_layout(changed)
         self.assertTrue(any("fallback" in error for error in errors))
-        self.assertTrue(any("direct production-asset links" in error for error in errors))
+        self.assertTrue(any("full-size metrics links" in error for error in errors))
 
 
 if __name__ == "__main__":
