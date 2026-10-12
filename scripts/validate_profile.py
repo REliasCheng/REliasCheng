@@ -164,6 +164,8 @@ def validate() -> list[str]:
                 errors.append(f"Reduced-motion static source absent or after animated {prefix}: {name}")
     if "assets/brand/terminal-dark.svg" in readme or "<h1" in readme or "# Elias Cheng" in readme:
         errors.append("V2 must not repeat the hero identity with a terminal or large heading")
+    if readme.count("(max-width: 900px)") != 10:
+        errors.append("V2 hero and featured cards need narrow-column sources through the GitHub tablet layout")
     for theme in ("dark", "light"):
         mobile_static = f"assets/brand/hero-mobile-static-{theme}.svg"
         mobile_animated = f"assets/brand/hero-mobile-{theme}.svg"
