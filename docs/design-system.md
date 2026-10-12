@@ -1,4 +1,30 @@
-# SIGNALCORE V2 design system
+# SIGNALCORE V2.1 design system
+
+## Portfolio clarity polish
+
+V2.1 keeps the V2 hero, palette and 900 px narrow-column switch. The desktop
+Python feature now uses a **real Qt window capture** from the original host
+application running with its in-memory mock backend. The capture shows the
+`status` / `MOCK ACK: status` exchange; it is not a device screenshot. At narrow
+widths, a separately composed SVG presents the same tested flow with larger
+type. The C/C++ and C51 graphics show specific outcomes exercised by their
+host tests: response-buffer failure without state mutation and UART/key pin
+conflict. Project names, value and verification limits remain readable Markdown.
+
+The README no longer repeats project names inside images. Public metrics remain
+available in a native GitHub disclosure below the projects; the same production
+telemetry SVG and JSON continue to publish. The README contribution snake is
+retired because GitHub's native graph appears immediately below Pinned repos.
+Snake generation, static fallbacks and all seven production assets remain intact.
+The footer retains one maintenance entry and the license boundary.
+
+The GUI captures were taken from `Python-Host-Application-Lab` on Windows with
+`DemoMockSerialBackend`, using its public `MainWindow`, `connect_serial`,
+`send_command('status')` and `poll_serial` methods. The dark capture uses Qt's
+Fusion palette with SIGNALCORE colors; neither image represents a physical
+serial connection. The capture script and full-window evidence are in the
+V2.1 audit directory; these checked-in PNGs are the top 900 × 160 pixels of
+the real 900 × 560 window.
 
 ## Direction
 

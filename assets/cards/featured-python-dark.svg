@@ -1,8 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="240" viewBox="0 0 1200 240" role="img" aria-labelledby="title desc">
-<title id="title">Python Host Application</title><desc id="desc">Original python architecture diagram; implementation scope and verification links follow in README text.</desc>
-<rect width="1200" height="240" rx="14" fill="#142235" stroke="#25394C"/>
-<path d="M38 24H1162" stroke="#25394C"/><text x="38" y="51" fill="#61DCE6" font-family="Consolas, monospace" font-size="17" letter-spacing="2">01 / HOST APPLICATION</text>
-<text x="38" y="109" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="650">Python Host Application</text>
-<text x="38" y="151" fill="#A9BDCD" font-family="Segoe UI, Arial, sans-serif" font-size="21">GUI · application core · serial boundary</text>
-<g font-family="Consolas, monospace" font-size="18" fill="#F0F6FF"><rect x="689" y="45" width="435" height="154" rx="9" fill="#0B111B" stroke="#25394C"/><path d="M689 77H1124" stroke="#25394C"/><circle cx="707" cy="61" r="4" fill="#61DCE6"/><text x="719" y="132">GUI</text><path d="M776 123H829" stroke="#61DCE6" stroke-width="2"/><rect x="834" y="99" width="97" height="45" rx="5" fill="#142235" stroke="#61DCE6"/><text x="851" y="127">CORE</text><path d="M938 123H985" stroke="#61DCE6" stroke-width="2"/><path d="M989 95V152" stroke="#A9BDCD" stroke-width="2" stroke-dasharray="5 5"/><text x="1004" y="132">SERIAL</text><text x="704" y="184" fill="#708CA2" font-size="15">MOCKABLE APPLICATION BOUNDARY</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="232" viewBox="0 0 1200 232" role="img" aria-labelledby="title desc">
+<title id="title">Mock serial exchange through the Python host application</title><desc id="desc">Diagram based on the linked source and host tests; no device output or board verification is implied.</desc>
+<rect x=".5" y=".5" width="1199" height="231" rx="14" fill="#142235" stroke="#25394C"/>
+<path d="M38 42H1162" stroke="#25394C"/>
+<text x="40" y="31" fill="#61DCE6" font-family="Consolas, ui-monospace, monospace" font-size="19">PYTHON / PYQT5 / VERIFIED MOCK SESSION</text>
+<text x="40" y="93" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="35" font-weight="650">GUI → Application Core → Serial Boundary</text>
+<text x="41" y="128" fill="#A9BDCD" font-family="Segoe UI, Arial, sans-serif" font-size="23">One flow exercised by the offscreen Qt test</text>
+<rect x="40" y="148" width="1120" height="61" rx="7" fill="#0B111B"/>
+<text x="64" y="187" fill="#A9BDCD" font-family="Consolas, ui-monospace, monospace" font-size="27">TX  status</text>
+<path d="M477 161V196" stroke="#25394C"/>
+<text x="515" y="187" fill="#61DCE6" font-family="Consolas, ui-monospace, monospace" font-size="27">RX  MOCK ACK: status</text>
 </svg>

@@ -1,7 +1,7 @@
 {
   "Python-Host-Application-Lab": {
     "source": "src/host_app/core/application.py",
-    "tests": "tests/test_application.py",
+    "tests": "tests/test_gui.py",
     "ci": ".github/workflows/test.yml",
     "design": "docs/system-architecture.md"
   },

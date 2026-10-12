@@ -65,20 +65,18 @@ class ProfileLinkTests(unittest.TestCase):
         readme = README.read_text(encoding="utf-8")
         self.assertEqual(check_live_asset_layout(readme), [])
 
-    def test_live_assets_reject_animated_source_before_still_source(self):
+    def test_live_assets_reject_removed_contribution_visual_reappearing(self):
         readme = README.read_text(encoding="utf-8")
-        still = f'<source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="{PRODUCTION_ASSET_ROOT}contribution-static-dark.svg">'
-        animated = f'<source media="(prefers-color-scheme: dark)" srcset="{PRODUCTION_ASSET_ROOT}snake-dark.svg">'
-        changed = readme.replace(still + '\n  ', '', 1).replace(animated, animated + '\n  ' + still, 1)
-        self.assertTrue(any("reduced-motion" in error for error in check_live_asset_layout(changed)))
+        changed = readme + f'\n<img src="{PRODUCTION_ASSET_ROOT}snake-dark.svg">\n'
+        self.assertTrue(any("contribution visual" in error for error in check_live_asset_layout(changed)))
 
     def test_live_assets_reject_missing_local_fallback_and_unapproved_raw_link(self):
         readme = README.read_text(encoding="utf-8")
-        changed = readme.replace('assets/fallback/contribution-dark.svg', 'assets/preview/snake-dark.svg', 1)
+        changed = readme.replace('assets/fallback/telemetry-dark.svg', 'assets/preview/telemetry-dark.svg', 1)
         changed += '\n[Unexpected](https://raw.githubusercontent.com/REliasCheng/REliasCheng/main/README.md)\n'
         errors = check_live_asset_layout(changed)
         self.assertTrue(any("fallback" in error for error in errors))
-        self.assertTrue(any("still-image links" in error for error in errors))
+        self.assertTrue(any("direct production-asset links" in error for error in errors))
 
 
 if __name__ == "__main__":

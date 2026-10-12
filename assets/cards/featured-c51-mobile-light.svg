@@ -1,8 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="306" viewBox="0 0 640 306" role="img" aria-labelledby="title desc">
-<title id="title">C51 Board Resource Planner</title><desc id="desc">Original c51 architecture diagram; implementation scope and verification links follow in README text.</desc>
-<rect width="640" height="306" rx="14" fill="#FFFFFF" stroke="#D0DFEA"/>
-<path d="M30 24H610" stroke="#D0DFEA"/><text x="30" y="47" fill="#087F95" font-family="Consolas, monospace" font-size="19" letter-spacing="2">03 / RESOURCE PLANNER</text>
-<text x="30" y="97" fill="#102033" font-family="Segoe UI, Arial, sans-serif" font-size="31" font-weight="650">C51 Board Resource Planner</text>
-<text x="30" y="134" fill="#3A536B" font-family="Segoe UI, Arial, sans-serif" font-size="22">GPIO · Timer · UART · I²C</text>
-<g font-family="Consolas, monospace" font-size="23" fill="#102033"><text x="33" y="165" fill="#526B80" font-size="20">MODULE NEEDS</text><rect x="33" y="182" width="69" height="58" rx="4" fill="#F5F8FC" stroke="#D0DFEA"/><text x="40" y="216" font-size="19">GPIO</text><rect x="106" y="182" width="69" height="58" rx="4" fill="#F5F8FC" stroke="#D0DFEA"/><text x="113" y="216" font-size="19">TIMER</text><rect x="179" y="182" width="69" height="58" rx="4" fill="#F5F8FC" stroke="#D0DFEA"/><text x="186" y="216" font-size="19">UART</text><rect x="252" y="182" width="69" height="58" rx="4" fill="#F5F8FC" stroke="#D0DFEA"/><text x="259" y="216" font-size="19">I²C</text><path d="M33 258H321" stroke="#087F95" stroke-width="2"/><text x="33" y="285" fill="#087F95" font-size="20">CONFLICT CHECK  →  REPORT</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="220" viewBox="0 0 640 220" role="img" aria-labelledby="title desc">
+<title id="title">8051 planner detects UART and keys sharing P3.0 and P3.1</title><desc id="desc">Diagram based on the linked source and host tests; no device output or board verification is implied.</desc>
+<rect x=".5" y=".5" width="639" height="219" rx="14" fill="#FFFFFF" stroke="#D0DFEA"/>
+<text x="29" y="39" fill="#087F95" font-family="Consolas, ui-monospace, monospace" font-size="23">8051 / RESOURCE PLANNER</text>
+<text x="29" y="82" fill="#102033" font-family="Segoe UI, Arial, sans-serif" font-size="31" font-weight="650">Shared pins, explicit conflict</text>
+<path d="M29 103H611" stroke="#D0DFEA"/>
+<text x="29" y="140" fill="#3A536B" font-family="Consolas, ui-monospace, monospace" font-size="24">UART   P3.0 / P3.1 + T1</text>
+<text x="29" y="172" fill="#3A536B" font-family="Consolas, ui-monospace, monospace" font-size="24">KEYS   P3.0 / P3.1 + P3.2</text>
+<text x="29" y="204" fill="#087F95" font-family="Consolas, ui-monospace, monospace" font-size="23">P3.0 / P3.1 → CONFLICT</text>
 </svg>

@@ -66,13 +66,13 @@ class BrandAssetTests(unittest.TestCase):
                 ElementTree.fromstring(content)
                 self.assertIn("<title", content)
                 self.assertIn("<desc", content)
-                self.assertIn('viewBox="0 0 1200 240"', content)
+                self.assertIn('viewBox="0 0 1200 232"' if "PYTHON" in content else 'viewBox="0 0 1200 176"', content)
                 self.assertNotIn("<image", content)
             self.assertEqual(len(set(contents)), 3)
             self.assertEqual(len(set(mobile)), 3)
             for content in mobile:
                 ElementTree.fromstring(content)
-                self.assertIn('viewBox="0 0 640 306"', content)
+                self.assertIn('viewBox="0 0 640 258"' if "PYTHON" in content else 'viewBox="0 0 640 220"', content)
                 self.assertIn("<title", content)
                 self.assertIn("<desc", content)
 

@@ -1,5 +1,15 @@
 # SIGNALCORE maintenance
 
+V2.1 presents the three selected projects as linked Markdown headings with
+tested outcomes. The Python desktop picture uses real, cropped Windows Qt
+mock-session PNGs in `assets/evidence/`; 900 px and narrower uses independently
+composed SVGs. The README collapses the unchanged published telemetry image
+behind a native disclosure and relies on GitHub's own contribution graph below
+Pinned repositories. The scheduled seven-file asset publication remains active
+even though README no longer displays its snake. See
+[design system](design-system.md) and [production assets](production-assets.md)
+for the preserved implementation and publishing contracts.
+
 The visual system is on the Profile default branch. This document distinguishes the historical checked-in preview from the active production asset branch. It grants no permission to change repository metadata, technical repositories, or the production workflow's permission boundary.
 
 ## Generate and validate artwork

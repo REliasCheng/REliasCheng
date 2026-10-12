@@ -1,8 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="306" viewBox="0 0 640 306" role="img" aria-labelledby="title desc">
-<title id="title">Python Host Application</title><desc id="desc">Original python architecture diagram; implementation scope and verification links follow in README text.</desc>
-<rect width="640" height="306" rx="14" fill="#FFFFFF" stroke="#D0DFEA"/>
-<path d="M30 24H610" stroke="#D0DFEA"/><text x="30" y="47" fill="#087F95" font-family="Consolas, monospace" font-size="19" letter-spacing="2">01 / HOST APPLICATION</text>
-<text x="30" y="97" fill="#102033" font-family="Segoe UI, Arial, sans-serif" font-size="31" font-weight="650">Python Host Application</text>
-<text x="30" y="134" fill="#3A536B" font-family="Segoe UI, Arial, sans-serif" font-size="22">GUI · application core · serial boundary</text>
-<g font-family="Consolas, monospace" font-size="23" fill="#102033"><rect x="31" y="172" width="360" height="105" rx="9" fill="#F5F8FC" stroke="#D0DFEA"/><path d="M31 198H391" stroke="#D0DFEA"/><circle cx="48" cy="185" r="4" fill="#087F95"/><text x="50" y="237">GUI</text><path d="M121 231H165" stroke="#087F95" stroke-width="2"/><rect x="171" y="212" width="91" height="42" rx="5" fill="#FFFFFF" stroke="#087F95"/><text x="188" y="238">CORE</text><path d="M267 231H305" stroke="#087F95" stroke-width="2"/><path d="M310 208V254" stroke="#3A536B" stroke-width="2" stroke-dasharray="5 5"/><text x="321" y="237">SERIAL</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="258" viewBox="0 0 640 258" role="img" aria-labelledby="title desc">
+<title id="title">Mock serial exchange through the Python host application</title><desc id="desc">Diagram based on the linked source and host tests; no device output or board verification is implied.</desc>
+<rect x=".5" y=".5" width="639" height="257" rx="14" fill="#FFFFFF" stroke="#D0DFEA"/>
+<text x="29" y="39" fill="#087F95" font-family="Consolas, ui-monospace, monospace" font-size="23">PYTHON / PYQT5</text>
+<text x="29" y="84" fill="#102033" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="650">A tested mock session</text>
+<path d="M29 105H611" stroke="#D0DFEA"/>
+<text x="29" y="145" fill="#3A536B" font-family="Segoe UI, Arial, sans-serif" font-size="27">GUI  →  Core  →  Mock serial</text>
+<rect x="29" y="165" width="582" height="69" rx="7" fill="#F5F8FC"/>
+<text x="49" y="192" fill="#3A536B" font-family="Consolas, ui-monospace, monospace" font-size="24">TX  status</text>
+<text x="49" y="222" fill="#087F95" font-family="Consolas, ui-monospace, monospace" font-size="24">RX  MOCK ACK: status</text>
 </svg>
