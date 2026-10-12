@@ -91,16 +91,18 @@ Design and study repositories below are not presented as completed firmware or h
 
 ## Public engineering evidence
 
-Five selected host CI workflows are checked against each repository's `main` SHA at the displayed refresh time. `PASS` means current-SHA host CI only; it does not imply target or hardware verification. API failures remain `UNAVAILABLE`. The data is a dated GitHub API snapshot.
-
 <details>
-<summary>View public repository count and the five monitored host CI checks</summary>
+<summary>View dated public metrics and five selected host CI checks</summary>
+
+Statuses are matched to each repository's `main` SHA at the displayed refresh time. `PASS` means host CI only, never target or hardware validation; API failures remain `UNAVAILABLE`.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/telemetry-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/telemetry-light.svg">
   <img src="assets/fallback/telemetry-dark.svg" alt="Public GitHub telemetry with dated repository and current-main host CI status" width="100%">
 </picture>
+
+[Open full-size dark metrics](https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/telemetry-dark.svg) · [Open full-size light metrics](https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/telemetry-light.svg)
 
 </details>
 

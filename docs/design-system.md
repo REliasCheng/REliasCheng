@@ -18,6 +18,11 @@ retired because GitHub's native graph appears immediately below Pinned repos.
 Snake generation, static fallbacks and all seven production assets remain intact.
 The footer retains one maintenance entry and the license boundary.
 
+The expanded 520 px telemetry SVG is small when scaled into a phone's README
+column. The disclosure therefore keeps its status semantics next to the panel
+and links to each original-size production SVG for zoomable inspection. Those
+links share the same strict production-asset allowlist as the displayed image.
+
 The GUI captures were taken from `Python-Host-Application-Lab` on Windows with
 `DemoMockSerialBackend`, using its public `MainWindow`, `connect_serial`,
 `send_command('status')` and `poll_serial` methods. The dark capture uses Qt's
