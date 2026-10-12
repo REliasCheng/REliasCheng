@@ -84,11 +84,11 @@ def featured_card(theme: str, kind: str, mobile: bool = False) -> str:
         ox, oy = (33,143) if small else (726,49)
         cw = 73 if small else 90
         labels = ['GPIO','TIMER','UART','I²C']
-        art = f'<text x="{ox}" y="{oy+22}" fill="{t["muted"]}" font-size="16">MODULE NEEDS</text>'
+        art = f'<text x="{ox}" y="{oy+22}" fill="{t["muted"]}" font-size="{20 if small else 16}">MODULE NEEDS</text>'
         for i,label in enumerate(labels):
             xx=ox+i*cw
-            art += f'<rect x="{xx}" y="{oy+39}" width="{cw-4}" height="58" rx="4" fill="{t["background"]}" stroke="{t["border"]}"/><text x="{xx+7}" y="{oy+73}" font-size="{14 if small else 16}">{label}</text>'
-        art += f'<path d="M{ox} {oy+115}H{ox+4*cw-4}" stroke="{t["signal"]}" stroke-width="2"/><text x="{ox}" y="{oy+142}" fill="{t["signal"]}" font-size="16">CONFLICT CHECK  →  REPORT</text>'
+            art += f'<rect x="{xx}" y="{oy+39}" width="{cw-4}" height="58" rx="4" fill="{t["background"]}" stroke="{t["border"]}"/><text x="{xx+7}" y="{oy+73}" font-size="{19 if small else 16}">{label}</text>'
+        art += f'<path d="M{ox} {oy+115}H{ox+4*cw-4}" stroke="{t["signal"]}" stroke-width="2"/><text x="{ox}" y="{oy+142}" fill="{t["signal"]}" font-size="{20 if small else 16}">CONFLICT CHECK  →  REPORT</text>'
     art_y = ''
     if small and kind == 'embedded-cpp':
         desc_y = 134
@@ -98,7 +98,7 @@ def featured_card(theme: str, kind: str, mobile: bool = False) -> str:
 <path d="M{x} 24H{w-x}" stroke="{t['border']}"/><text x="{x}" y="{top}" fill="{t['signal']}" font-family="Consolas, monospace" font-size="{19 if small else 17}" letter-spacing="2">{kicker}</text>
 <text x="{x}" y="{title_y}" fill="{t['text']}" font-family="Segoe UI, Arial, sans-serif" font-size="{title_size}" font-weight="650">{title}</text>
 <text x="{x}" y="{desc_y}" fill="{t['secondary']}" font-family="Segoe UI, Arial, sans-serif" font-size="{22 if small else 21}">{subtitle}</text>
-<g font-family="Consolas, monospace" font-size="{18 if small else 18}" fill="{t['text']}">{art}</g>
+<g font-family="Consolas, monospace" font-size="{23 if small else 18}" fill="{t['text']}">{art}</g>
 </svg>'''
 
 
