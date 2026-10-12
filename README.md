@@ -1,24 +1,18 @@
 <picture>
+  <source media="(max-width: 600px) and (prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/brand/hero-mobile-static-dark.svg">
+  <source media="(max-width: 600px) and (prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/brand/hero-mobile-static-light.svg">
+  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/brand/hero-mobile-dark.svg">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/brand/hero-mobile-light.svg">
   <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/brand/hero-static.svg">
   <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/brand/hero-static-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/brand/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/brand/hero-light.svg">
-  <img src="assets/brand/hero-static.svg" alt="SIGNALCORE — Elias Cheng, embedded systems and software architecture" width="100%">
+  <img src="assets/brand/hero-static.svg" alt="Elias Cheng — embedded software engineer; testable cores and hardware-aware design" width="100%">
 </picture>
 
-# Elias Cheng
+I build host applications and portable embedded cores with explicit test boundaries. Each linked repository documents its target and hardware limits.
 
-I build testable embedded software, MCU application cores, board-planning tools, and host applications. This profile separates **implemented work** from **architecture studies** and **exploration**; host tests are not MCU or hardware validation.
-
-<picture>
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/brand/terminal-static-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/brand/terminal-static-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/terminal-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/brand/terminal-light.svg">
-  <img src="assets/brand/terminal-static-dark.svg" alt="Terminal introduction: Elias Cheng, original host software, host-side tests, and embedded architecture studies" width="100%">
-</picture>
-
-## Featured engineering projects
+## Selected engineering
 
 Original, inspectable implementations with public host-side evidence. The linked repositories define their own build and hardware limits.
 
@@ -58,29 +52,17 @@ Design decision: reject incomplete command output without committing partial sta
 
 Design decision: model module resource demands explicitly before reporting GPIO, Timer, UART or I2C conflicts. Evidence: [Source](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/practice/src/board_resources.c) · [Tests](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/tests/test_board_resources.c) · [CI](https://github.com/REliasCheng/C51-Board-Lab/actions/workflows/host-tests.yml) · [Design](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/README.md).
 
-## Current MCU work
+## MCU development
 
 Application and communication cores are distinguishable from a complete target firmware release.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/mcu-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/mcu-light.svg">
-  <img src="assets/cards/mcu-dark.svg" alt="Current MCU work" width="100%">
-</picture>
 
 - [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning) — C89 UART RX ring buffer and 8051 adapter boundary. Host-tested core; no Keil target or board evidence.
 - [STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning) — RTC, temperature and configuration state behind platform callbacks. Host tests; C51 target and hardware not verified.
 - [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU) — CT107D resource, timing and control policies. Host-tested policies; no complete target or board evidence.
 
-## Architecture labs
+## Architecture and research
 
 These repositories communicate system design and technical boundaries. They are **not** presented as publicly implemented or hardware-verified systems.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/architecture-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/architecture-light.svg">
-  <img src="assets/cards/architecture-dark.svg" alt="Architecture labs" width="100%">
-</picture>
 
 - [ARM Cortex-M](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab) — startup, interrupts, clocks and driver layering.
 - [FreeRTOS](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) — scheduling, IPC and ISR-to-task design.
@@ -88,25 +70,13 @@ These repositories communicate system design and technical boundaries. They are 
 - [Wireless / IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) — native Wi-Fi → lwIP → TCP → plain MQTT model; no TLS or live sensor evidence.
 - [Firmware Update / OTA](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) — bootloader, UART/YMODEM, MQTT and CRC boundary model; no A/B or rollback claim.
 
-## Exploration and foundations
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/exploration-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/exploration-light.svg">
-  <img src="assets/cards/exploration-dark.svg" alt="Exploration and foundations" width="100%">
-</picture>
+### Exploration and foundations
 
 - [Embodied Robotics Arm](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab) — LeRobot/robotic-arm integration study involving third-party code; no functional or hardware run claimed.
 - [ARM Embedded Linux](https://github.com/REliasCheng/ARM-Linux-Embedded-Lab) — RK3566 boot, Device Tree and driver-interface research; no public kernel build or board runtime claimed.
 - [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations) — electronics, digital logic, CPU, MCU and PCB knowledge map; a documentation project, not runnable firmware.
 
-## Technology path
-
-Electronics and digital logic → C/C++ software and host tests → 8051/STC cores → Cortex-M, RTOS and GUI architecture → Wireless, firmware update, robotics and Embedded Linux exploration.
-
-This is a learning and design progression, **not a claim that every layer is implemented or validated**. Follow each repository's README for its exact evidence level.
-
-## Public telemetry
+## Public engineering evidence
 
 The panel below is a **dated snapshot** from public GitHub API data, not a live service. Its host-CI status was bound to each repository's `main` SHA at the displayed refresh time; a later commit can make that evidence stale. `PASS` does not mean target build or hardware validation; an unavailable API result remains `UNAVAILABLE`.
 
@@ -130,10 +100,8 @@ This animation was generated from the public REliasCheng contribution graph. Con
 
 Prefer a still image? [Dark contribution graph](https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-dark.svg) · [Light contribution graph](https://raw.githubusercontent.com/REliasCheng/REliasCheng/signalcore-assets/contribution-static-light.svg). Both are derived from the same public contribution data.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/footer-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/brand/footer-light.svg">
-  <img src="assets/brand/footer-dark.svg" alt="SIGNALCORE footer" width="100%">
-</picture>
+---
 
-The [design system](docs/design-system.md), [preview notes](docs/preview.md), and [maintenance guide](docs/maintenance.md) explain the visual components and how their evidence is kept accurate. Original profile content follows this repository's [LICENSE](LICENSE); third-party repositories and tools retain their own terms. No blanket license claim is made over linked projects, vendor material or dependencies.
+**SIGNALCORE** · [Design system](docs/design-system.md) · [Maintenance](docs/maintenance.md) · [Production assets](docs/production-assets.md)
+
+Original profile content follows this repository's [LICENSE](LICENSE). Linked projects, vendor material and dependencies retain their own terms.

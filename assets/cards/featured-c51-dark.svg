@@ -1,18 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="190" viewBox="0 0 1200 190" role="img" aria-labelledby="title desc">
-  <title id="title">Resource mapping and conflicts</title><desc id="desc">Original abstract diagram for 8051 / BOARD RESOURCE PLANNER. HOST TESTED / NO BOARD CLAIM.</desc>
-  <rect width="1200" height="190" rx="13" fill="#142235" stroke="#25394C" stroke-width="2"/>
-  <rect width="7" height="190" rx="3" fill="#61DCE6"/>
-  <text x="30" y="40" fill="#61DCE6" font-family="Consolas, ui-monospace, monospace" font-size="15" letter-spacing="2">8051 / BOARD RESOURCE PLANNER</text>
-  <text x="30" y="84" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="650">Resource mapping and conflicts</text>
-  <text x="30" y="119" fill="#A9BDCD" font-family="Consolas, ui-monospace, monospace" font-size="17">module needs  →  GPIO / Timer / UART / I2C</text>
-  <path d="M30 143H765" stroke="#25394C"/>
-  <text x="30" y="169" fill="#708CA2" font-family="Consolas, ui-monospace, monospace" font-size="14" letter-spacing="1">HOST TESTED / NO BOARD CLAIM</text>
-  <g font-family="Consolas, ui-monospace, monospace"><rect x="822" y="58" width="115" height="83" rx="7" fill="none" stroke="#60A5FA" stroke-width="2"/>
-  <text x="840" y="105" fill="#60A5FA" font-size="14">MODULE</text>
-  <path d="M937 99H990" stroke="#61DCE6" stroke-width="3"/>
-  <rect x="990" y="51" width="149" height="96" rx="7" fill="none" stroke="#61DCE6" stroke-width="2"/>
-  <path d="M990 82H1139M990 114H1139M1064 51V147" stroke="#25394C" stroke-width="2"/>
-  <text x="1004" y="73" fill="#61DCE6" font-size="13">GPIO</text><text x="1075" y="73" fill="#61DCE6" font-size="13">TIMER</text>
-  <text x="1004" y="104" fill="#61DCE6" font-size="13">UART</text><text x="1075" y="104" fill="#61DCE6" font-size="13">I2C</text>
-  <text x="1004" y="136" fill="#F2BD70" font-size="13">CONFLICT?</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="240" viewBox="0 0 1200 240" role="img" aria-labelledby="title desc">
+<title id="title">C51 Board Resource Planner</title><desc id="desc">Original c51 architecture diagram; implementation scope and verification links follow in README text.</desc>
+<rect width="1200" height="240" rx="14" fill="#142235" stroke="#25394C"/>
+<path d="M38 24H1162" stroke="#25394C"/><text x="38" y="51" fill="#61DCE6" font-family="Consolas, monospace" font-size="17" letter-spacing="2">03 / RESOURCE PLANNER</text>
+<text x="38" y="109" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="650">C51 Board Resource Planner</text>
+<text x="38" y="151" fill="#A9BDCD" font-family="Segoe UI, Arial, sans-serif" font-size="21">GPIO · Timer · UART · I²C</text>
+<g font-family="Consolas, monospace" font-size="18" fill="#F0F6FF"><text x="726" y="71" fill="#708CA2" font-size="16">MODULE NEEDS</text><rect x="726" y="88" width="86" height="58" rx="4" fill="#0B111B" stroke="#25394C"/><text x="733" y="122" font-size="16">GPIO</text><rect x="816" y="88" width="86" height="58" rx="4" fill="#0B111B" stroke="#25394C"/><text x="823" y="122" font-size="16">TIMER</text><rect x="906" y="88" width="86" height="58" rx="4" fill="#0B111B" stroke="#25394C"/><text x="913" y="122" font-size="16">UART</text><rect x="996" y="88" width="86" height="58" rx="4" fill="#0B111B" stroke="#25394C"/><text x="1003" y="122" font-size="16">I²C</text><path d="M726 164H1082" stroke="#61DCE6" stroke-width="2"/><text x="726" y="191" fill="#61DCE6" font-size="16">CONFLICT CHECK  →  REPORT</text></g>
 </svg>

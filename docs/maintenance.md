@@ -4,7 +4,7 @@ The visual system is on the Profile default branch. This document distinguishes 
 
 ## Generate and validate artwork
 
-From the Profile repository root, run `python scripts/generate_brand_assets.py`, `python -m unittest discover -s tests -v`, and `python scripts/validate_profile.py`. The generator writes the original brand/card/fallback SVGs deterministically from `assets/brand/tokens.json`; inspect the resulting diff and render both color modes at desktop and narrow widths. Modify palette values in the token file, regenerate, and recheck contrast. Category labels and membership live in `data/projects.json`; update the README's text and links together with any catalog change, then rerun validation.
+From the Profile repository root, run `python scripts/generate_brand_assets.py`, `python -m unittest discover -s tests -v`, and `python scripts/validate_profile.py`. The generator writes brand/card/fallback SVGs deterministically from `assets/brand/tokens.json`; inspect the resulting diff and render both color modes at desktop and 320, 375, 390, 430 and 768 px. V2's desktop and mobile hero assets are separate compositions. The V1 terminal and category SVGs remain historical generated files but are not used by README. Modify palette values in the token file, regenerate, and recheck contrast. Category labels and membership live in `data/projects.json`; update the README's text and links together with any catalog change, then rerun validation.
 
 ## Metrics
 

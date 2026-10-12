@@ -1,15 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="190" viewBox="0 0 1200 190" role="img" aria-labelledby="title desc">
-  <title id="title">Embedded software structure</title><desc id="desc">Original abstract diagram for C11 / C++11 / PORTABLE CORE. HOST TESTED / NO MCU CLAIM.</desc>
-  <rect width="1200" height="190" rx="13" fill="#FFFFFF" stroke="#D0DFEA" stroke-width="2"/>
-  <rect width="7" height="190" rx="3" fill="#087F95"/>
-  <text x="30" y="40" fill="#087F95" font-family="Consolas, ui-monospace, monospace" font-size="15" letter-spacing="2">C11 / C++11 / PORTABLE CORE</text>
-  <text x="30" y="84" fill="#102033" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="650">Embedded software structure</text>
-  <text x="30" y="119" fill="#3A536B" font-family="Consolas, ui-monospace, monospace" font-size="17">commands  →  state  →  testable modules</text>
-  <path d="M30 143H765" stroke="#D0DFEA"/>
-  <text x="30" y="169" fill="#526B80" font-family="Consolas, ui-monospace, monospace" font-size="14" letter-spacing="1">HOST TESTED / NO MCU CLAIM</text>
-  <g font-family="Consolas, ui-monospace, monospace"><path d="M810 100H855M938 100H970M1055 100H1090" stroke="#087F95" stroke-width="3"/>
-  <rect x="855" y="63" width="83" height="75" rx="7" fill="none" stroke="#2563EB" stroke-width="2"/>
-  <rect x="970" y="63" width="85" height="75" rx="7" fill="none" stroke="#087F95" stroke-width="2"/>
-  <rect x="1090" y="63" width="72" height="75" rx="7" fill="none" stroke="#2563EB" stroke-width="2"/>
-  <text x="867" y="105" fill="#2563EB" font-size="14">CMD</text><text x="983" y="105" fill="#087F95" font-size="14">TASK</text><text x="1106" y="105" fill="#2563EB" font-size="14">TEST</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="240" viewBox="0 0 1200 240" role="img" aria-labelledby="title desc">
+<title id="title">Embedded C/C++ Core</title><desc id="desc">Original embedded-cpp architecture diagram; implementation scope and verification links follow in README text.</desc>
+<rect width="1200" height="240" rx="14" fill="#FFFFFF" stroke="#D0DFEA"/>
+<path d="M38 24H1162" stroke="#D0DFEA"/><text x="38" y="51" fill="#087F95" font-family="Consolas, monospace" font-size="17" letter-spacing="2">02 / PORTABLE CORE</text>
+<text x="38" y="109" fill="#102033" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="650">Embedded C/C++ Core</text>
+<text x="38" y="151" fill="#3A536B" font-family="Segoe UI, Arial, sans-serif" font-size="21">Commands · ring buffer · state</text>
+<g font-family="Consolas, monospace" font-size="18" fill="#102033"><rect x="731" y="91" width="103" height="55" rx="5" fill="none" stroke="#D0DFEA" stroke-width="2"/><text x="745" y="125">CMD</text><rect x="849" y="91" width="103" height="55" rx="5" fill="none" stroke="#087F95" stroke-width="2"/><text x="863" y="125">BUFFER</text><rect x="967" y="91" width="103" height="55" rx="5" fill="none" stroke="#D0DFEA" stroke-width="2"/><text x="981" y="125">STATE</text><path d="M834 118H849M952 118H967" stroke="#087F95" stroke-width="2"/><path d="M900 91V64H1018V91" fill="none" stroke="#3A536B" stroke-width="2"/><text x="983" y="57" fill="#526B80" font-size="15">NO PARTIAL COMMIT</text></g>
 </svg>

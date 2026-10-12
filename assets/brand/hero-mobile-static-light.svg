@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="390" viewBox="0 0 640 390" role="img" aria-labelledby="title desc">
+<title id="title">Elias Cheng — embedded software engineer</title><desc id="desc">SIGNALCORE mobile identity with a single signal and controller symbol.</desc>
+<rect width="640" height="390" rx="20" fill="#F5F8FC"/>
+<path d="M32 70H608" stroke="#D0DFEA"/><path d="M32 330H608" stroke="#D0DFEA"/>
+<text x="32" y="48" fill="#087F95" font-family="Consolas, monospace" font-size="22" letter-spacing="3">SIGNALCORE / 02</text>
+<text x="32" y="151" fill="#102033" font-family="Segoe UI, Arial, sans-serif" font-size="64" font-weight="700">Elias Cheng</text>
+<text x="34" y="201" fill="#3A536B" font-family="Segoe UI, Arial, sans-serif" font-size="29">Embedded software engineer</text>
+<text x="34" y="246" fill="#3A536B" font-family="Segoe UI, Arial, sans-serif" font-size="25">Testable cores · hardware-aware design</text>
+<path d="M35 292H170V275H212V306H254V286H337" fill="none" stroke="#D0DFEA" stroke-width="3"/>
+<path d="M35 292H170V275H212V306H254V286H337" fill="none" stroke="#087F95" stroke-width="3" stroke-dasharray="54 66"/>
+<g transform="translate(506 263)" fill="none" stroke="#087F95" stroke-width="3"><rect x="0" y="0" width="72" height="58" rx="6"/><path d="M18 -12V0M36 -12V0M54 -12V0M18 58V70M36 58V70M54 58V70M-12 18H0M-12 39H0M72 18H84M72 39H84"/></g>
+<text x="34" y="363" fill="#526B80" font-family="Consolas, monospace" font-size="19">C / C++ / Python</text>
+</svg>
