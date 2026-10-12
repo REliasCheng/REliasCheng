@@ -153,11 +153,8 @@ def validate() -> list[str]:
         errors.append("Picture elements need text alternatives")
     if "<details>" in readme and PRODUCTION_ASSET_ROOT + "snake-dark.svg" in readme:
         errors.append("Contribution graphic must be visible by default")
-    if "assets/brand/terminal-static-dark.svg" not in readme:
-        errors.append("Terminal needs a meaningful static image fallback")
     for prefix, static_names, animated_name in (
         ("hero", ("hero-static.svg", "hero-static-light.svg"), "hero-dark.svg"),
-        ("terminal", ("terminal-static-dark.svg", "terminal-static-light.svg"), "terminal-dark.svg"),
         ("contribution", ("contribution-static-dark.svg", "contribution-static-light.svg"), "snake-dark.svg"),
     ):
         for name in static_names:
@@ -165,6 +162,17 @@ def validate() -> list[str]:
             marker = f'srcset="{asset}"'
             if marker not in readme or animated_name not in readme or readme.index(marker) > readme.index(animated_name):
                 errors.append(f"Reduced-motion static source absent or after animated {prefix}: {name}")
+    if "assets/brand/terminal-dark.svg" in readme or "<h1" in readme or "# Elias Cheng" in readme:
+        errors.append("V2 must not repeat the hero identity with a terminal or large heading")
+    for theme in ("dark", "light"):
+        mobile_static = f"assets/brand/hero-mobile-static-{theme}.svg"
+        mobile_animated = f"assets/brand/hero-mobile-{theme}.svg"
+        desktop = f"assets/brand/hero-{theme}.svg"
+        if mobile_static not in readme or mobile_animated not in readme or readme.index(mobile_static) > readme.index(mobile_animated) or readme.index(mobile_animated) > readme.index(desktop):
+            errors.append(f"Mobile hero missing or incorrectly ordered: {theme}")
+    for removed_banner in ("mcu", "architecture", "exploration"):
+        if f"assets/cards/{removed_banner}-dark.svg" in readme:
+            errors.append(f"Redundant {removed_banner} banner remains in README")
     for kind in ("python", "embedded-cpp", "c51"):
         for theme in ("dark", "light"):
             if f"assets/cards/featured-{kind}-{theme}.svg" not in readme:

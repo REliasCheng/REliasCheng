@@ -1,12 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="540" height="220" viewBox="0 0 540 220" role="img" aria-labelledby="title desc">
-  <title id="title">Host application architecture</title><desc id="desc">Compact original diagram: GUI → core → serial boundary. HOST TESTED / NO DEVICE CLAIM.</desc>
-  <rect width="540" height="220" rx="12" fill="#142235" stroke="#25394C" stroke-width="2"/>
-  <rect width="6" height="220" rx="3" fill="#61DCE6"/>
-  <g font-family="Consolas, ui-monospace, monospace">
-    <text x="24" y="35" fill="#61DCE6" font-size="16" letter-spacing="1">PYTHON / HOST APPLICATION</text>
-    <text x="24" y="108" fill="#A9BDCD" font-size="18">GUI → core → serial boundary</text>
-    <rect x="24" y="133" width="143" height="45" rx="6" fill="none" stroke="#60A5FA" stroke-width="2"/><text x="39" y="161" fill="#F0F6FF" font-size="16">GUI</text><path d="M167 155H193" stroke="#61DCE6" stroke-width="2"/><rect x="193" y="133" width="143" height="45" rx="6" fill="none" stroke="#61DCE6" stroke-width="2"/><text x="208" y="161" fill="#F0F6FF" font-size="16">CORE</text><path d="M336 155H362" stroke="#61DCE6" stroke-width="2"/><rect x="362" y="133" width="143" height="45" rx="6" fill="none" stroke="#60A5FA" stroke-width="2"/><text x="377" y="161" fill="#F0F6FF" font-size="16">SERIAL</text>
-    <text x="24" y="204" fill="#708CA2" font-size="17">HOST TESTED / NO DEVICE CLAIM</text>
-  </g>
-  <text x="24" y="77" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="650">Host application architecture</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="306" viewBox="0 0 640 306" role="img" aria-labelledby="title desc">
+<title id="title">Python Host Application</title><desc id="desc">Original python architecture diagram; implementation scope and verification links follow in README text.</desc>
+<rect width="640" height="306" rx="14" fill="#142235" stroke="#25394C"/>
+<path d="M30 24H610" stroke="#25394C"/><text x="30" y="47" fill="#61DCE6" font-family="Consolas, monospace" font-size="19" letter-spacing="2">01 / HOST APPLICATION</text>
+<text x="30" y="97" fill="#F0F6FF" font-family="Segoe UI, Arial, sans-serif" font-size="31" font-weight="650">Python Host Application</text>
+<text x="30" y="134" fill="#A9BDCD" font-family="Segoe UI, Arial, sans-serif" font-size="22">GUI · application core · serial boundary</text>
+<g font-family="Consolas, monospace" font-size="18" fill="#F0F6FF"><rect x="31" y="172" width="360" height="105" rx="9" fill="#0B111B" stroke="#25394C"/><path d="M31 198H391" stroke="#25394C"/><circle cx="48" cy="185" r="4" fill="#61DCE6"/><text x="50" y="237">GUI</text><path d="M121 231H165" stroke="#61DCE6" stroke-width="2"/><rect x="171" y="212" width="91" height="42" rx="5" fill="#142235" stroke="#61DCE6"/><text x="188" y="238">CORE</text><path d="M267 231H305" stroke="#61DCE6" stroke-width="2"/><path d="M310 208V254" stroke="#A9BDCD" stroke-width="2" stroke-dasharray="5 5"/><text x="321" y="237">SERIAL</text></g>
 </svg>

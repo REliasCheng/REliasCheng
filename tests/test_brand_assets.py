@@ -11,7 +11,7 @@ from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from generate_brand_assets import featured_card, featured_mobile_card, terminal  # noqa: E402
+from generate_brand_assets import featured_card, featured_mobile_card, hero  # noqa: E402
 from prepare_static_contribution import prepare  # noqa: E402
 
 
@@ -45,19 +45,18 @@ class BrandAssetTests(unittest.TestCase):
             palettes.append(theme_palettes)
         self.assertEqual(palettes[0], palettes[1])
 
-    def test_terminal_has_staged_typing_and_static_fallback(self):
+    def test_hero_has_independent_mobile_layout_and_static_fallback(self):
         for theme in ("dark", "light"):
-            animated = terminal(theme)
-            static = terminal(theme, animated=False)
-            ElementTree.fromstring(animated)
-            ElementTree.fromstring(static)
-            self.assertEqual(animated.count('class="typed"'), 8)
-            self.assertIn("@media (prefers-reduced-motion: reduce)", animated)
-            self.assertIn("animation-fill-mode: both", animated)
-            self.assertNotIn('class="typed"', static)
-            self.assertNotIn("<style>", static)
-            self.assertIn("Original host software", static)
-            self.assertIn("Host-side tests", static)
+            for mobile in (False, True):
+                animated = hero(theme, mobile=mobile)
+                static = hero(theme, animated=False, mobile=mobile)
+                ElementTree.fromstring(animated)
+                ElementTree.fromstring(static)
+                self.assertIn("@media (prefers-reduced-motion:reduce)", animated)
+                self.assertNotIn("<style>", static)
+                self.assertIn("Elias Cheng", static)
+                self.assertIn('viewBox="0 0 640 390"' if mobile else 'viewBox="0 0 1200 330"', static)
+            self.assertNotEqual(hero(theme), hero(theme, mobile=True))
 
     def test_distinct_featured_cards_in_both_themes(self):
         for theme in ("dark", "light"):
@@ -67,13 +66,13 @@ class BrandAssetTests(unittest.TestCase):
                 ElementTree.fromstring(content)
                 self.assertIn("<title", content)
                 self.assertIn("<desc", content)
-                self.assertIn('viewBox="0 0 1200 190"', content)
+                self.assertIn('viewBox="0 0 1200 240"', content)
                 self.assertNotIn("<image", content)
             self.assertEqual(len(set(contents)), 3)
             self.assertEqual(len(set(mobile)), 3)
             for content in mobile:
                 ElementTree.fromstring(content)
-                self.assertIn('viewBox="0 0 540 220"', content)
+                self.assertIn('viewBox="0 0 640 306"', content)
                 self.assertIn("<title", content)
                 self.assertIn("<desc", content)
 

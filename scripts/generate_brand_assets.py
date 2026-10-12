@@ -6,6 +6,9 @@ import json
 from pathlib import Path
 from xml.etree import ElementTree
 
+from v2_brand import hero, featured_card, featured_mobile_card, footer
+
+
 
 ROOT = Path(__file__).resolve().parents[1]
 TOKENS = json.loads((ROOT / "assets/brand/tokens.json").read_text(encoding="utf-8"))
@@ -18,57 +21,6 @@ def save(path: Path, source: str) -> None:
     ElementTree.fromstring(source)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(source.rstrip() + "\n", encoding="utf-8")
-
-
-def hero(theme: str, animated: bool = True) -> str:
-    t = TOKENS[theme]
-    dark = theme == "dark"
-    glow = "#164C60" if dark else "#D7EDF3"
-    grid = "#4D7790" if dark else "#8BB4C7"
-    motion = """<style>
-      .pulse { animation: route 7s linear infinite; }
-      .sweep { animation: sweep 7s ease-in-out infinite; transform-origin: 1260px 254px; }
-      @keyframes route { to { stroke-dashoffset: -180; } }
-      @keyframes sweep { 50% { opacity: .92; } }
-      @media (prefers-reduced-motion: reduce) { .pulse, .sweep { animation: none; } }
-    </style>""" if animated else ""
-    pulse = 'class="pulse"' if animated else ""
-    sweep = 'class="sweep"' if animated else ""
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="480" viewBox="0 0 1600 480" role="img" aria-labelledby="title desc">
-  <title id="title">SIGNALCORE — Elias Cheng</title>
-  <desc id="desc">Original circuit-inspired banner with an abstract controller, routed signals and a waveform. Decorative motion is not live hardware data.</desc>
-  <defs>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="{grid}" stroke-opacity=".13"/></pattern>
-    <linearGradient id="trace" x1="0" x2="1"><stop stop-color="{t['signal']}" stop-opacity="0"/><stop offset=".55" stop-color="{t['signal']}"/><stop offset="1" stop-color="{t['signal']}" stop-opacity="0"/></linearGradient>
-{motion}
-  </defs>
-  <rect width="1600" height="480" rx="20" fill="{t['background']}"/>
-  <rect width="1600" height="480" rx="20" fill="url(#grid)"/>
-  <path d="M0 77H104L146 119H494M0 404H146L202 348H512M1600 72H1507L1457 122H1408M1600 409H1517L1467 359H1413" fill="none" stroke="{t['border']}" stroke-width="2"/>
-  <path {pulse} d="M0 97H96L145 146H529M1600 387H1512L1460 335H1400" fill="none" stroke="url(#trace)" stroke-width="3" stroke-dasharray="30 24"/>
-  <circle cx="146" cy="119" r="5" fill="{t['signal']}"/><circle cx="1460" cy="335" r="5" fill="{t['signal']}"/>
-
-  <text x="112" y="91" fill="{t['signal']}" font-family="Consolas, ui-monospace, monospace" font-size="17" letter-spacing="4">SIGNALCORE  /  EMBEDDED ENGINEERING INTERFACE</text>
-  <rect x="112" y="112" width="64" height="3" fill="{t['signal']}"/>
-  <text x="108" y="230" fill="{t['text']}" font-family="Segoe UI, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="2">ELIAS CHENG</text>
-  <text x="112" y="278" fill="{t['secondary']}" font-family="Segoe UI, Arial, sans-serif" font-size="23">Embedded systems · low-level software · hardware-aware design</text>
-  <path d="M112 323H610" stroke="{t['border']}" stroke-width="2"/>
-  <path d="M112 361H187V339H262V382H337V350H412V361H517" fill="none" stroke="{t['signal']}" stroke-width="3"/>
-  <text x="544" y="367" fill="{t['muted']}" font-family="Consolas, ui-monospace, monospace" font-size="15" letter-spacing="2">SIGNAL / 01</text>
-  <text x="112" y="435" fill="{t['muted']}" font-family="Consolas, ui-monospace, monospace" font-size="13" letter-spacing="2">PROFILE INTERFACE  ·  DESIGN VISUALIZATION, NOT DEVICE TELEMETRY</text>
-
-  <g transform="translate(1036 69)">
-    <rect x="-18" y="-18" width="440" height="374" rx="22" fill="{t['panel']}" stroke="{t['border']}" stroke-width="2"/>
-    <path d="M0 42H50L82 74M0 292H48L83 258M405 42H355L323 74M405 292H357L322 258" fill="none" stroke="{t['signal']}" stroke-opacity=".38" stroke-width="2"/>
-    <rect x="87" y="63" width="232" height="214" rx="16" fill="{glow}" stroke="{t['signal']}" stroke-width="2"/>
-    <rect x="112" y="88" width="182" height="164" rx="9" fill="{t['background']}" stroke="{t['border']}"/>
-    <path d="M133 143H158V117H185V170H212V132H242V151H273" fill="none" stroke="{t['signal']}" stroke-width="3"/>
-    <path {sweep} d="M133 183H272" fill="none" stroke="url(#trace)" stroke-width="5"/>
-    <text x="134" y="218" fill="{t['secondary']}" font-family="Consolas, ui-monospace, monospace" font-size="14" letter-spacing="2">CORE / SIGNAL</text>
-    <g stroke="{t['muted']}" stroke-width="2"><path d="M62 94H87M62 132H87M62 170H87M62 208H87M62 246H87M319 94H344M319 132H344M319 170H344M319 208H344M319 246H344"/></g>
-    <text x="17" y="324" fill="{t['muted']}" font-family="Consolas, ui-monospace, monospace" font-size="12" letter-spacing="2">INPUT  →  CORE  →  PLATFORM  →  OUTPUT</text>
-  </g>
-</svg>'''
 
 
 def terminal(theme: str, animated: bool = True) -> str:
@@ -142,88 +94,6 @@ def category_card(theme: str, label: str, code: str, subtitle: str, accent: str)
 </svg>'''
 
 
-def featured_card(theme: str, kind: str) -> str:
-    """Three original diagrams of existing work, not simulated runtime screenshots."""
-    t = TOKENS[theme]
-    cases = {
-        "python": (
-            "PYTHON / HOST APPLICATION", "Host application architecture",
-            "GUI  →  application core  →  serial boundary", "HOST TESTED / NO DEVICE CLAIM",
-            f'''<rect x="823" y="42" width="126" height="114" rx="9" fill="none" stroke="{t['blue']}" stroke-width="2"/>
-  <path d="M823 72H949M842 93H916M842 112H902M842 132H923" stroke="{t['blue']}" stroke-width="2"/>
-  <path d="M949 98H988M1060 98H1095" stroke="{t['signal']}" stroke-width="2"/>
-  <rect x="988" y="68" width="72" height="60" rx="6" fill="none" stroke="{t['signal']}" stroke-width="2"/>
-  <text x="1001" y="104" fill="{t['signal']}" font-size="13">CORE</text>
-  <path d="M1095 75V121M1104 75V121" stroke="{t['muted']}" stroke-width="3"/>''',
-        ),
-        "embedded-cpp": (
-            "C11 / C++11 / PORTABLE CORE", "Embedded software structure",
-            "commands  →  state  →  testable modules", "HOST TESTED / NO MCU CLAIM",
-            f'''<path d="M810 100H855M938 100H970M1055 100H1090" stroke="{t['signal']}" stroke-width="3"/>
-  <rect x="855" y="63" width="83" height="75" rx="7" fill="none" stroke="{t['blue']}" stroke-width="2"/>
-  <rect x="970" y="63" width="85" height="75" rx="7" fill="none" stroke="{t['signal']}" stroke-width="2"/>
-  <rect x="1090" y="63" width="72" height="75" rx="7" fill="none" stroke="{t['blue']}" stroke-width="2"/>
-  <text x="867" y="105" fill="{t['blue']}" font-size="14">CMD</text><text x="983" y="105" fill="{t['signal']}" font-size="14">TASK</text><text x="1106" y="105" fill="{t['blue']}" font-size="14">TEST</text>''',
-        ),
-        "c51": (
-            "8051 / BOARD RESOURCE PLANNER", "Resource mapping and conflicts",
-            "module needs  →  GPIO / Timer / UART / I2C", "HOST TESTED / NO BOARD CLAIM",
-            f'''<rect x="822" y="58" width="115" height="83" rx="7" fill="none" stroke="{t['blue']}" stroke-width="2"/>
-  <text x="840" y="105" fill="{t['blue']}" font-size="14">MODULE</text>
-  <path d="M937 99H990" stroke="{t['signal']}" stroke-width="3"/>
-  <rect x="990" y="51" width="149" height="96" rx="7" fill="none" stroke="{t['signal']}" stroke-width="2"/>
-  <path d="M990 82H1139M990 114H1139M1064 51V147" stroke="{t['border']}" stroke-width="2"/>
-  <text x="1004" y="73" fill="{t['signal']}" font-size="13">GPIO</text><text x="1075" y="73" fill="{t['signal']}" font-size="13">TIMER</text>
-  <text x="1004" y="104" fill="{t['signal']}" font-size="13">UART</text><text x="1075" y="104" fill="{t['signal']}" font-size="13">I2C</text>
-  <text x="1004" y="136" fill="{t['warning']}" font-size="13">CONFLICT?</text>''',
-        ),
-    }
-    code, title, flow, boundary, diagram = cases[kind]
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="190" viewBox="0 0 1200 190" role="img" aria-labelledby="title desc">
-  <title id="title">{title}</title><desc id="desc">Original abstract diagram for {code}. {boundary}.</desc>
-  <rect width="1200" height="190" rx="13" fill="{t['panel']}" stroke="{t['border']}" stroke-width="2"/>
-  <rect width="7" height="190" rx="3" fill="{t['signal']}"/>
-  <text x="30" y="40" fill="{t['signal']}" font-family="Consolas, ui-monospace, monospace" font-size="15" letter-spacing="2">{code}</text>
-  <text x="30" y="84" fill="{t['text']}" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="650">{title}</text>
-  <text x="30" y="119" fill="{t['secondary']}" font-family="Consolas, ui-monospace, monospace" font-size="17">{flow}</text>
-  <path d="M30 143H765" stroke="{t['border']}"/>
-  <text x="30" y="169" fill="{t['muted']}" font-family="Consolas, ui-monospace, monospace" font-size="14" letter-spacing="1">{boundary}</text>
-  <g font-family="Consolas, ui-monospace, monospace">{diagram}</g>
-</svg>'''
-
-
-def featured_mobile_card(theme: str, kind: str) -> str:
-    """Compact layout keeps core labels legible inside GitHub's narrow column."""
-    t = TOKENS[theme]
-    cases = {
-        "python": ("PYTHON / HOST APPLICATION", "Host application architecture", "GUI → core → serial boundary", "HOST TESTED / NO DEVICE CLAIM", ("GUI", "CORE", "SERIAL")),
-        "embedded-cpp": ("C11 / C++11 / PORTABLE CORE", "Embedded software structure", "commands → state → modules", "HOST TESTED / NO MCU CLAIM", ("CMD", "TASK", "TEST")),
-        "c51": ("8051 / BOARD RESOURCE PLANNER", "Resource mapping and conflicts", "module → GPIO / Timer / UART / I2C", "HOST TESTED / NO BOARD CLAIM", ("MODULE", "MAP", "CHECK")),
-    }
-    code, title, flow, boundary, nodes = cases[kind]
-    boxes = []
-    for index, label in enumerate(nodes):
-        x = 24 + index * 169
-        boxes.append(
-            f'<rect x="{x}" y="133" width="143" height="45" rx="6" fill="none" stroke="{t["signal"] if index == 1 else t["blue"]}" stroke-width="2"/>'
-            f'<text x="{x + 15}" y="161" fill="{t["text"]}" font-size="16">{label}</text>'
-        )
-        if index < 2:
-            boxes.append(f'<path d="M{x + 143} 155H{x + 169}" stroke="{t["signal"]}" stroke-width="2"/>')
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="540" height="220" viewBox="0 0 540 220" role="img" aria-labelledby="title desc">
-  <title id="title">{title}</title><desc id="desc">Compact original diagram: {flow}. {boundary}.</desc>
-  <rect width="540" height="220" rx="12" fill="{t['panel']}" stroke="{t['border']}" stroke-width="2"/>
-  <rect width="6" height="220" rx="3" fill="{t['signal']}"/>
-  <g font-family="Consolas, ui-monospace, monospace">
-    <text x="24" y="35" fill="{t['signal']}" font-size="16" letter-spacing="1">{code}</text>
-    <text x="24" y="108" fill="{t['secondary']}" font-size="18">{flow}</text>
-    {''.join(boxes)}
-    <text x="24" y="204" fill="{t['muted']}" font-size="17">{boundary}</text>
-  </g>
-  <text x="24" y="77" fill="{t['text']}" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="650">{title}</text>
-</svg>'''
-
-
 def fallback(theme: str, kind: str) -> str:
     t = TOKENS[theme]
     caption = "Contribution animation requires a verified generated image" if kind == "contribution" else "Public metrics are temporarily unavailable"
@@ -236,19 +106,12 @@ def fallback(theme: str, kind: str) -> str:
 </svg>'''
 
 
-def footer(theme: str) -> str:
-    t = TOKENS[theme]
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="105" viewBox="0 0 1200 105" role="img" aria-label="SIGNALCORE footer terminal">
-  <rect width="1200" height="105" rx="12" fill="{t['panel']}" stroke="{t['border']}" stroke-width="2"/>
-  <text x="30" y="42" fill="{t['signal']}" font-family="Consolas, ui-monospace, monospace" font-size="17">signalcore@elias:~$ status</text>
-  <text x="30" y="73" fill="{t['secondary']}" font-family="Consolas, ui-monospace, monospace" font-size="16">PORTFOLIO  ACTIVE    ·    FOCUS  EMBEDDED ENGINEERING    ·    SOURCE  github.com/REliasCheng</text>
-</svg>'''
-
-
 def main() -> None:
     for theme in ("dark", "light"):
         t = TOKENS[theme]
         save(BRAND / f"hero-{theme}.svg", hero(theme))
+        save(BRAND / f"hero-mobile-{theme}.svg", hero(theme, mobile=True))
+        save(BRAND / f"hero-mobile-static-{theme}.svg", hero(theme, animated=False, mobile=True))
         save(BRAND / f"terminal-{theme}.svg", terminal(theme))
         save(BRAND / f"terminal-static-{theme}.svg", terminal(theme, animated=False))
         save(BRAND / f"divider-{theme}.svg", divider(theme))
@@ -268,7 +131,7 @@ def main() -> None:
         save(FALLBACK / f"telemetry-{theme}.svg", fallback(theme, "telemetry"))
     save(BRAND / "hero-static.svg", hero("dark", animated=False))
     save(BRAND / "hero-static-light.svg", hero("light", animated=False))
-    print("Generated 36 original SVG assets from assets/brand/tokens.json")
+    print("Generated 40 original SVG assets from assets/brand/tokens.json")
 
 
 if __name__ == "__main__":

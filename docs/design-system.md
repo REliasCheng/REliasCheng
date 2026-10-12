@@ -1,43 +1,31 @@
-# SIGNALCORE design system
+# SIGNALCORE V2 design system
 
-## Brand concept
+## Direction
 
-SIGNALCORE is a compact embedded-engineering interface: routing traces, a signal waveform, restrained terminal language, and clear evidence labels. It is the current Profile visual identity, not a claim of verified hardware. All artwork in `assets/brand`, `assets/cards`, and `assets/fallback` is generated from repository-authored vector geometry and tokens; no third-party image, font, logo, or course material is imported. The separately generated contribution animation uses Platane/snk and actual GitHub contribution data under that tool's own terms.
+SIGNALCORE V2 is an editorial embedded engineering portfolio. Identity and selected implementations lead; MCU work, architecture studies, public evidence and contribution activity follow. The controller drawing is original vector geometry, not a board photograph or runtime trace. The three featured diagrams describe architecture and are not application screenshots.
 
-## Palette
+Two directions were considered before implementation:
 
-`assets/brand/tokens.json` is authoritative. Dark uses background `#0B111B`, panel `#142235`, border `#25394C`, text `#F0F6FF`, signal `#61DCE6`, and verification green `#67D9C5`. Light uses background `#F5F8FC`, white panels, border `#D0DFEA`, text `#102033`, signal `#087F95`, and verification green `#0F765E`. Muted text is for secondary labels, never the sole expression of status. All semantic text colors meet at least 4.5:1 contrast against their panel background.
+- **Minimal Engineering:** monochrome editorial layout, maximum whitespace, little brand imagery. It reads quickly but loses some of the embedded identity established by SIGNALCORE.
+- **Refined SIGNALCORE:** navy and controlled cyan with one controller symbol, compact project-specific diagrams and quiet Markdown sections. Selected for stronger identity with comparable reading speed and a dedicated mobile composition.
 
-## Typography, spacing, and borders
+## Palette and type
 
-Use system Segoe UI/Arial for readable narrative and Consolas/ui-monospace for terminal/status labels. No font download. The 8 px spacing unit yields 16 px card gaps and 32 px section intervals. Fine borders are 1 px, active signal strokes 2 px. Corners are restrained; no badges or decorative emoji.
+`assets/brand/tokens.json` remains authoritative. Dark: background `#0B111B`, panel `#142235`, text `#F0F6FF`, signal `#61DCE6`. Light: background `#F5F8FC`, panel `#FFFFFF`, text `#102033`, signal `#087F95`. Other semantic colors retain their documented roles. The profile validator requires at least 4.5:1 panel contrast for text roles.
 
-## Component rules
+Segoe UI/Arial carries names, titles and narrative. Consolas/monospace is reserved for compact technical labels. The token spacing unit is 8 px. Fine borders use 1 px; signal paths use 2 px. The cards rely on a single restrained frame and internal architecture diagrams rather than bright full-card outlines.
 
-- Hero: one identity statement and one schematic MCU/signal motif. It is not a hardware photograph.
-- Terminal: a staged whoami/portfolio introduction with original-work and host-test labels, never simulated test output. The alternate static SVG contains all meaningful text without animation.
-- Featured cards: three distinct abstract diagrams for the host app, portable C/C++ modules, and the 8051 planner. Each has a compact dark/light SVG selected below 600 px so labels do not become microscopic. Their linked Markdown text states each project's actual evidence boundary; the SVGs are not runtime screenshots.
-- Category card: one visual heading per maturity group; details and evidence remain selectable text in the README.
-- Metrics: dated public API snapshot in a 520 × 413 panel. Its aspect ratio keeps the GitHub full-width render compact while the narrower native width preserves phone text size; the repository count leads while refresh time, host scope and main SHA remain readable but secondary. Show source, current-main SHA relationship and failure/unavailable states. A count is not an engineering score.
-- Contribution: actual GitHub data only. The preview snake was produced by Platane/snk from the public contribution graph, validated, and framed with these palette tokens. The dark dots use `#1C3044` through `#4A98A5` against the navy panel and the `#61DCE6` snake; light dots use `#E8F1F5` through `#4C91A3` with a distinct `#075D75` snake. The default view is animated; linked still dark/light graphs are derived from that same verified SVG and contain no snake animation. A neutral `<img>` fallback also remains.
-- Footer and dividers: quiet navigation, not a substitute for content.
+## Components
 
-## Dark and light policy
+- **Hero:** 1200 × 330 desktop and a separately composed 640 × 390 mobile asset. The mobile layout places the name and role above the signal and controller, avoiding desktop scaling. Both themes have animated and static files; animation is a slow signal path with a reduced-motion static source placed first in README `<picture>`.
+- **Identity status:** one short Markdown paragraph after the hero. The V1 terminal animation is retired from the page; old terminal assets remain in the repository as historical artifacts.
+- **Selected engineering:** three 1200 × 240 desktop and 640 × 306 mobile diagrams. Python uses an application window with a mockable serial boundary; C/C++ uses a command, buffer and state path; C51 uses a resource matrix and conflict check. Implementation and validation limits stay in readable Markdown alongside Source, Tests, CI and Design links.
+- **MCU and research:** Markdown headings and concise linked lists replace large category banners. The V1 category assets remain historical and unused.
+- **Public evidence:** the approved production telemetry image remains a dated public GitHub API snapshot. `PASS` is bound to the current `main` SHA for a monitored host workflow, not target or hardware validation.
+- **Contribution:** the production snake and both data-derived static variants remain. Reduced-motion sources precede animated sources. The footer is a short Markdown navigation line.
 
-Each displayed component has dark and light SVG variants. GitHub `<picture>` sources select by `prefers-color-scheme`; their `<img>` fallbacks point to checked-in files. Dynamic contribution and metrics sources use the repository's `signalcore-assets` branch through approved raw URLs; standalone SVGs have their own background fill. The default Profile was updated by PR #1 and later production changes. Automatic dark-theme selection in a real browser remains to be verified.
+## Evidence and production boundary
 
-## Animation and accessibility
+`data/projects.json` keeps the 14 non-profile repositories and maturity classification. `data/featured-evidence.json` keeps the exact Source, Tests, CI and Design paths. SVGs contain no remote image, script or executable content. The README keeps the six approved raw SVG sources and local fallback images. The `signalcore-assets` branch and its seven-file scheduled publication workflow are unchanged by V2. See [maintenance](maintenance.md) and [production assets](production-assets.md) for release behavior.
 
-The hero route and signal sweep use low-amplitude CSS motion. The terminal reveals eight lines over roughly seven seconds, then shows a blinking prompt. In a GitHub README, SVG-internal motion media queries are not reliable enough alone: each animated `<picture>` places `prefers-reduced-motion: reduce` dark/light static sources **before** animated sources. This applies to hero, terminal and contribution graph. The snake is separate data-derived animation, visible by default, with both direct still-image links and a neutral `<img>` fallback. Essential identity, project categories, links, evidence boundaries and metrics labels are HTML/text. Every picture has alt text. Earlier preview checks do not establish completed default-branch browser QA.
-
-## Project category system
-
-`data/projects.json` is authoritative for group membership: featured engineering (3), current MCU work (3), architecture labs (5), exploration labs (2), foundations (1). Group membership reflects public implementation and evidence, not a score or ranking. Architecture labs remain documentation-first. Robotics includes third-party integration; foundations remains documentation. No listed project is called hardware-validated merely because its host tests pass.
-
-## Status semantics
-
-For a monitored host workflow, `PASS` means its successful run SHA matches the current `main` SHA. `FAIL` means the matching run concluded unsuccessfully. `PENDING` means the matching run is not complete. `STALE` means only an older successful run was found. `NOT VERIFIED` means no eligible success was found. `UNAVAILABLE` means the public API response could not be trusted. None establishes target build, runtime, hardware, security, or production quality.
-
-## SVG generation and maintenance
-
-Run `python scripts/generate_brand_assets.py` after token or geometry edits, then `python scripts/validate_profile.py` and visual review. `scripts/generate_metrics.py` reads public GitHub API data; it refuses an empty repository inventory and never substitutes zero for an API failure. Its output is a dated snapshot. The snake workflow uses the documented Platane/snk SVG-only v3 interface with five contribution colors. See [maintenance](maintenance.md) and [production assets](production-assets.md) for update, failure, dry-run and fallback steps. The independent production asset branch is active; no GitHub Pages site is claimed.
+Generate with `python scripts/generate_brand_assets.py`; then run `python -m unittest discover -s tests -q` and `python scripts/validate_profile.py`. Review actual GitHub rendering in both themes and at 320, 375, 390, 430, 768 and desktop widths before merging.
