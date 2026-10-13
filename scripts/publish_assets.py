@@ -35,14 +35,14 @@ class PublicationBlocked(RuntimeError):
 
 
 class PublicationVerificationUncertain(PublicationBlocked):
-    """Push succeeded, but a later remote read could not prove the final head."""
+    """A push was attempted, but its accepted or final remote state is unproved."""
 
     def __init__(self, committed_sha: str, observed_head: str | None) -> None:
         self.committed_sha = committed_sha
         self.observed_head = observed_head
         super().__init__(
-            f"Push accepted commit {committed_sha}; later remote head is "
-            f"{observed_head or 'unavailable'}. Remote state may have advanced; inspect before retry."
+            f"Publication attempted commit {committed_sha}; remote head is "
+            f"{observed_head or 'unavailable'}. Acceptance or final state is uncertain; inspect before retry."
         )
 
 
@@ -161,7 +161,26 @@ def publish(source: Path, approved_main_sha: str, remote: str = "origin") -> str
         committed = command("git", "rev-parse", "HEAD", cwd=checkout)
         if branch_head(remote, "main") != approved_main_sha:
             raise PublicationBlocked("Approved main SHA changed before publication push")
-        command("git", "push", "origin", f"HEAD:refs/heads/{BRANCH}", cwd=checkout)
+        try:
+            command("git", "push", "origin", f"HEAD:refs/heads/{BRANCH}", cwd=checkout)
+        except PublicationBlocked as push_error:
+            # Explicit Git rejection is definitive; preserve that diagnosis.
+            rejection = str(push_error).lower()
+            if any(marker in rejection for marker in (
+                "non-fast-forward", "[rejected]", "[remote rejected]", "pre-receive hook declined",
+                "protected branch hook declined",
+            )):
+                raise
+            # A local Git error can occur after the remote accepted the commit
+            # (for example, the connection can close before the acknowledgement).
+            # Read the remote head once; never repeat the push automatically.
+            try:
+                observed = branch_head(remote)
+            except PublicationBlocked:
+                observed = None
+            if observed == committed:
+                return committed
+            raise PublicationVerificationUncertain(committed, observed) from push_error
         try:
             observed = branch_head(remote)
         except PublicationBlocked as exc:
