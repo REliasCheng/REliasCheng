@@ -248,6 +248,45 @@ class PublisherTests(unittest.TestCase):
                 publish(self.source, "a" * 40)
         self.assertIsNone(result.exception.observed_head)
 
+    def test_push_accepted_but_acknowledgement_lost_is_verified_by_remote_head(self):
+        def fake_command(*args, cwd=ROOT):
+            if args[:3] == ("git", "remote", "get-url"):
+                return "https://github.com/REliasCheng/REliasCheng.git"
+            if args[:2] == ("git", "clone"):
+                Path(args[-1]).mkdir()
+            if args[:3] == ("git", "rev-parse", "HEAD"):
+                return "b" * 40
+            if args[:2] == ("git", "push"):
+                raise PublicationBlocked("simulated connection closed after accepted push")
+            return ""
+
+        with patch("publish_assets.branch_head", side_effect=["a" * 40, "a" * 40,
+                                                           "a" * 40, "b" * 40]), patch(
+            "publish_assets.validate_source", return_value=self.data
+        ), patch("publish_assets.command", side_effect=fake_command):
+            self.assertEqual(publish(self.source, "a" * 40), "b" * 40)
+
+    def test_unacknowledged_push_with_unreadable_remote_remains_uncertain(self):
+        def fake_command(*args, cwd=ROOT):
+            if args[:3] == ("git", "remote", "get-url"):
+                return "https://github.com/REliasCheng/REliasCheng.git"
+            if args[:2] == ("git", "clone"):
+                Path(args[-1]).mkdir()
+            if args[:3] == ("git", "rev-parse", "HEAD"):
+                return "b" * 40
+            if args[:2] == ("git", "push"):
+                raise PublicationBlocked("simulated connection closed")
+            return ""
+
+        with patch("publish_assets.branch_head", side_effect=["a" * 40, "a" * 40,
+                                                           "a" * 40, PublicationBlocked("read failed")]), patch(
+            "publish_assets.validate_source", return_value=self.data
+        ), patch("publish_assets.command", side_effect=fake_command):
+            with self.assertRaises(PublicationVerificationUncertain) as caught:
+                publish(self.source, "a" * 40)
+        self.assertEqual(caught.exception.committed_sha, "b" * 40)
+        self.assertIsNone(caught.exception.observed_head)
+
 
 if __name__ == "__main__":
     unittest.main()
