@@ -1,6 +1,6 @@
 {
   "owner": "REliasCheng",
-  "refreshed_utc": "2026-10-17 07:44 UTC",
+  "refreshed_utc": "2026-10-18 07:58 UTC",
   "public_repositories": 15,
   "languages_by_repository": [
     [
@@ -18,21 +18,21 @@
       "repository": "Python-Host-Application-Lab",
       "scope": "Host app",
       "status": "PASS",
-      "sha": "29ac4683c0cb12236648d64ee2fbcb158d5b2de5"
+      "sha": "d2a719b45e9c7308bcf0faaf56f3ddaa71ca377c"
     },
     {
       "label": "Embedded C/C++",
       "repository": "Embedded-C-Cpp-Learning",
       "scope": "Portable core",
       "status": "PASS",
-      "sha": "e4259eb2448a11aa573075e0ac93999b19469a07"
+      "sha": "fa1b1964b72c206c8be28f4d239afcbb247e5b7c"
     },
     {
       "label": "C51 Planner",
       "repository": "C51-Board-Lab",
       "scope": "Planner core",
       "status": "PASS",
-      "sha": "bf2c0df36f6cc9c41e5088dc2a17292471463526"
+      "sha": "c121d76fdac4f8aacd3a344b9e3f3a744e5c1bea"
     },
     {
       "label": "STC89 Terminal",
@@ -46,7 +46,7 @@
       "repository": "STC8-MCU-Learning",
       "scope": "Portable core",
       "status": "PASS",
-      "sha": "ebecc4140981160d7ab5767c82aa2aa45837dbd7"
+      "sha": "d205a86033b2e8b962706df41637a9d0cd00a8ff"
     }
   ],
   "source": "GitHub public REST API"
