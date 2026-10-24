@@ -1,6 +1,6 @@
 {
   "owner": "REliasCheng",
-  "refreshed_utc": "2026-10-23 08:29 UTC",
+  "refreshed_utc": "2026-10-24 08:04 UTC",
   "public_repositories": 15,
   "languages_by_repository": [
     [
@@ -18,14 +18,14 @@
       "repository": "Python-Host-Application-Lab",
       "scope": "Host app",
       "status": "PASS",
-      "sha": "459c2b4bfbc1272d645a9e0791bf26f96adbf03a"
+      "sha": "a12afefb712af70cee5da03debac7fd988510c92"
     },
     {
       "label": "Embedded C/C++",
       "repository": "Embedded-C-Cpp-Learning",
       "scope": "Portable core",
       "status": "PASS",
-      "sha": "3d11f2e01fff8c90875a636eee1d3ebba78c6941"
+      "sha": "a80a44950bdeb525dbad2b7eb3bc22d8012f5d7f"
     },
     {
       "label": "C51 Planner",
