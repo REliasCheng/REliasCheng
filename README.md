@@ -62,31 +62,26 @@ The planner compares declared module resource masks and preserves the existing p
 
 [Source](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/practice/src/board_resources.c) · [Tests](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/tests/test_board_resources.c) · [CI](https://github.com/REliasCheng/C51-Board-Lab/actions/workflows/host-tests.yml) · [Design](https://github.com/REliasCheng/C51-Board-Lab/blob/main/projects/06_%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/board-resource-planner/README.md)
 
+## Verified software engineering
+
+Commit-bound snapshot checked on **2026-10-27**. The linked CI runs passed for the listed projects' audited `main` commits; they are historical evidence, not live status or hardware validation. [Full evidence index](data/engineering-evidence.json).
+
+- **[Firmware Update / OTA](https://github.com/REliasCheng/Embedded-OTA-Update-Lab)** — Portable C update flow with staging, simulated Flash, CRC and journal recovery. Host simulation only; no device update, signatures or A/B rollback. [Source](https://github.com/REliasCheng/Embedded-OTA-Update-Lab/blob/main/src/ota_update.c) · [Tests](https://github.com/REliasCheng/Embedded-OTA-Update-Lab/blob/main/tests/test_ota_update.c) · [Main CI](https://github.com/REliasCheng/Embedded-OTA-Update-Lab/actions/runs/40311425747)
+- **[ARM Cortex-M Control](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab)** — C11 timer-event, sampling and hysteresis core with host compiler and sanitizer tests. No Cortex-M target build or hardware interrupt timing. [Source](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab/blob/main/src/control_app.c) · [Tests](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab/blob/main/tests/test_control_app.c) · [Main CI](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab/actions/runs/40318386452)
+- **[FreeRTOS Host Runtime](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab)** — Official FreeRTOS V11.3.2 runs a three-task pipeline on a Host Port. No Cortex-M scheduling or physical ISR evidence. [Source](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab/blob/main/app/rtos_demo.c) · [Tests](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab/blob/main/tests/test_processing.c) · [Main CI](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab/actions/runs/40321931576)
+- **[LVGL Host Dashboard](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab)** — Real LVGL v9.6.0 widgets, SDL2 window and headless framebuffer tests. No MCU display, touch or FreeRTOS target integration. [Source](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab/blob/main/app/dashboard_ui.c) · [Tests](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab/blob/main/tests/dashboard_headless.c) · [Main CI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab/actions/runs/40327059878)
+- **[Wireless / IoT MQTT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab)** — C11 client and loopback Mosquitto Broker exercise telemetry, QoS 1 and reconnect. No device Wi-Fi, Aliyun or TLS run. [Source](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab/blob/main/app/host_mqtt_device.c) · [Tests](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab/blob/main/tests/mqtt_integration.py) · [Main CI](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab/actions/runs/40438227834)
+- **[ARM Embedded Linux](https://github.com/REliasCheng/ARM-Linux-Embedded-Lab)** — Real Linux PTY I/O, AArch64 userspace cross build and QEMU execution; x86_64 module built without loading. No RK3566 boot or Device Tree validation. [Source](https://github.com/REliasCheng/ARM-Linux-Embedded-Lab/blob/main/src/linux_device_port.c) · [Tests](https://github.com/REliasCheng/ARM-Linux-Embedded-Lab/blob/main/tests/pty_integration.py) · [Main CI](https://github.com/REliasCheng/ARM-Linux-Embedded-Lab/actions/runs/40444152160)
+- **[Offline Robotics Control](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab)** — Synthetic leader–follower controller parses SO-100 YAML, maps six channels and tests Fake Bus fault latching and replay. No third-party LeRobot runtime, motor motion or physical E-stop evidence. [Source](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab/blob/main/offline_control/controller.py) · [Tests](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab/blob/main/tests_offline/test_control.py) · [Main CI](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab/actions/runs/40472442405)
+
 ## MCU development
 
 - [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning) — C89 UART RX ring buffer and 8051 adapter; host-tested core, no Keil target or board evidence.
 - [STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning) — RTC, temperature and configuration state behind platform callbacks; host tests, no C51 target or hardware verification.
 - [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU) — CT107D resource, timing and control policies; host tests, no complete target or board validation.
 
-## Architecture and research
+## Foundations
 
-Design and study repositories below are not presented as completed firmware or hardware runs.
-
-**Firmware / RTOS / GUI**
-
-- [ARM Cortex-M](https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab) — startup, interrupts, clocks and driver layering.
-- [FreeRTOS](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) — scheduling, IPC and ISR-to-task design.
-- [LVGL Embedded GUI](https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab) — display, input, rendering and event pipeline.
-
-**Connectivity / OTA**
-
-- [Wireless / IoT](https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab) — Wi-Fi → lwIP → TCP → plain MQTT model; no TLS or live sensor evidence.
-- [Firmware Update / OTA](https://github.com/REliasCheng/Embedded-OTA-Update-Lab) — bootloader, UART/YMODEM, MQTT and CRC boundary model; no A/B or rollback claim.
-
-**Robotics / Linux / foundations**
-
-- [Embodied Robotics Arm](https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab) — LeRobot integration study with third-party code; no functional or hardware run claimed.
-- [ARM Embedded Linux](https://github.com/REliasCheng/ARM-Linux-Embedded-Lab) — RK3566 boot, Device Tree and driver-interface research; no public kernel build or board runtime claimed.
 - [Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations) — electronics, logic, CPU, MCU and PCB knowledge map; documentation, not runnable firmware.
 
 ## Public engineering evidence

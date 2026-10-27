@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from datetime import date
 from pathlib import Path
 import re
 from urllib.parse import quote, unquote
@@ -14,6 +15,19 @@ README = ROOT / "README.md"
 PROJECTS = ROOT / "data/projects.json"
 TOKENS = ROOT / "assets/brand/tokens.json"
 EVIDENCE = ROOT / "data/featured-evidence.json"
+ENGINEERING = ROOT / "data/engineering-evidence.json"
+PROJECT_REPOSITORIES = {
+    "Embedded-OTA-Update-Lab", "ARM-Cortex-M-Development-Lab", "FreeRTOS-Embedded-Lab",
+    "LVGL-Embedded-GUI-Lab", "Wireless-IoT-Embedded-Lab", "ARM-Linux-Embedded-Lab",
+    "Embodied-Robotics-Arm-Lab", "Python-Host-Application-Lab", "Embedded-C-Cpp-Learning",
+    "C51-Board-Lab", "STC8-MCU-Learning", "stc89c52-learning", "BlueBridgeCup-MCU",
+    "Embedded-Systems-Foundations",
+}
+VERIFIED_REPOSITORIES = {
+    "Embedded-OTA-Update-Lab", "ARM-Cortex-M-Development-Lab", "FreeRTOS-Embedded-Lab",
+    "LVGL-Embedded-GUI-Lab", "Wireless-IoT-Embedded-Lab", "ARM-Linux-Embedded-Lab",
+    "Embodied-Robotics-Arm-Lab",
+}
 MD_LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
 HTML_ASSET = re.compile(r'(?:src|srcset)="([^"]+)"')
 FORBIDDEN_SVG = re.compile(
@@ -51,19 +65,97 @@ def expected_evidence_links(evidence: dict) -> set[str]:
     return links
 
 
-def check_repository_links(readme: str, repositories: set[str], evidence: dict) -> list[str]:
+def _safe_repo_path(path: str) -> bool:
+    return (isinstance(path, str) and bool(path) and not path.startswith("/")
+            and "\\" not in path and not any(char in path for char in ("?", "#", "%", ":"))
+            and all(part not in ("", ".", "..") for part in path.split("/")))
+
+
+def validate_engineering_index(catalog: dict, index: dict) -> list[str]:
+    """Validate a dated, commit-bound index without treating it as live CI telemetry."""
+    errors = []
+    if (not isinstance(index, dict) or set(index) != {"schema_version", "description", "records"}
+            or index["schema_version"] != 1):
+        return ["Invalid engineering evidence envelope"]
+    records = index["records"]
+    if not isinstance(records, list) or len(records) != 14:
+        return ["Engineering evidence must contain 14 records"]
+    projects = {p["repository"]: p for g in catalog["categories"] for p in g["projects"]}
+    names = [r.get("repository") for r in records if isinstance(r, dict)]
+    if any(not isinstance(name, str) for name in names):
+        return ["Engineering evidence contains an invalid repository identifier"]
+    if len(names) != 14 or len(set(names)) != 14 or set(names) != set(projects):
+        return ["Engineering evidence repository set differs from the 14-project catalog"]
+    required = {"repository", "display_name", "implementation_class", "verification_scope",
+                "main_sha", "pr", "main_ci", "main_ci_head_sha", "main_ci_conclusion",
+                "source", "tests", "documentation", "unverified", "verified_on"}
+    for record in records:
+        repo = record["repository"]
+        if set(record) != required:
+            errors.append(f"Incomplete engineering evidence: {repo}")
+            continue
+        if record["display_name"] != projects[repo]["display_name"] or record["implementation_class"] != projects[repo]["implementation_status"]:
+            errors.append(f"Catalog/evidence description mismatch: {repo}")
+        sha = record["main_sha"]
+        if not isinstance(sha, str) or not re.fullmatch(r"[0-9a-f]{40}", sha):
+            errors.append(f"Invalid main SHA: {repo}")
+        try:
+            date.fromisoformat(record["verified_on"])
+        except (TypeError, ValueError):
+            errors.append(f"Invalid verification date: {repo}")
+        if not isinstance(record["unverified"], list) or not record["unverified"] or not all(isinstance(x, str) and x for x in record["unverified"]):
+            errors.append(f"Missing verification boundary: {repo}")
+        root = f"https://github.com/REliasCheng/{repo}"
+        if repo == "Embedded-Systems-Foundations":
+            if any(record[k] is not None for k in ("pr", "main_ci", "main_ci_head_sha", "source", "tests")) or record["main_ci_conclusion"] != "not_applicable" or record["documentation"] != "README.md":
+                errors.append("Foundations must remain documentation-only without invented CI")
+        else:
+            if (not isinstance(record["pr"], str)
+                    or not re.fullmatch(re.escape(root) + r"/pull/[1-9][0-9]*", record["pr"])):
+                errors.append(f"Invalid PR URL: {repo}")
+            if (not isinstance(record["main_ci"], str)
+                    or not re.fullmatch(re.escape(root) + r"/actions/runs/[1-9][0-9]*", record["main_ci"])
+                    or record["main_ci_head_sha"] != sha or record["main_ci_conclusion"] != "success"):
+                errors.append(f"Invalid commit-bound main CI: {repo}")
+            if not _safe_repo_path(record["source"]) or not _safe_repo_path(record["tests"]) or record["documentation"] is not None:
+                errors.append(f"Invalid source/test path: {repo}")
+    return errors
+
+
+def expected_engineering_links(index: dict, verified_repositories: set[str]) -> set[str]:
+    records = {r["repository"]: r for r in index["records"]}
+    links = set()
+    for repo in verified_repositories:
+        record = records[repo]
+        root = f"https://github.com/REliasCheng/{repo}"
+        for kind in ("source", "tests"):
+            links.add(root + "/blob/main/" + quote(record[kind], safe="/"))
+        links.add(record["main_ci"])
+    return links
+
+
+def check_repository_links(readme: str, repositories: set[str], evidence: dict,
+                           engineering_index: dict | None = None,
+                           verified_repositories: set[str] | None = None) -> list[str]:
     errors = []
     markdown_urls = set(MD_LINK.findall(readme))
     github_urls = {url for url in markdown_urls if url.startswith("https://github.com/")}
     expected_roots = {f"https://github.com/REliasCheng/{repo}" for repo in repositories}
     expected_deep = expected_evidence_links(evidence)
+    if engineering_index is not None and verified_repositories is not None:
+        expected_deep |= expected_engineering_links(engineering_index, verified_repositories)
     if not expected_roots <= github_urls:
         errors.append(f"Missing repository root links: {sorted(expected_roots - github_urls)}")
     if not expected_deep <= github_urls:
-        errors.append(f"Missing featured evidence links: {sorted(expected_deep - github_urls)}")
+        errors.append(f"Missing evidence links: {sorted(expected_deep - github_urls)}")
     unexpected = github_urls - expected_roots - expected_deep
     if unexpected:
         errors.append(f"Unexpected GitHub README links: {sorted(unexpected)}")
+    approved_raw = {PRODUCTION_ASSET_ROOT + f"telemetry-{theme}.svg" for theme in ("dark", "light")}
+    unexpected_external = {url for url in markdown_urls if url.startswith(("http://", "https://"))
+                           and not url.startswith("https://github.com/") and url not in approved_raw}
+    if unexpected_external:
+        errors.append(f"Unexpected external README links: {sorted(unexpected_external)}")
     return errors
 
 
@@ -119,6 +211,7 @@ def validate() -> list[str]:
     readme = README.read_text(encoding="utf-8")
     catalog = json.loads(PROJECTS.read_text(encoding="utf-8"))
     evidence = json.loads(EVIDENCE.read_text(encoding="utf-8"))
+    engineering = json.loads(ENGINEERING.read_text(encoding="utf-8"))
     tokens = json.loads(TOKENS.read_text(encoding="utf-8"))
     for theme in ("dark", "light"):
         palette = tokens[theme]
@@ -128,11 +221,25 @@ def validate() -> list[str]:
                 errors.append(f"{theme} {role}/panel contrast below 4.5:1: {ratio:.2f}")
     categories = catalog["categories"]
     repositories = [project["repository"] for group in categories for project in group["projects"]]
-    if len(repositories) != 14 or len(set(repositories)) != 14:
+    if len(repositories) != 14 or len(set(repositories)) != 14 or set(repositories) != PROJECT_REPOSITORIES:
         errors.append("Project catalog must contain each of the 14 non-profile repositories once")
     if set(evidence) != {"Python-Host-Application-Lab", "Embedded-C-Cpp-Learning", "C51-Board-Lab"}:
         errors.append("Featured evidence manifest must cover exactly the three featured repositories")
-    errors.extend(check_repository_links(readme, set(repositories), evidence))
+    counts = {group["id"]: len(group["projects"]) for group in categories}
+    if counts != {"featured": 3, "verified": 7, "mcu": 3, "foundations": 1}:
+        errors.append("Project categories must preserve three featured, seven verified, three MCU and one foundations repository")
+    membership = {group["id"]: {p["repository"] for p in group["projects"]} for group in categories}
+    if (membership.get("verified") != VERIFIED_REPOSITORIES
+            or membership.get("featured") != set(evidence)
+            or membership.get("foundations") != {"Embedded-Systems-Foundations"}):
+        errors.append("Project categories contain an unexpected repository")
+    engineering_errors = validate_engineering_index(catalog, engineering)
+    errors.extend(engineering_errors)
+    if not engineering_errors and "verified" in counts:
+        verified = {p["repository"] for g in categories if g["id"] == "verified" for p in g["projects"]}
+        errors.extend(check_repository_links(readme, set(repositories), evidence, engineering, verified))
+        if not all(r["verified_on"] in readme for r in engineering["records"]):
+            errors.append("README lacks dated evidence snapshot label")
     for link in MD_LINK.findall(readme):
         if link.startswith(("http://", "https://", "#")):
             continue
@@ -201,4 +308,4 @@ if __name__ == "__main__":
         for problem in problems:
             print("ERROR:", problem)
         raise SystemExit(1)
-    print("Profile validation passed: 14 repository roots, featured evidence, approved live assets and safe local SVGs")
+    print("Profile validation passed: 14 repository roots, commit-bound engineering evidence, featured evidence, approved live assets and safe local SVGs")
