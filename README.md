@@ -76,9 +76,11 @@ Commit-bound snapshot checked on **2026-10-27**. The linked CI runs passed for t
 
 ## MCU development
 
-- [STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning) — C89 UART RX ring buffer and 8051 adapter; host-tested core, no Keil target or board evidence.
-- [STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning) — RTC, temperature and configuration state behind platform callbacks; host tests, no C51 target or hardware verification.
-- [BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU) — CT107D resource, timing and control policies; host tests, no complete target or board validation.
+MCU evidence was checked on **2026-10-28**; the other 11 projects retain their **2026-10-27** snapshot. Each linked CI run passed for its recorded `main` commit. These are dated results, not live status or hardware validation.
+
+- **[STC8 MCU Learning](https://github.com/REliasCheng/STC8-MCU-Learning)** — C89 UART RX pipeline and original UART1 adapter compiled and linked with SDCC MCS-51; vector, Intel HEX and two clean builds checked. No target instruction simulation, Keil build or board UART evidence. [Source](https://github.com/REliasCheng/STC8-MCU-Learning/blob/main/platform/stc8/stc8_uart_sdcc.c) · [Tests](https://github.com/REliasCheng/STC8-MCU-Learning/blob/main/tests/test_uart_frame.c) · [Main CI](https://github.com/REliasCheng/STC8-MCU-Learning/actions/runs/40626106552)
+- **[STC89C52 Learning](https://github.com/REliasCheng/stc89c52-learning)** — Original terminal core linked into an SDCC target; HEX and generic C52 instruction simulation checked synthetic events and diagnostics. No RTC, OLED, EEPROM or board runtime evidence. [Source](https://github.com/REliasCheng/stc89c52-learning/blob/main/projects/13_%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%97%B6%E9%92%9F%E4%BF%A1%E6%81%AF%E7%BB%88%E7%AB%AF/practice/core/terminal_app.c) · [Tests](https://github.com/REliasCheng/stc89c52-learning/blob/main/projects/13_%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%97%B6%E9%92%9F%E4%BF%A1%E6%81%AF%E7%BB%88%E7%AB%AF/practice/tests/test_terminal_app.c) · [Main CI](https://github.com/REliasCheng/stc89c52-learning/actions/runs/40628442826)
+- **[BlueBridgeCup MCU](https://github.com/REliasCheng/BlueBridgeCup-MCU)** — Original peripheral policy linked and called in an IAP15-constrained SDCC target; HEX and generic C52 simulation checked synthetic key and conflict diagnostics. No CT107D board, latch or peripheral runtime evidence. [Source](https://github.com/REliasCheng/BlueBridgeCup-MCU/blob/main/practice/peripheral-driver-corrections/peripheral_policy.c) · [Tests](https://github.com/REliasCheng/BlueBridgeCup-MCU/blob/main/practice/peripheral-driver-corrections/tests/test_peripheral_policy.c) · [Main CI](https://github.com/REliasCheng/BlueBridgeCup-MCU/actions/runs/40681394203)
 
 ## Foundations
 

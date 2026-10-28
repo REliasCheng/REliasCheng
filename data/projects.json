@@ -162,42 +162,42 @@
           "repository": "STC8-MCU-Learning",
           "display_name": "STC8 Communication Core",
           "category": "mcu",
-          "short_description": "C89 UART RX ring buffer and 8051 adapter boundary.",
+          "short_description": "C89 UART RX pipeline and original STC8 UART1 SDCC adapter linked into MCS-51 HEX.",
           "technology_tags": [
             "STC8",
             "C89",
             "UART"
           ],
-          "implementation_status": "MCU application core",
-          "verification_scope": "Host-tested core; no Keil target or board evidence",
+          "implementation_status": "SDCC MCS-51 target firmware foundation",
+          "verification_scope": "SDCC compile/link/HEX and Host tests; no target instruction runtime, Keil build or board evidence",
           "link": "https://github.com/REliasCheng/STC8-MCU-Learning"
         },
         {
           "repository": "stc89c52-learning",
           "display_name": "STC89 Terminal Core",
           "category": "mcu",
-          "short_description": "RTC, temperature and config state behind platform callbacks.",
+          "short_description": "Original terminal state core linked into an SDCC MCS-51 target with diagnostic adapter.",
           "technology_tags": [
             "STC89C52",
             "C11",
             "State"
           ],
-          "implementation_status": "MCU application core",
-          "verification_scope": "Host tests; C51 target and hardware not verified",
+          "implementation_status": "SDCC MCS-51 target core with instruction simulation",
+          "verification_scope": "SDCC target build and generic C52 instruction simulation; no peripheral hardware evidence",
           "link": "https://github.com/REliasCheng/stc89c52-learning"
         },
         {
           "repository": "BlueBridgeCup-MCU",
           "display_name": "CT107D Peripheral Policies",
           "category": "mcu",
-          "short_description": "8051 board resources, timing and host-tested control policies.",
+          "short_description": "Original CT107D peripheral policy linked into an IAP15-constrained SDCC target.",
           "technology_tags": [
             "CT107D",
             "8051",
             "Timing"
           ],
-          "implementation_status": "MCU application core",
-          "verification_scope": "Host-tested policies; no complete target or board evidence",
+          "implementation_status": "IAP15 target policy with C52 instruction simulation",
+          "verification_scope": "IAP15-constrained SDCC target build and generic C52 policy simulation; no CT107D board evidence",
           "link": "https://github.com/REliasCheng/BlueBridgeCup-MCU"
         }
       ]

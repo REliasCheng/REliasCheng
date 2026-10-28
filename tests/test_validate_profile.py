@@ -9,7 +9,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from validate_profile import (  # noqa: E402
-    ENGINEERING, PRODUCTION_ASSET_ROOT, PROJECTS, ROOT, README, check_live_asset_layout,
+    ENGINEERING, MCU_TARGET_SNAPSHOT, PRODUCTION_ASSET_ROOT, PROJECTS, ROOT, README, check_live_asset_layout,
     check_repository_links, expected_engineering_links, expected_evidence_links,
     valid_readme_asset, validate_engineering_index,
 )
@@ -88,14 +88,59 @@ class EngineeringEvidenceTests(unittest.TestCase):
         self.index = json.loads(ENGINEERING.read_text(encoding="utf-8"))
         self.verified = {p["repository"] for g in self.catalog["categories"]
                          if g["id"] == "verified" for p in g["projects"]}
+        self.mcu = {p["repository"] for g in self.catalog["categories"]
+                    if g["id"] == "mcu" for p in g["projects"]}
+        self.linked = self.verified | self.mcu
 
     def test_real_index_is_complete_and_readme_links_are_derived(self):
         self.assertEqual(validate_engineering_index(self.catalog, self.index), [])
         self.assertEqual(len(self.verified), 7)
-        self.assertEqual(len(expected_engineering_links(self.index, self.verified)), 21)
+        self.assertEqual(len(self.mcu), 3)
+        self.assertEqual(len(expected_engineering_links(self.index, self.linked)), 30)
         readme = README.read_text(encoding="utf-8")
-        for link in expected_engineering_links(self.index, self.verified):
+        for link in expected_engineering_links(self.index, self.linked):
             self.assertIn(f"({link})", readme)
+
+    def test_mcu_target_snapshot_is_current_and_commit_bound(self):
+        records = {r["repository"]: r for r in self.index["records"]}
+        for repo, (sha, run_id) in MCU_TARGET_SNAPSHOT.items():
+            with self.subTest(repo=repo):
+                record = records[repo]
+                self.assertEqual(record["main_sha"], sha)
+                self.assertEqual(record["main_ci_head_sha"], sha)
+                self.assertEqual(record["main_ci"], f"https://github.com/REliasCheng/{repo}/actions/runs/{run_id}")
+                self.assertEqual(record["verified_on"], "2026-10-28")
+
+    def test_old_mcu_snapshot_cannot_masquerade_as_current(self):
+        index = copy.deepcopy(self.index)
+        record = next(r for r in index["records"] if r["repository"] == "STC8-MCU-Learning")
+        record["main_sha"] = record["main_ci_head_sha"] = "a4b3be8ee4651668b6e71c1e80f4d7445606b675"
+        record["main_ci"] = "https://github.com/REliasCheng/STC8-MCU-Learning/actions/runs/39197757174"
+        self.assertTrue(any("Outdated MCU target snapshot" in x for x in validate_engineering_index(self.catalog, index)))
+
+    def test_mixed_snapshot_dates_and_category_counts(self):
+        dates = {r["repository"]: r["verified_on"] for r in self.index["records"]}
+        self.assertEqual({r: dates[r] for r in self.mcu}, {r: "2026-10-28" for r in self.mcu})
+        self.assertTrue(all(dates[r] == "2026-10-27" for r in dates.keys() - self.mcu))
+        self.assertEqual({g["id"]: len(g["projects"]) for g in self.catalog["categories"]},
+                         {"featured": 3, "verified": 7, "mcu": 3, "foundations": 1})
+        readme = README.read_text(encoding="utf-8")
+        self.assertIn("other 11 projects retain their **2026-10-27** snapshot", readme)
+
+    def test_mcu_deep_links_reject_escape_unknown_owner_and_repository(self):
+        index = copy.deepcopy(self.index)
+        record = next(r for r in index["records"] if r["repository"] == "BlueBridgeCup-MCU")
+        record["source"] = "../private.c"
+        with self.assertRaises(ValueError):
+            expected_engineering_links(index, self.linked)
+        with self.assertRaises(ValueError):
+            expected_engineering_links(self.index, self.linked | {"Unknown-Repo"})
+        readme = README.read_text(encoding="utf-8")
+        readme += "\n[Fake](https://github.com/AnotherOwner/BlueBridgeCup-MCU/blob/main/target/sdcc/main.c)\n"
+        featured = json.loads((ROOT / "data/featured-evidence.json").read_text(encoding="utf-8"))
+        roots = {p["repository"] for g in self.catalog["categories"] for p in g["projects"]}
+        self.assertTrue(any("Unexpected GitHub" in x for x in
+                            check_repository_links(readme, roots, featured, self.index, self.linked)))
 
     def test_wrong_ci_host_or_stale_head_is_rejected(self):
         index = copy.deepcopy(self.index)
@@ -121,7 +166,7 @@ class EngineeringEvidenceTests(unittest.TestCase):
         readme += "\n[Unverified](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab/blob/main/fake.c)\n"
         featured = json.loads((ROOT / "data/featured-evidence.json").read_text(encoding="utf-8"))
         roots = {p["repository"] for g in self.catalog["categories"] for p in g["projects"]}
-        errors = check_repository_links(readme, roots, featured, self.index, self.verified)
+        errors = check_repository_links(readme, roots, featured, self.index, self.linked)
         self.assertTrue(any("Unexpected GitHub" in x for x in errors))
 
     def test_lookalike_domain_is_rejected(self):
@@ -129,7 +174,7 @@ class EngineeringEvidenceTests(unittest.TestCase):
         readme += "\n[Fake](https://github.com.evil.example/REliasCheng/FreeRTOS-Embedded-Lab)\n"
         featured = json.loads((ROOT / "data/featured-evidence.json").read_text(encoding="utf-8"))
         roots = {p["repository"] for g in self.catalog["categories"] for p in g["projects"]}
-        errors = check_repository_links(readme, roots, featured, self.index, self.verified)
+        errors = check_repository_links(readme, roots, featured, self.index, self.linked)
         self.assertTrue(any("Unexpected external" in x for x in errors))
 
 
