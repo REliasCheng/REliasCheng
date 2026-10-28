@@ -1,6 +1,6 @@
 {
   "owner": "REliasCheng",
-  "refreshed_utc": "2026-10-28 02:37 UTC",
+  "refreshed_utc": "2026-10-28 09:35 UTC",
   "public_repositories": 15,
   "languages_by_repository": [
     [
@@ -39,14 +39,14 @@
       "repository": "stc89c52-learning",
       "scope": "Portable core",
       "status": "PASS",
-      "sha": "01f8c61bf86861c6e6a4a8024f25f447da725ef5"
+      "sha": "e1350c5d253ab1e786ba9f18f2e442f183a84c1b"
     },
     {
       "label": "STC8 UART",
       "repository": "STC8-MCU-Learning",
       "scope": "Portable core",
       "status": "PASS",
-      "sha": "a4b3be8ee4651668b6e71c1e80f4d7445606b675"
+      "sha": "c517009a25e3560074f76a20274dc04956c1cdf2"
     }
   ],
   "source": "GitHub public REST API"
