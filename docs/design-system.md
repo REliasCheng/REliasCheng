@@ -33,7 +33,7 @@ the real 900 × 560 window.
 
 ## Direction
 
-SIGNALCORE V2 is an editorial embedded engineering portfolio. Identity and selected implementations lead; MCU work, architecture studies, public evidence and contribution activity follow. The controller drawing is original vector geometry, not a board photograph or runtime trace. The three featured diagrams describe architecture and are not application screenshots.
+SIGNALCORE V2.1 is an editorial embedded engineering portfolio. Identity and selected implementations lead; verified software projects, MCU work, foundations, public evidence and contribution activity follow. The controller drawing is original vector geometry, not a board photograph or runtime trace. The three featured diagrams describe architecture and are not application screenshots.
 
 Two directions were considered before implementation:
 
@@ -51,7 +51,7 @@ Segoe UI/Arial carries names, titles and narrative. Consolas/monospace is reserv
 - **Hero:** 1200 × 330 desktop and a separately composed 640 × 390 narrow-column asset. The narrow layout places the name and role above the signal and controller, avoiding desktop scaling. GitHub keeps a profile sidebar at tablet widths, so README selects narrow-column sources through a 900 px viewport. Both themes have animated and static files; animation is a slow signal path with a reduced-motion static source placed first in README `<picture>`.
 - **Identity status:** one short Markdown paragraph after the hero. The V1 terminal animation is retired from the page; old terminal assets remain in the repository as historical artifacts.
 - **Selected engineering:** three 1200 × 240 desktop and 640 × 306 mobile diagrams. Python uses an application window with a mockable serial boundary; C/C++ uses a command, buffer and state path; C51 uses a resource matrix and conflict check. Implementation and validation limits stay in readable Markdown alongside Source, Tests, CI and Design links.
-- **MCU and research:** Markdown headings and concise linked lists replace large category banners. The V1 category assets remain historical and unused.
+- **Verified software, MCU and foundations:** Concise Markdown lists expose commit-bound engineering evidence and hardware limits without adding large category banners. The V1 category assets remain historical and unused.
 - **Public evidence:** the approved production telemetry image remains a dated public GitHub API snapshot. `PASS` is bound to the current `main` SHA for a monitored host workflow, not target or hardware validation.
 - **Contribution:** the production snake and both data-derived static variants remain. Reduced-motion sources precede animated sources. The footer is a short Markdown navigation line.
 

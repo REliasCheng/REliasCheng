@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "description": "Dated, commit-bound engineering evidence; not live GitHub telemetry.",
+  "records": [
+    {
+      "repository": "Embedded-OTA-Update-Lab",
+      "display_name": "Firmware Update / OTA",
+      "implementation_class": "Host software implementation",
+      "verification_scope": "Portable C OTA flow with staging, flash simulation, CRC and journal recovery; host tests only.",
+      "main_sha": "0cec602fa2c1f890eb7ea8e2e98e759e5762ef6a",
+      "pr": "https://github.com/REliasCheng/Embedded-OTA-Update-Lab/pull/6",
+      "main_ci": "https://github.com/REliasCheng/Embedded-OTA-Update-Lab/actions/runs/40311425747",
+      "main_ci_head_sha": "0cec602fa2c1f890eb7ea8e2e98e759e5762ef6a",
+      "main_ci_conclusion": "success",
+      "source": "src/ota_update.c",
+      "tests": "tests/test_ota_update.c",
+      "documentation": null,
+      "unverified": [
+        "MCU target build",
+        "device flash update",
+        "signatures or A/B rollback"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "ARM-Cortex-M-Development-Lab",
+      "display_name": "ARM Cortex-M Control",
+      "implementation_class": "MCU application core",
+      "verification_scope": "Original C11 timer-event, sample, hysteresis and status-output core with host compiler and sanitizer tests.",
+      "main_sha": "4dacc2464a847d58012d9c4e99b4d0e34b1d78fb",
+      "pr": "https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab/pull/1",
+      "main_ci": "https://github.com/REliasCheng/ARM-Cortex-M-Development-Lab/actions/runs/40318386452",
+      "main_ci_head_sha": "4dacc2464a847d58012d9c4e99b4d0e34b1d78fb",
+      "main_ci_conclusion": "success",
+      "source": "src/control_app.c",
+      "tests": "tests/test_control_app.c",
+      "documentation": null,
+      "unverified": [
+        "Cortex-M target build",
+        "hardware interrupt timing"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "FreeRTOS-Embedded-Lab",
+      "display_name": "FreeRTOS Host Runtime",
+      "implementation_class": "Genuine RTOS Host runtime",
+      "verification_scope": "Pinned official FreeRTOS V11.3.2 runs producer, consumer and reporter tasks on host ports.",
+      "main_sha": "e65cec6eb5f02fd6e9e8dd2cbf416ea4586d0510",
+      "pr": "https://github.com/REliasCheng/FreeRTOS-Embedded-Lab/pull/1",
+      "main_ci": "https://github.com/REliasCheng/FreeRTOS-Embedded-Lab/actions/runs/40321931576",
+      "main_ci_head_sha": "e65cec6eb5f02fd6e9e8dd2cbf416ea4586d0510",
+      "main_ci_conclusion": "success",
+      "source": "app/rtos_demo.c",
+      "tests": "tests/test_processing.c",
+      "documentation": null,
+      "unverified": [
+        "Cortex-M target runtime",
+        "board scheduling and physical ISR"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "LVGL-Embedded-GUI-Lab",
+      "display_name": "LVGL Host Dashboard",
+      "implementation_class": "Host GUI runtime",
+      "verification_scope": "Official LVGL v9.6.0 drives real widgets, SDL2 window and headless framebuffer tests.",
+      "main_sha": "1bc8ab0af33b78ebc00264df885913b39802cb6d",
+      "pr": "https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab/pull/1",
+      "main_ci": "https://github.com/REliasCheng/LVGL-Embedded-GUI-Lab/actions/runs/40327059878",
+      "main_ci_head_sha": "1bc8ab0af33b78ebc00264df885913b39802cb6d",
+      "main_ci_conclusion": "success",
+      "source": "app/dashboard_ui.c",
+      "tests": "tests/dashboard_headless.c",
+      "documentation": null,
+      "unverified": [
+        "ST7789 or CST816T hardware",
+        "MCU or FreeRTOS target integration"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "Wireless-IoT-Embedded-Lab",
+      "display_name": "Wireless / IoT MQTT",
+      "implementation_class": "Host network integration",
+      "verification_scope": "C11 device model and libmosquitto client exchange MQTT with a loopback Mosquitto broker, including QoS 1 and reconnect tests.",
+      "main_sha": "b71ff86e4e9fed0fdaae6d133904c802aa80ccf3",
+      "pr": "https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab/pull/1",
+      "main_ci": "https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab/actions/runs/40438227834",
+      "main_ci_head_sha": "b71ff86e4e9fed0fdaae6d133904c802aa80ccf3",
+      "main_ci_conclusion": "success",
+      "source": "app/host_mqtt_device.c",
+      "tests": "tests/mqtt_integration.py",
+      "documentation": null,
+      "unverified": [
+        "JieLi target build",
+        "device Wi-Fi",
+        "Aliyun or TLS"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "ARM-Linux-Embedded-Lab",
+      "display_name": "ARM Embedded Linux",
+      "implementation_class": "ARM64 userspace build / QEMU runtime",
+      "verification_scope": "Linux PTY device I/O, AArch64 userspace cross build and QEMU execution; x86_64 external module built but not loaded.",
+      "main_sha": "682246f2cbee1342cfc668ab027630ef18fd52e3",
+      "pr": "https://github.com/REliasCheng/ARM-Linux-Embedded-Lab/pull/1",
+      "main_ci": "https://github.com/REliasCheng/ARM-Linux-Embedded-Lab/actions/runs/40444152160",
+      "main_ci_head_sha": "682246f2cbee1342cfc668ab027630ef18fd52e3",
+      "main_ci_conclusion": "success",
+      "source": "src/linux_device_port.c",
+      "tests": "tests/pty_integration.py",
+      "documentation": null,
+      "unverified": [
+        "RK3566 board boot",
+        "Device Tree verification",
+        "kernel module load"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "Embodied-Robotics-Arm-Lab",
+      "display_name": "Offline Robotics Control",
+      "implementation_class": "Offline robotics control",
+      "verification_scope": "Original synthetic leader-follower controller parses SO-100 YAML and uses an in-memory Fake Bus with fault latch and replay.",
+      "main_sha": "b21e2f47bf82f3fbe623fa2343a8ac768a716173",
+      "pr": "https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab/pull/2",
+      "main_ci": "https://github.com/REliasCheng/Embodied-Robotics-Arm-Lab/actions/runs/40472442405",
+      "main_ci_head_sha": "b21e2f47bf82f3fbe623fa2343a8ac768a716173",
+      "main_ci_conclusion": "success",
+      "source": "offline_control/controller.py",
+      "tests": "tests_offline/test_control.py",
+      "documentation": null,
+      "unverified": [
+        "third-party LeRobot runtime",
+        "real motor bus or physical E-stop",
+        "autonomous policy"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "Python-Host-Application-Lab",
+      "display_name": "Python Host Application",
+      "implementation_class": "Host software implementation",
+      "verification_scope": "PyQt5 serial host application with testable core and mock backend.",
+      "main_sha": "13a1ffb81bb0d4b9ee72c819750b08e99c2f52ef",
+      "pr": "https://github.com/REliasCheng/Python-Host-Application-Lab/pull/12",
+      "main_ci": "https://github.com/REliasCheng/Python-Host-Application-Lab/actions/runs/40161227325",
+      "main_ci_head_sha": "13a1ffb81bb0d4b9ee72c819750b08e99c2f52ef",
+      "main_ci_conclusion": "success",
+      "source": "src/host_app/core/application.py",
+      "tests": "tests/test_gui.py",
+      "documentation": null,
+      "unverified": [
+        "real-device protocol or response validation"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "Embedded-C-Cpp-Learning",
+      "display_name": "Embedded C/C++ Core",
+      "implementation_class": "Host software implementation",
+      "verification_scope": "Portable command, ring-buffer and task-state components with host tests.",
+      "main_sha": "a80a44950bdeb525dbad2b7eb3bc22d8012f5d7f",
+      "pr": "https://github.com/REliasCheng/Embedded-C-Cpp-Learning/pull/9",
+      "main_ci": "https://github.com/REliasCheng/Embedded-C-Cpp-Learning/actions/runs/39929657668",
+      "main_ci_head_sha": "a80a44950bdeb525dbad2b7eb3bc22d8012f5d7f",
+      "main_ci_conclusion": "success",
+      "source": "projects/06_综合软件实践/嵌入式命令处理框架/practice/src/command.c",
+      "tests": "projects/06_综合软件实践/嵌入式命令处理框架/tests/test_command_framework.c",
+      "documentation": null,
+      "unverified": [
+        "MCU target build or hardware"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "C51-Board-Lab",
+      "display_name": "C51 Board Resource Planner",
+      "implementation_class": "Host software implementation",
+      "verification_scope": "Static 8051 resource mapping and conflict detection with host tests.",
+      "main_sha": "540ec7a9d95cd13a126c27925aa45624928bd418",
+      "pr": "https://github.com/REliasCheng/C51-Board-Lab/pull/5",
+      "main_ci": "https://github.com/REliasCheng/C51-Board-Lab/actions/runs/40161077628",
+      "main_ci_head_sha": "540ec7a9d95cd13a126c27925aa45624928bd418",
+      "main_ci_conclusion": "success",
+      "source": "projects/06_综合应用/board-resource-planner/practice/src/board_resources.c",
+      "tests": "projects/06_综合应用/board-resource-planner/tests/test_board_resources.c",
+      "documentation": null,
+      "unverified": [
+        "board wiring or runtime"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "STC8-MCU-Learning",
+      "display_name": "STC8 Communication Core",
+      "implementation_class": "MCU application core",
+      "verification_scope": "C89 UART RX ring buffer, frame collector and host-testable adapter contract.",
+      "main_sha": "a4b3be8ee4651668b6e71c1e80f4d7445606b675",
+      "pr": "https://github.com/REliasCheng/STC8-MCU-Learning/pull/4",
+      "main_ci": "https://github.com/REliasCheng/STC8-MCU-Learning/actions/runs/39197757174",
+      "main_ci_head_sha": "a4b3be8ee4651668b6e71c1e80f4d7445606b675",
+      "main_ci_conclusion": "success",
+      "source": "src/core/uart_frame_drain.c",
+      "tests": "tests/test_uart_frame.c",
+      "documentation": null,
+      "unverified": [
+        "Keil target build",
+        "board UART timing"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "stc89c52-learning",
+      "display_name": "STC89 Terminal Core",
+      "implementation_class": "MCU application core",
+      "verification_scope": "RTC, temperature and configuration state behind platform callbacks with host tests.",
+      "main_sha": "01f8c61bf86861c6e6a4a8024f25f447da725ef5",
+      "pr": "https://github.com/REliasCheng/stc89c52-learning/pull/4",
+      "main_ci": "https://github.com/REliasCheng/stc89c52-learning/actions/runs/39703450624",
+      "main_ci_head_sha": "01f8c61bf86861c6e6a4a8024f25f447da725ef5",
+      "main_ci_conclusion": "success",
+      "source": "projects/13_环境与时钟信息终端/practice/core/terminal_app.c",
+      "tests": "projects/13_环境与时钟信息终端/practice/tests/test_terminal_app.c",
+      "documentation": null,
+      "unverified": [
+        "C51 target build",
+        "peripheral hardware"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "BlueBridgeCup-MCU",
+      "display_name": "CT107D Peripheral Policies",
+      "implementation_class": "MCU application core",
+      "verification_scope": "Host-tested 8051 peripheral timing and control policies.",
+      "main_sha": "852405bd1afa424510ba45e7bfbd9bba9a8a141f",
+      "pr": "https://github.com/REliasCheng/BlueBridgeCup-MCU/pull/6",
+      "main_ci": "https://github.com/REliasCheng/BlueBridgeCup-MCU/actions/runs/39353471902",
+      "main_ci_head_sha": "852405bd1afa424510ba45e7bfbd9bba9a8a141f",
+      "main_ci_conclusion": "success",
+      "source": "practice/peripheral-driver-corrections/peripheral_policy.c",
+      "tests": "practice/peripheral-driver-corrections/tests/test_peripheral_policy.c",
+      "documentation": null,
+      "unverified": [
+        "complete target build",
+        "CT107D board runtime"
+      ],
+      "verified_on": "2026-10-27"
+    },
+    {
+      "repository": "Embedded-Systems-Foundations",
+      "display_name": "Embedded Systems Foundations",
+      "implementation_class": "Documentation / foundations",
+      "verification_scope": "Electronics, logic, CPU, MCU and PCB knowledge navigation; no executable firmware.",
+      "main_sha": "4e38ef78b3c3368e93a441417f7aeda07de834fd",
+      "pr": null,
+      "main_ci": null,
+      "main_ci_head_sha": null,
+      "main_ci_conclusion": "not_applicable",
+      "source": null,
+      "tests": null,
+      "documentation": "README.md",
+      "unverified": [
+        "firmware build or runtime"
+      ],
+      "verified_on": "2026-10-27"
+    }
+  ]
+}

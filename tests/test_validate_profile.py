@@ -1,5 +1,7 @@
-"""Offline contract checks for repository and featured-evidence links."""
+"""Offline contract checks for project evidence and protected Profile assets."""
 
+import copy
+import json
 import sys
 from pathlib import Path
 import unittest
@@ -7,8 +9,9 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from validate_profile import (  # noqa: E402
-    PRODUCTION_ASSET_ROOT, README, check_live_asset_layout, check_repository_links, expected_evidence_links,
-    valid_readme_asset,
+    ENGINEERING, PRODUCTION_ASSET_ROOT, PROJECTS, ROOT, README, check_live_asset_layout,
+    check_repository_links, expected_engineering_links, expected_evidence_links,
+    valid_readme_asset, validate_engineering_index,
 )
 
 
@@ -77,6 +80,57 @@ class ProfileLinkTests(unittest.TestCase):
         errors = check_live_asset_layout(changed)
         self.assertTrue(any("fallback" in error for error in errors))
         self.assertTrue(any("full-size metrics links" in error for error in errors))
+
+
+class EngineeringEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.catalog = json.loads(PROJECTS.read_text(encoding="utf-8"))
+        self.index = json.loads(ENGINEERING.read_text(encoding="utf-8"))
+        self.verified = {p["repository"] for g in self.catalog["categories"]
+                         if g["id"] == "verified" for p in g["projects"]}
+
+    def test_real_index_is_complete_and_readme_links_are_derived(self):
+        self.assertEqual(validate_engineering_index(self.catalog, self.index), [])
+        self.assertEqual(len(self.verified), 7)
+        self.assertEqual(len(expected_engineering_links(self.index, self.verified)), 21)
+        readme = README.read_text(encoding="utf-8")
+        for link in expected_engineering_links(self.index, self.verified):
+            self.assertIn(f"({link})", readme)
+
+    def test_wrong_ci_host_or_stale_head_is_rejected(self):
+        index = copy.deepcopy(self.index)
+        index["records"][0]["main_ci"] = "https://example.com/fake"
+        self.assertTrue(any("main CI" in x for x in validate_engineering_index(self.catalog, index)))
+        index = copy.deepcopy(self.index)
+        index["records"][0]["main_ci_head_sha"] = "0" * 40
+        self.assertTrue(any("main CI" in x for x in validate_engineering_index(self.catalog, index)))
+
+    def test_path_escape_and_fabricated_foundations_ci_are_rejected(self):
+        index = copy.deepcopy(self.index)
+        index["records"][0]["source"] = "../private.py"
+        self.assertTrue(any("source/test path" in x for x in validate_engineering_index(self.catalog, index)))
+        index = copy.deepcopy(self.index)
+        index["records"][-1]["main_ci"] = "https://github.com/REliasCheng/Embedded-Systems-Foundations/actions/runs/1"
+        self.assertTrue(any("documentation-only" in x for x in validate_engineering_index(self.catalog, index)))
+
+    def test_duplicate_record_or_unlisted_github_link_is_rejected(self):
+        index = copy.deepcopy(self.index)
+        index["records"][1]["repository"] = index["records"][0]["repository"]
+        self.assertTrue(any("repository set" in x for x in validate_engineering_index(self.catalog, index)))
+        readme = README.read_text(encoding="utf-8")
+        readme += "\n[Unverified](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab/blob/main/fake.c)\n"
+        featured = json.loads((ROOT / "data/featured-evidence.json").read_text(encoding="utf-8"))
+        roots = {p["repository"] for g in self.catalog["categories"] for p in g["projects"]}
+        errors = check_repository_links(readme, roots, featured, self.index, self.verified)
+        self.assertTrue(any("Unexpected GitHub" in x for x in errors))
+
+    def test_lookalike_domain_is_rejected(self):
+        readme = README.read_text(encoding="utf-8")
+        readme += "\n[Fake](https://github.com.evil.example/REliasCheng/FreeRTOS-Embedded-Lab)\n"
+        featured = json.loads((ROOT / "data/featured-evidence.json").read_text(encoding="utf-8"))
+        roots = {p["repository"] for g in self.catalog["categories"] for p in g["projects"]}
+        errors = check_repository_links(readme, roots, featured, self.index, self.verified)
+        self.assertTrue(any("Unexpected external" in x for x in errors))
 
 
 if __name__ == "__main__":
