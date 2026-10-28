@@ -28,6 +28,11 @@ VERIFIED_REPOSITORIES = {
     "LVGL-Embedded-GUI-Lab", "Wireless-IoT-Embedded-Lab", "ARM-Linux-Embedded-Lab",
     "Embodied-Robotics-Arm-Lab",
 }
+MCU_TARGET_SNAPSHOT = {
+    "STC8-MCU-Learning": ("c517009a25e3560074f76a20274dc04956c1cdf2", 40626106552),
+    "stc89c52-learning": ("e1350c5d253ab1e786ba9f18f2e442f183a84c1b", 40628442826),
+    "BlueBridgeCup-MCU": ("92949b881c148efb8bf1dc4060e9a1ab65f65ff3", 40681394203),
+}
 MD_LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
 HTML_ASSET = re.compile(r'(?:src|srcset)="([^"]+)"')
 FORBIDDEN_SVG = re.compile(
@@ -99,6 +104,10 @@ def validate_engineering_index(catalog: dict, index: dict) -> list[str]:
         sha = record["main_sha"]
         if not isinstance(sha, str) or not re.fullmatch(r"[0-9a-f]{40}", sha):
             errors.append(f"Invalid main SHA: {repo}")
+        if repo in MCU_TARGET_SNAPSHOT:
+            expected_sha, run_id = MCU_TARGET_SNAPSHOT[repo]
+            if sha != expected_sha or record["main_ci"] != f"https://github.com/REliasCheng/{repo}/actions/runs/{run_id}":
+                errors.append(f"Outdated MCU target snapshot: {repo}")
         try:
             date.fromisoformat(record["verified_on"])
         except (TypeError, ValueError):
@@ -122,14 +131,21 @@ def validate_engineering_index(catalog: dict, index: dict) -> list[str]:
     return errors
 
 
-def expected_engineering_links(index: dict, verified_repositories: set[str]) -> set[str]:
+def expected_engineering_links(index: dict, evidence_repositories: set[str]) -> set[str]:
     records = {r["repository"]: r for r in index["records"]}
     links = set()
-    for repo in verified_repositories:
+    for repo in evidence_repositories:
+        if repo not in PROJECT_REPOSITORIES or repo not in records:
+            raise ValueError(f"Unknown engineering evidence repository: {repo}")
         record = records[repo]
         root = f"https://github.com/REliasCheng/{repo}"
         for kind in ("source", "tests"):
+            if not _safe_repo_path(record[kind]):
+                raise ValueError(f"Invalid engineering evidence path: {repo}")
             links.add(root + "/blob/main/" + quote(record[kind], safe="/"))
+        if (not isinstance(record["main_ci"], str)
+                or not re.fullmatch(re.escape(root) + r"/actions/runs/[1-9][0-9]*", record["main_ci"])):
+            raise ValueError(f"Invalid engineering CI link: {repo}")
         links.add(record["main_ci"])
     return links
 
@@ -236,8 +252,8 @@ def validate() -> list[str]:
     engineering_errors = validate_engineering_index(catalog, engineering)
     errors.extend(engineering_errors)
     if not engineering_errors and "verified" in counts:
-        verified = {p["repository"] for g in categories if g["id"] == "verified" for p in g["projects"]}
-        errors.extend(check_repository_links(readme, set(repositories), evidence, engineering, verified))
+        linked = {p["repository"] for g in categories if g["id"] in ("verified", "mcu") for p in g["projects"]}
+        errors.extend(check_repository_links(readme, set(repositories), evidence, engineering, linked))
         if not all(r["verified_on"] in readme for r in engineering["records"]):
             errors.append("README lacks dated evidence snapshot label")
     for link in MD_LINK.findall(readme):

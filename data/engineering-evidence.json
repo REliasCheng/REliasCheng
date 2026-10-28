@@ -196,59 +196,63 @@
     {
       "repository": "STC8-MCU-Learning",
       "display_name": "STC8 Communication Core",
-      "implementation_class": "MCU application core",
-      "verification_scope": "C89 UART RX ring buffer, frame collector and host-testable adapter contract.",
-      "main_sha": "a4b3be8ee4651668b6e71c1e80f4d7445606b675",
-      "pr": "https://github.com/REliasCheng/STC8-MCU-Learning/pull/4",
-      "main_ci": "https://github.com/REliasCheng/STC8-MCU-Learning/actions/runs/39197757174",
-      "main_ci_head_sha": "a4b3be8ee4651668b6e71c1e80f4d7445606b675",
+      "implementation_class": "SDCC MCS-51 target firmware foundation",
+      "verification_scope": "Original STC8 UART1 adapter and C89 RX core compiled and linked with SDCC, vector and Intel HEX checked; two fresh builds match. Host tests passed; target instructions not simulated.",
+      "main_sha": "c517009a25e3560074f76a20274dc04956c1cdf2",
+      "pr": "https://github.com/REliasCheng/STC8-MCU-Learning/pull/5",
+      "main_ci": "https://github.com/REliasCheng/STC8-MCU-Learning/actions/runs/40626106552",
+      "main_ci_head_sha": "c517009a25e3560074f76a20274dc04956c1cdf2",
       "main_ci_conclusion": "success",
-      "source": "src/core/uart_frame_drain.c",
+      "source": "platform/stc8/stc8_uart_sdcc.c",
       "tests": "tests/test_uart_frame.c",
       "documentation": null,
       "unverified": [
-        "Keil target build",
-        "board UART timing"
+        "Keil C51 target build",
+        "target instruction simulation",
+        "actual board clock and UART timing",
+        "firmware flash and board runtime"
       ],
-      "verified_on": "2026-10-27"
+      "verified_on": "2026-10-28"
     },
     {
       "repository": "stc89c52-learning",
       "display_name": "STC89 Terminal Core",
-      "implementation_class": "MCU application core",
-      "verification_scope": "RTC, temperature and configuration state behind platform callbacks with host tests.",
-      "main_sha": "01f8c61bf86861c6e6a4a8024f25f447da725ef5",
-      "pr": "https://github.com/REliasCheng/stc89c52-learning/pull/4",
-      "main_ci": "https://github.com/REliasCheng/stc89c52-learning/actions/runs/39703450624",
-      "main_ci_head_sha": "01f8c61bf86861c6e6a4a8024f25f447da725ef5",
+      "implementation_class": "SDCC MCS-51 target core with instruction simulation",
+      "verification_scope": "Original terminal_app.c linked with SDCC under STC89C52RC memory limits; Intel HEX and clean rebuild checked; generic C52 simulation exercised synthetic events and diagnostic state.",
+      "main_sha": "e1350c5d253ab1e786ba9f18f2e442f183a84c1b",
+      "pr": "https://github.com/REliasCheng/stc89c52-learning/pull/5",
+      "main_ci": "https://github.com/REliasCheng/stc89c52-learning/actions/runs/40628442826",
+      "main_ci_head_sha": "e1350c5d253ab1e786ba9f18f2e442f183a84c1b",
       "main_ci_conclusion": "success",
       "source": "projects/13_环境与时钟信息终端/practice/core/terminal_app.c",
       "tests": "projects/13_环境与时钟信息终端/practice/tests/test_terminal_app.c",
       "documentation": null,
       "unverified": [
-        "C51 target build",
-        "peripheral hardware"
+        "original Keil terminal target build",
+        "RTC, temperature, OLED and EEPROM hardware",
+        "firmware flash and board runtime"
       ],
-      "verified_on": "2026-10-27"
+      "verified_on": "2026-10-28"
     },
     {
       "repository": "BlueBridgeCup-MCU",
       "display_name": "CT107D Peripheral Policies",
-      "implementation_class": "MCU application core",
-      "verification_scope": "Host-tested 8051 peripheral timing and control policies.",
-      "main_sha": "852405bd1afa424510ba45e7bfbd9bba9a8a141f",
-      "pr": "https://github.com/REliasCheng/BlueBridgeCup-MCU/pull/6",
-      "main_ci": "https://github.com/REliasCheng/BlueBridgeCup-MCU/actions/runs/39353471902",
-      "main_ci_head_sha": "852405bd1afa424510ba45e7bfbd9bba9a8a141f",
+      "implementation_class": "IAP15 target policy with C52 instruction simulation",
+      "verification_scope": "Original peripheral_policy.c linked and called in an IAP15-constrained SDCC image; Intel HEX and clean rebuild checked; generic C52 simulation verified synthetic key and conflict diagnostics.",
+      "main_sha": "92949b881c148efb8bf1dc4060e9a1ab65f65ff3",
+      "pr": "https://github.com/REliasCheng/BlueBridgeCup-MCU/pull/7",
+      "main_ci": "https://github.com/REliasCheng/BlueBridgeCup-MCU/actions/runs/40681394203",
+      "main_ci_head_sha": "92949b881c148efb8bf1dc4060e9a1ab65f65ff3",
       "main_ci_conclusion": "success",
       "source": "practice/peripheral-driver-corrections/peripheral_policy.c",
       "tests": "practice/peripheral-driver-corrections/tests/test_peripheral_policy.c",
       "documentation": null,
       "unverified": [
-        "complete target build",
-        "CT107D board runtime"
+        "CT107D V31/V40 board configuration",
+        "on-chip debugger startup and peripheral timing",
+        "firmware flash and CT107D board runtime"
       ],
-      "verified_on": "2026-10-27"
+      "verified_on": "2026-10-28"
     },
     {
       "repository": "Embedded-Systems-Foundations",
