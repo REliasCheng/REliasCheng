@@ -12,6 +12,8 @@
 
 Open a project to inspect its implementation, host tests and target limits.
 
+[Technical evidence & engineering discussion](docs/technical-interview-evidence.md) — commit-bound source, tests, CI and reproduction notes.
+
 ## Selected engineering
 
 ### [Python Host Application](https://github.com/REliasCheng/Python-Host-Application-Lab)
