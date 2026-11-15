@@ -83,11 +83,11 @@
       "repository": "Wireless-IoT-Embedded-Lab",
       "display_name": "Wireless / IoT MQTT",
       "implementation_class": "Host network integration",
-      "verification_scope": "C11 device model and libmosquitto client exchange MQTT with a loopback Mosquitto broker, including QoS 1 and reconnect tests.",
-      "main_sha": "b71ff86e4e9fed0fdaae6d133904c802aa80ccf3",
-      "pr": "https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab/pull/1",
-      "main_ci": "https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab/actions/runs/40438227834",
-      "main_ci_head_sha": "b71ff86e4e9fed0fdaae6d133904c802aa80ccf3",
+      "verification_scope": "C11 device model and libmosquitto client exchange MQTT with a loopback Mosquitto broker, including QoS 1 and reconnect tests. A scripted MQTT 3.1.1 peer verifies SUBACK downgrade rejection and resubscription.",
+      "main_sha": "d5e3d32cba2076b96330b131da6f7a56dd9870ca",
+      "pr": "https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab/pull/3",
+      "main_ci": "https://github.com/REliasCheng/Wireless-IoT-Embedded-Lab/actions/runs/43689352144",
+      "main_ci_head_sha": "d5e3d32cba2076b96330b131da6f7a56dd9870ca",
       "main_ci_conclusion": "success",
       "source": "app/host_mqtt_device.c",
       "tests": "tests/mqtt_integration.py",
@@ -97,7 +97,7 @@
         "device Wi-Fi",
         "Aliyun or TLS"
       ],
-      "verified_on": "2026-10-27"
+      "verified_on": "2026-11-15"
     },
     {
       "repository": "ARM-Linux-Embedded-Lab",
