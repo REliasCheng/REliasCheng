@@ -121,12 +121,13 @@ class EngineeringEvidenceTests(unittest.TestCase):
     def test_mixed_snapshot_dates_and_category_counts(self):
         dates = {r["repository"]: r["verified_on"] for r in self.index["records"]}
         self.assertEqual({r: dates[r] for r in self.mcu}, {r: "2026-10-28" for r in self.mcu})
-        self.assertEqual(dates["Python-Host-Application-Lab"], "2026-11-15")
-        self.assertTrue(all(dates[r] == "2026-10-27" for r in dates.keys() - self.mcu - {"Python-Host-Application-Lab"}))
+        refreshed = {"Python-Host-Application-Lab", "Wireless-IoT-Embedded-Lab"}
+        self.assertEqual({r: dates[r] for r in refreshed}, {r: "2026-11-15" for r in refreshed})
+        self.assertTrue(all(dates[r] == "2026-10-27" for r in dates.keys() - self.mcu - refreshed))
         self.assertEqual({g["id"]: len(g["projects"]) for g in self.catalog["categories"]},
                          {"featured": 3, "verified": 7, "mcu": 3, "foundations": 1})
         readme = README.read_text(encoding="utf-8")
-        self.assertIn("other 10 non-MCU projects retain their **2026-10-27** snapshot", readme)
+        self.assertIn("other 9 non-MCU projects retain their **2026-10-27** snapshot", readme)
 
     def test_mcu_deep_links_reject_escape_unknown_owner_and_repository(self):
         index = copy.deepcopy(self.index)
