@@ -143,19 +143,19 @@
       "repository": "Python-Host-Application-Lab",
       "display_name": "Python Host Application",
       "implementation_class": "Host software implementation",
-      "verification_scope": "PyQt5 serial host application with testable core and mock backend.",
-      "main_sha": "13a1ffb81bb0d4b9ee72c819750b08e99c2f52ef",
-      "pr": "https://github.com/REliasCheng/Python-Host-Application-Lab/pull/12",
-      "main_ci": "https://github.com/REliasCheng/Python-Host-Application-Lab/actions/runs/40161227325",
-      "main_ci_head_sha": "13a1ffb81bb0d4b9ee72c819750b08e99c2f52ef",
+      "verification_scope": "PyQt5 serial host application with testable core, mock backend and embedded NUL command rejection.",
+      "main_sha": "c55f74115b6008effb7ff4375e8aec0aa0f1f2f6",
+      "pr": "https://github.com/REliasCheng/Python-Host-Application-Lab/pull/13",
+      "main_ci": "https://github.com/REliasCheng/Python-Host-Application-Lab/actions/runs/43342263004",
+      "main_ci_head_sha": "c55f74115b6008effb7ff4375e8aec0aa0f1f2f6",
       "main_ci_conclusion": "success",
       "source": "src/host_app/core/application.py",
-      "tests": "tests/test_gui.py",
+      "tests": "tests/test_command.py",
       "documentation": null,
       "unverified": [
         "real-device protocol or response validation"
       ],
-      "verified_on": "2026-10-27"
+      "verified_on": "2026-11-15"
     },
     {
       "repository": "Embedded-C-Cpp-Learning",
